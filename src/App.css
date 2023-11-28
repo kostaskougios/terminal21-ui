@@ -1,16 +1,22 @@
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    'aside main main';
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App header {
+  grid-area: header;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App aside {
+  grid-area: aside;
+}
+
+.App main {
+  grid-area: main;
 }
 
 .App-header {
