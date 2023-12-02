@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-
 const ChatApp: React.FC = () => {
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [message, setMessage] = useState<string>('');
