@@ -8,7 +8,9 @@ const Chat: React.FC = () => {
 
     useEffect(() => {
         // Connect to the WebSocket server
-        const newSocket = io('http://localhost:8080/ui/session'); // Replace with your server URL
+        const newSocket = io('http://localhost:8080', {
+            path: '/ui/session'
+          }); // Replace with your server URL
         setSocket(newSocket);
 
         // Listen for messages from the server
