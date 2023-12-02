@@ -7,20 +7,16 @@ import {
     AlertTitle,
     AlertDescription,
 } from '@chakra-ui/react'
-import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
+import { CircularProgress } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 import {
     Menu,
     MenuButton,
     MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
+    MenuItem
 } from '@chakra-ui/react'
 import { ChatIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import Chat from './Chat';
+import ChatApp from './ChatApp';
 
 function Terminal() {
     const toast = useToast()
@@ -73,7 +69,7 @@ function Terminal() {
             <p>
                 Phasellus pharetra, tellus in mollis pulvinar, nunc odio varius lorem, ut dignissim diam tortor vitae purus. Sed eleifend scelerisque felis pulvinar scelerisque. Donec iaculis venenatis nisl id mollis. Donec sed ornare urna, sit amet dignissim est. Mauris vitae elit eget elit interdum tincidunt. Donec eget tempor nisl. Vivamus pulvinar quam sed quam pharetra, id blandit ante fermentum. Nulla nec dui sed tortor varius posuere id sit amet elit. Maecenas varius, justo sit amet semper imperdiet, leo ipsum varius sapien, eu dignissim leo dolor quis diam.
             </p>
-            <Chat/>
+            <ChatApp/>
             <p>
                 Nulla tempor nisi risus, vel pharetra nibh sagittis facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis lacus sapien, sagittis et finibus ut, imperdiet non nisl. Aenean pretium orci quis gravida vehicula. Mauris id vulputate ex, vitae euismod lectus. Nam elementum auctor nunc a placerat. Vivamus aliquet libero vel ipsum rhoncus feugiat. Suspendisse iaculis rhoncus imperdiet.
             </p>

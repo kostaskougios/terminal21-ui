@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import io, { Socket } from 'socket.io-client';
 
-const Chat: React.FC = () => {
-    const [socket, setSocket] = useState<Socket | null>(null);
+
+const ChatApp: React.FC = () => {
+    const [ws, setWs] = useState<WebSocket | null>(null);
     const [message, setMessage] = useState<string>('');
     const [chat, setChat] = useState<string[]>([]);
 
     useEffect(() => {
-        // Connect to the WebSocket server
-        const newSocket = io('http://localhost:8080', {
-            path: '/ui/session'
-          }); // Replace with your server URL
-        setSocket(newSocket);
+        // Create a WebSocket connection
+        const newWs = new WebSocket('ws://localhost:8080/ui/session');
 
-        // Listen for messages from the server
-        newSocket.on('chat message', (msg: string) => {
-            setChat((prevChat) => [...prevChat, msg]);
-        });
+        newWs.onmessage = (event: MessageEvent) => {
+            setChat((prevChat) => [...prevChat, event.data]);
+        };
 
-        // Disconnect on cleanup
+        setWs(newWs);
+
+        // Clean up function
         return () => {
-            if (newSocket) newSocket.disconnect();
+            if (newWs) newWs.close();
         };
     }, []);
 
     const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (message !== '' && socket) {
-            // Send the message to the server
-            socket.emit('chat message', message);
+        if (message !== '' && ws) {
+            ws.send(message);
             setMessage('');
         }
     };
@@ -52,4 +49,4 @@ const Chat: React.FC = () => {
     );
 };
 
-export default Chat;
+export default ChatApp;
