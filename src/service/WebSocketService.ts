@@ -14,12 +14,12 @@ class WebSocketService {
 
         this.socket.onopen = () => {
             console.log("WebSocket connection established");
-            this.sendMessage(new WsMessage("init",null));
+            this.sendMessage(new WsMessage("init", null));
         };
 
         this.socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
-            console.log("received:",message);
+            console.log("received:", message);
             this.responses.push(message);
             this.messageHandlers.forEach(handler => handler(message));
         };
