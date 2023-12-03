@@ -19,6 +19,7 @@ class WebSocketService {
 
         this.socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
+            console.log("received:",message);
             this.responses.push(message);
             this.messageHandlers.forEach(handler => handler(message));
         };
