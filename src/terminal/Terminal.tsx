@@ -1,6 +1,7 @@
 import './Terminal.css';
 import React, { useEffect, useState } from 'react';
 import WebSocketService from '../service/WebSocketService';
+import { mapResponse } from './mapResponse';
 function Terminal() {
 
     const [messages, setMessages] = useState<any[]>([]);
@@ -26,23 +27,6 @@ function Terminal() {
             ))}
         </div>
     );
-}
-
-function mapResponse(msg: any): JSX.Element {
-    // Check for the presence of different keys and handle accordingly
-    if (msg.Std) {
-        // Handling "Std" key
-        return (
-            <>
-                {msg.Std.elements.map((element: any, index: number) => {
-                    if (element.Paragraph) {
-                        return <p key={index}>{element.Paragraph.text}</p>;
-                    }
-                })}
-            </>
-        );
-    }
-    return <div>Unknown message format</div>;
 }
 
 export default Terminal;
