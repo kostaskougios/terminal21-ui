@@ -38,7 +38,6 @@ function mapResponse(msg: any): JSX.Element {
                     if (element.Paragraph) {
                         return <p key={index}>{element.Paragraph.text}</p>;
                     }
-                    // You can add more conditions here for different types of elements within "Std"
                 })}
             </>
         );
