@@ -1,4 +1,4 @@
-class WsMessage {
+class WsRequest {
   operation: string;
   body: any;
 
@@ -15,4 +15,4 @@ class WsMessage {
   }
 }
 
-export default WsMessage;
+export default WsRequest;

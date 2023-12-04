@@ -1,4 +1,4 @@
-import WsMessage from "./WsMessage";
+import WsRequest from "./WsRequest";
 
 type MessageHandler = (message: any) => void;
 
@@ -14,12 +14,12 @@ class WebSocketService {
 
     this.socket.onopen = () => {
       console.log("WebSocket connection established");
-      this.sendMessage(new WsMessage("init", null));
+      this.sendMessage(new WsRequest("init", null));
     };
 
     this.socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      console.log("received:", message);
+        console.log("received:", event.data);
+        const message = JSON.parse(event.data);
       this.responses.push(message);
       this.messageHandlers.forEach((handler) => handler(message));
     };
@@ -34,15 +34,17 @@ class WebSocketService {
   }
 
   public disconnect(): void {
+    console.log("disconnect called.")
     if (this.socket) {
       this.socket.close();
     }
   }
 
-  public sendMessage(message: WsMessage): void {
+  public sendMessage(message: WsRequest): void {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       console.log("Sending ", message);
       this.socket.send(message.toJSON());
+      console.log("Msg was send.");
     } else
       console.log(
         "Message " +
