@@ -46,9 +46,10 @@ function Sessions() {
       <TabPanels>
         {
           sessions.map((session) => {
+            console.log(session);
             return (
               <TabPanel>
-                <Terminal />
+                <Terminal sessionId={session.id}/>
               </TabPanel>
             )
           })
