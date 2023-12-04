@@ -1,32 +1,31 @@
-import './Terminal.css';
-import React, { useEffect, useState } from 'react';
-import WebSocketService from '../service/WebSocketService';
-import { mapResponse } from './mapResponse';
+import "./Terminal.css";
+import React, { useEffect, useState } from "react";
+import WebSocketService from "../service/WebSocketService";
+import { mapResponse } from "./mapResponse";
 function Terminal() {
+  const [messages, setMessages] = useState<any[]>([]);
+  const webSocketService = new WebSocketService(
+    "ws://localhost:8080/ui/session",
+  );
 
-    const [messages, setMessages] = useState<any[]>([]);
-    const webSocketService = new WebSocketService('ws://localhost:8080/ui/session');
+  useEffect(() => {
+    webSocketService.connect();
+    console.log("websocket connected");
+    webSocketService.subscribeToMessages((message) => {
+      setMessages((prev) => [...prev, message]);
+    });
 
-    useEffect(() => {
-        webSocketService.connect();
-        console.log("websocket connected");
-        webSocketService.subscribeToMessages((message) => {
-            setMessages(prev => [...prev, message]);
-        });
+    return () => {
+      webSocketService.disconnect();
+    };
+  }, []);
 
-        return () => {
-            webSocketService.disconnect();
-        };
-    }, []);
-
-    return (
-        <div className='Terminal'>
-            <p>The main terminal area</p>
-            {messages.map( (msg) => 
-                mapResponse(msg)
-            )}
-        </div>
-    );
+  return (
+    <div className="Terminal">
+      <p>The main terminal area</p>
+      {messages.map((msg) => mapResponse(msg))}
+    </div>
+  );
 }
 
 export default Terminal;
