@@ -14,7 +14,7 @@ class WebSocketService {
 
         this.socket!.onopen = () => {
             console.log("WebSocket connection established");
-            //this.sendMessage(new WsRequest("init", null));
+            this.sendMessage(new WsRequest("init", null));
         };
 
         this.socket!.onmessage = (event) => {
@@ -42,7 +42,6 @@ class WebSocketService {
         if (this.socket) {
             this.socket.close();
         }
-        this.reconnect();
     }
 
     public sendMessage(message: WsRequest): void {
@@ -52,10 +51,7 @@ class WebSocketService {
             console.log("Msg was send.");
         } else
             console.log(
-                "Message " +
-                message +
-                " not send. readyState = " +
-                this.socket?.readyState,
+                `Message ${message} not send. readyState = ${this.socket?.readyState}`,
             );
     }
 
