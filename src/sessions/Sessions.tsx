@@ -7,21 +7,21 @@ import WebSocketService from "../service/WebSocketService";
 import WsRequest from "../service/WsRequest";
 
 function Sessions() {
-  const [messages, setMessages] = useState<any[]>([]);
+  const [sessions, setSessions] = useState<Array<any>>([]);
   const webSocketService = new WebSocketService(
     "sessions-ws",
     "ws://localhost:8080/ui/sessions"
   );
 
-  webSocketService.subscribeToOnOpen( () => {
+  webSocketService.subscribeToOnOpen(() => {
     webSocketService.sendMessage(new WsRequest("sessions", null));
   });
 
   useEffect(() => {
     webSocketService.connect();
     console.log("sessions websocket connected");
-    webSocketService.subscribeToMessages((message) => {
-      setMessages((prev) => [...prev, message]);
+    webSocketService.subscribeToMessages((sessions) => {
+      setSessions((prev) => sessions);
     });
 
     return () => {
@@ -32,22 +32,30 @@ function Sessions() {
   return (
     <Tabs className="Sessions" variant="enclosed">
       <TabList>
-        <Tab>One</Tab>
-        <Tab>Two</Tab>
-        <Tab>Three</Tab>
+        {
+          sessions.map((session) => {
+            console.log('tab for session', session);
+            return (
+              <Tab key={session.id}>{session.name}</Tab>
+            )
+          })
+        }
+        <Tab>Demo</Tab>
       </TabList>
 
       <TabPanels>
+        {
+          sessions.map((session) => {
+            return (
+              <TabPanel>
+                <Terminal />
+              </TabPanel>
+            )
+          })
+        }
         <TabPanel>
-          <p>one!</p>
-          <Terminal />
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
+          <p>Demo</p>
           <TerminalDemo />
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
         </TabPanel>
       </TabPanels>
     </Tabs>
