@@ -1,10 +1,11 @@
 import "./Terminal.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import WebSocketService from "../service/WebSocketService";
 import { mapResponse } from "./mapResponse";
 function Terminal() {
   const [messages, setMessages] = useState<any[]>([]);
   const webSocketService = new WebSocketService(
+    "terminal-ws",
     "ws://localhost:8080/ui/session",
   );
 

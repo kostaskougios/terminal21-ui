@@ -1,44 +1,46 @@
 import WsRequest from "./WsRequest";
 
+type OnOpenHandler = () => void;
 type MessageHandler = (message: any) => void;
 
 class WebSocketService {
     private socket: WebSocket | null = null;
     private responses: any[] = [];
     private messageHandlers: MessageHandler[] = [];
+    private onOpenHandlers: OnOpenHandler[] = [];
 
-    constructor(private url: string) { }
+    constructor(public name: string, private url: string) { }
 
     public connect(): void {
         this.reconnect();
 
         this.socket!.onopen = () => {
-            console.log("WebSocket connection established");
-            this.sendMessage(new WsRequest("init", null));
+            console.log(`${this.name}: WebSocket connection established`);
+            this.onOpenHandlers.forEach((handler) => handler());
         };
 
         this.socket!.onmessage = (event) => {
-            console.log("received:", event.data);
+            console.log(`${this.name}: received:`, event.data);
             const message = JSON.parse(event.data);
             this.responses.push(message);
             this.messageHandlers.forEach((handler) => handler(message));
         };
 
         this.socket!.onclose = () => {
-            console.log("WebSocket connection closed");
+            console.log(`${this.name}: WebSocket connection closed`);
         };
 
         this.socket!.onerror = (error) => {
-            console.error("WebSocket error:", error);
+            console.error(`${this.name}: WebSocket error:`, error);
         };
     }
     private reconnect(): void {
-        console.log("(re)connecting.")
+        console.log(`${this.name}: connecting to ${this.url}`)
         this.socket = new WebSocket(this.url);
     }
 
     public disconnect(): void {
-        console.log("disconnect called.")
+        console.log(`${this.name}: disconnect called.`)
         if (this.socket) {
             this.socket.close();
         }
@@ -46,17 +48,21 @@ class WebSocketService {
 
     public sendMessage(message: WsRequest): void {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            console.log("Sending ", message);
+            console.log(`${this.name}: Sending `, message);
             this.socket.send(message.toJSON());
             console.log("Msg was send.");
         } else
             console.log(
-                `Message ${message} not send. readyState = ${this.socket?.readyState}`,
+                `${this.name}: Message ${message} not send. readyState = ${this.socket?.readyState}`,
             );
     }
 
     public subscribeToMessages(handler: MessageHandler): void {
         this.messageHandlers.push(handler);
+    }
+
+    public subscribeToOnOpen(handler: OnOpenHandler): void {
+        this.onOpenHandlers.push(handler);
     }
 
     public getResponses(): any[] {
