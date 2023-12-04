@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "watch": "nodemon --verbose --no-ignore --watch 'src/**/*' --ext 'ts,tsx,js,jsx,css,svg' --exec 'npm run build'"
+    "watch": "nodemon --verbose --no-ignore --watch 'src/**/*' --ext 'ts,tsx,js,jsx,css,svg' --exec 'npm run build'",
+    "format": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [

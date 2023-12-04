@@ -4,7 +4,7 @@ export function mapStd(msg: any): JSX.Element | null {
             <>
                 {msg.Std.elements.map((element: any, index: number) => {
                     if (element.Paragraph) {
-                        return <p key={index}>{element.Paragraph.text}</p>;
+                        return <p>{element.Paragraph.text}</p>;
                     }
                 })}
             </>

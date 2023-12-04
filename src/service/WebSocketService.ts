@@ -41,7 +41,7 @@ class WebSocketService {
 
     public sendMessage(message: WsMessage): void {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            console.log("Sending " + message);
+            console.log("Sending ", message);
             this.socket.send(message.toJSON());
         } else console.log("Message " + message + " not send. readyState = " + this.socket?.readyState)
     }

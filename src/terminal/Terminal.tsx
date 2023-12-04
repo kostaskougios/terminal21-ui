@@ -22,9 +22,9 @@ function Terminal() {
     return (
         <div className='Terminal'>
             <p>The main terminal area</p>
-            {messages.map( (msg) => (
+            {messages.map( (msg) => 
                 mapResponse(msg)
-            ))}
+            )}
         </div>
     );
 }
