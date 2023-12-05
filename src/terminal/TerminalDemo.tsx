@@ -11,7 +11,6 @@ import { CircularProgress } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { ChatIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import ChatApp from "./ChatApp";
 
 function TerminalDemo() {
   const toast = useToast();
@@ -81,7 +80,6 @@ function TerminalDemo() {
         varius posuere id sit amet elit. Maecenas varius, justo sit amet semper
         imperdiet, leo ipsum varius sapien, eu dignissim leo dolor quis diam.
       </p>
-      <ChatApp />
       <p>
         Nulla tempor nisi risus, vel pharetra nibh sagittis facilisis. Interdum
         et malesuada fames ac ante ipsum primis in faucibus. Duis lacus sapien,

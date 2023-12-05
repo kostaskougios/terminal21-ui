@@ -49,7 +49,7 @@ function Sessions() {
             console.log(session);
             return (
               <TabPanel>
-                <Terminal sessionId={session.id}/>
+                <Terminal key={session.id} sessionId={session.id}/>
               </TabPanel>
             )
           })
