@@ -18,7 +18,7 @@ class WebSocketService {
     this.reconnect();
 
     this.socket!.onopen = () => {
-      console.log(`${this.name}: WebSocket connection established`);
+      console.log(`${this.name}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`);
       this.onOpenHandlers.forEach((handler) => handler());
     };
 
@@ -31,6 +31,7 @@ class WebSocketService {
 
     this.socket!.onclose = () => {
       console.log(`${this.name}: WebSocket connection closed`);
+      setTimeout(() => this.attemptReconnect(), 500);
     };
 
     this.socket!.onerror = (error) => {
@@ -48,6 +49,12 @@ class WebSocketService {
       this.socket.close();
     }
   }
+  private attemptReconnect(): void {
+    if (!this.socket || this.socket.readyState === WebSocket.CLOSED) {
+      console.log("Attempting to reconnect...");
+      this.connect();
+    }
+  }
 
   public sendMessage(message: WsRequest): void {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
@@ -55,9 +62,7 @@ class WebSocketService {
       this.socket.send(message.toJSON());
       console.log("Msg was send.");
     } else
-      console.log(
-        `${this.name}: Message ${message} not send. readyState = ${this.socket?.readyState}`,
-      );
+        throw `${this.name}: Message ${message} not send. readyState = ${this.socket?.readyState}`;
   }
 
   public subscribeToMessages(handler: MessageHandler): void {
