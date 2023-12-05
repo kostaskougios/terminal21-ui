@@ -23,8 +23,8 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
     useEffect(() => {
         webSocketService.connect();
         console.log("websocket connected");
-        webSocketService.subscribeToMessages((message) => {
-            setMessages((prev) => [...prev, message]);
+        webSocketService.subscribeToMessages((messages) => {
+            setMessages((prev) => messages);
         });
 
         return () => {
