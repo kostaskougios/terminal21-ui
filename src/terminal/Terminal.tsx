@@ -12,7 +12,7 @@ interface TerminalProps {
 const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
     const [messages, setMessages] = useState<any[]>([]);
     const webSocketService = new WebSocketService(
-        "terminal-ws",
+        `terminal-ws-${sessionId}`,
         "ws://localhost:8080/ui/session",
     );
 
