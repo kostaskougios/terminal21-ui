@@ -3,7 +3,6 @@ export function mapStd(msg: any): JSX.Element | null {
     const element = msg.Std.element;
     return <>
         { renderElement(element) }
-          
       </>
   }
   return null;
