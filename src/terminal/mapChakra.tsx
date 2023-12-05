@@ -2,7 +2,7 @@ import { Button, Box } from "@chakra-ui/react";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 
 export function mapChakra(msg: any): JSX.Element | null {
-  return renderIfExists(ElementMap,msg.Chakra);
+  return renderIfExists(ElementMap, msg.Chakra);
 }
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
