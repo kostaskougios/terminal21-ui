@@ -1,18 +1,17 @@
 class SessionId {
-    sessionId: string;
+  sessionId: string;
 
-    constructor(sessionId: string) {
-        this.sessionId = sessionId;
-    }
+  constructor(sessionId: string) {
+    this.sessionId = sessionId;
+  }
 
-    toJSON(): any {
-        return {
-            SessionId: {
-                id: this.sessionId
-            }
-        };
-    }
-
+  toJSON(): any {
+    return {
+      SessionId: {
+        id: this.sessionId,
+      },
+    };
+  }
 }
 
 export default SessionId;

@@ -6,38 +6,40 @@ import WsRequest from "../service/WsRequest";
 import SessionId from "../service/SessionId";
 
 interface TerminalProps {
-    sessionId: string;
-  }
+  sessionId: string;
+}
 
 const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
-    const [messages, setMessages] = useState<any[]>([]);
-    const webSocketService = new WebSocketService(
-        `terminal-ws-${sessionId}`,
-        "ws://localhost:8080/ui/session",
-    );
+  const [messages, setMessages] = useState<any[]>([]);
+  const webSocketService = new WebSocketService(
+    `terminal-ws-${sessionId}`,
+    "ws://localhost:8080/ui/session",
+  );
 
-    webSocketService.subscribeToOnOpen(() => {
-        webSocketService.sendMessage(new WsRequest("init", new SessionId(sessionId)));
+  webSocketService.subscribeToOnOpen(() => {
+    webSocketService.sendMessage(
+      new WsRequest("init", new SessionId(sessionId)),
+    );
+  });
+
+  useEffect(() => {
+    webSocketService.connect();
+    console.log("websocket connected");
+    webSocketService.subscribeToMessages((messages) => {
+      setMessages((prev) => messages);
     });
 
-    useEffect(() => {
-        webSocketService.connect();
-        console.log("websocket connected");
-        webSocketService.subscribeToMessages((messages) => {
-            setMessages((prev) => messages);
-        });
+    return () => {
+      webSocketService.disconnect();
+    };
+  }, []);
 
-        return () => {
-            webSocketService.disconnect();
-        };
-    }, []);
-
-    return (
-        <div className="Terminal">
-            <p>Started session {sessionId}</p>
-            {messages.map((msg) => mapResponse(msg))}
-        </div>
-    );
-}
+  return (
+    <div className="Terminal">
+      <p>Started session {sessionId}</p>
+      {messages.map((msg) => mapResponse(msg))}
+    </div>
+  );
+};
 
 export default Terminal;

@@ -1,14 +1,12 @@
 export function mapStd(msg: any): JSX.Element | null {
   if (msg.Std) {
     const element = msg.Std.element;
-    return <>
-        { renderElement(element) }
-      </>
+    return <>{renderElement(element)}</>;
   }
   return null;
 }
 
-function renderElement(element:any) {
+function renderElement(element: any) {
   const p = element.Paragraph;
   if (p) {
     return <p key={p.key}>{p.text}</p>;
