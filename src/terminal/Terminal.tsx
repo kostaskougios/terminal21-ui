@@ -4,6 +4,7 @@ import WebSocketService from "../service/WebSocketService";
 import { mapResponse } from "./mapResponse";
 import WsRequest from "../service/WsRequest";
 import SessionId from "../service/SessionId";
+import UiHandlers from "../model/UiHandlers";
 
 interface TerminalProps {
   sessionId: string;
@@ -34,10 +35,11 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
     };
   }, []);
 
+  const uiHandlers=new UiHandlers((key) => { alert(key); });
   return (
     <div className="Terminal">
       <p>Started session {sessionId}</p>
-      {messages.map((msg) => mapResponse(msg))}
+      {messages.map((msg) => mapResponse(msg,uiHandlers))}
     </div>
   );
 };

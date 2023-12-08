@@ -1,9 +1,10 @@
 import React from "react";
 import { mapStd } from "./mapStd";
 import { mapChakra } from "./mapChakra";
+import UiHandlers from "../model/UiHandlers";
 
-export function mapResponse(msg: any): JSX.Element {
-  const r = [mapStd(msg), mapChakra(msg)].filter((e) => e != null);
+export function mapResponse(msg: any, uiHandlers: UiHandlers): JSX.Element {
+  const r = [mapStd(msg, uiHandlers), mapChakra(msg, uiHandlers)].filter((e) => e != null);
   if (r.length > 0) return r[0]!;
   return <div>Unknown message format {JSON.stringify(msg)}</div>;
 }
