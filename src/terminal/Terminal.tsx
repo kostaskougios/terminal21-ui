@@ -2,8 +2,8 @@ import "./Terminal.css";
 import { useEffect, useState } from "react";
 import WebSocketService from "../service/WebSocketService";
 import { mapResponse } from "./mapResponse";
-import WsRequest from "../service/WsRequest";
-import SessionId from "../service/SessionId";
+import WsRequest from "../service/json/WsRequest";
+import SessionId from "../service/json/SessionId";
 import UiHandlers from "../model/UiHandlers";
 
 interface TerminalProps {

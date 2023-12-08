@@ -1,4 +1,4 @@
-import WsRequest from "./WsRequest";
+import WsRequest from "./json/WsRequest";
 
 type OnOpenHandler = () => void;
 type MessageHandler = (message: any) => void;

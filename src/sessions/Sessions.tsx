@@ -4,7 +4,7 @@ import TerminalDemo from "../terminal/TerminalDemo";
 import "./Sessions.css";
 import { useEffect, useState } from "react";
 import WebSocketService from "../service/WebSocketService";
-import WsRequest from "../service/WsRequest";
+import WsRequest from "../service/json/WsRequest";
 
 function Sessions() {
   const [sessions, setSessions] = useState<Array<any>>([]);
