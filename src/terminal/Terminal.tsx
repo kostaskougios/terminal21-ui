@@ -5,6 +5,7 @@ import { mapResponse } from "./mapResponse";
 import WsRequest from "../service/json/WsRequest";
 import SessionId from "../service/json/SessionId";
 import UiHandlers from "../model/UiHandlers";
+import OnClickBody from "../service/json/OnClickBody";
 
 interface TerminalProps {
   sessionId: string;
@@ -18,9 +19,7 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
   );
 
   webSocketService.subscribeToOnOpen(() => {
-    webSocketService.sendMessage(
-      new WsRequest("init", new SessionId(sessionId)),
-    );
+    webSocketService.send(new WsRequest("init", new SessionId(sessionId)));
   });
 
   useEffect(() => {
@@ -35,11 +34,13 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
     };
   }, []);
 
-  const uiHandlers=new UiHandlers((key) => { alert(key); });
+  const uiHandlers = new UiHandlers((key) => {
+    webSocketService.send(new WsRequest("onclick", new OnClickBody(key)));
+  });
   return (
     <div className="Terminal">
       <p>Started session {sessionId}</p>
-      {messages.map((msg) => mapResponse(msg,uiHandlers))}
+      {messages.map((msg) => mapResponse(msg, uiHandlers))}
     </div>
   );
 };

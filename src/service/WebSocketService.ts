@@ -18,7 +18,9 @@ class WebSocketService {
     this.reconnect();
 
     this.socket!.onopen = () => {
-      console.log(`${this.name}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`);
+      console.log(
+        `${this.name}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`,
+      );
       this.onOpenHandlers.forEach((handler) => handler());
     };
 
@@ -56,13 +58,16 @@ class WebSocketService {
     }
   }
 
-  public sendMessage(message: WsRequest): void {
+  public send(message: WsRequest): void {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
       console.log(`${this.name}: Sending `, message);
       this.socket.send(message.toJSON());
       console.log("Msg was send.");
     } else
-        throw `${this.name}: Message ${message} not send. readyState = ${this.socket?.readyState}`;
+      throw `${
+        this.name
+      }: Message ${message.toJSON()} not send. readyState = ${this.socket
+        ?.readyState}`;
   }
 
   public subscribeToMessages(handler: MessageHandler): void {

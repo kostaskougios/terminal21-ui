@@ -1,6 +1,9 @@
 import UiHandlers from "../model/UiHandlers";
 
-export type ComponentRenderFunction = (props: any, uiHandlers: UiHandlers) => JSX.Element;
+export type ComponentRenderFunction = (
+  props: any,
+  uiHandlers: UiHandlers,
+) => JSX.Element;
 
 export function renderElement(
   elementMap: Record<string, ComponentRenderFunction>,
@@ -16,7 +19,7 @@ export function renderIfExists(
   elementMap: Record<string, ComponentRenderFunction>,
   uiHandlers: UiHandlers,
   msg: any,
-  validType: boolean
+  validType: boolean,
 ): JSX.Element | null {
-  return validType ? renderElement(elementMap,uiHandlers, msg) : null;
+  return validType ? renderElement(elementMap, uiHandlers, msg) : null;
 }

@@ -14,7 +14,7 @@ function Sessions() {
   );
 
   webSocketService.subscribeToOnOpen(() => {
-    webSocketService.sendMessage(new WsRequest("sessions", null));
+    webSocketService.send(new WsRequest("sessions", null));
   });
 
   useEffect(() => {
