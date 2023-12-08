@@ -1,7 +1,7 @@
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 
 export function mapStd(msg: any): JSX.Element | null {
-  return renderIfExists(ElementMap, msg.Std);
+  return renderIfExists(ElementMap, msg, msg.type == "Std");
 }
 
 const ElementMap: Record<string, ComponentRenderFunction> = {

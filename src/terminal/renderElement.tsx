@@ -12,6 +12,7 @@ export function renderElement(
 export function renderIfExists(
   elementMap: Record<string, ComponentRenderFunction>,
   msg: any,
+  validType: boolean
 ): JSX.Element | null {
-  return msg != null ? renderElement(elementMap, msg.element) : null;
+  return validType ? renderElement(elementMap, msg) : null;
 }
