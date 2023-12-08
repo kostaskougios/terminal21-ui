@@ -21,10 +21,9 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
   webSocketService.subscribeToOnOpen(() => {
     webSocketService.send(new WsRequest("init", new SessionId(sessionId)));
   });
+  webSocketService.connect();
 
   useEffect(() => {
-    webSocketService.connect();
-    console.log("websocket connected");
     webSocketService.subscribeToMessages((messages) => {
       setMessages((prev) => messages.elements);
     });

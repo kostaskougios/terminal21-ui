@@ -12,7 +12,7 @@ class WebSocketService {
   constructor(
     public name: string,
     private url: string,
-  ) {}
+  ) { }
 
   public connect(): void {
     this.reconnect();
@@ -40,9 +40,11 @@ class WebSocketService {
       console.error(`${this.name}: WebSocket error:`, error);
     };
   }
+
   private reconnect(): void {
     console.log(`${this.name}: connecting to ${this.url}`);
     this.socket = new WebSocket(this.url);
+    console.log("reconnect()",this);
   }
 
   public disconnect(): void {
@@ -63,11 +65,11 @@ class WebSocketService {
       console.log(`${this.name}: Sending `, message);
       this.socket.send(message.toJSON());
       console.log("Msg was send.");
-    } else
-      throw `${
-        this.name
-      }: Message ${message.toJSON()} not send. readyState = ${this.socket
+    } else {
+      throw `${this.name
+      }: Message ${message.toJSON()} not send. Socket = ${this.socket}. readyState = ${this.socket
         ?.readyState}`;
+    }
   }
 
   public subscribeToMessages(handler: MessageHandler): void {
