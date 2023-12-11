@@ -22,9 +22,9 @@ function Sessions() {
 
   useEffect(() => {
     webSocketService.connect();
-    console.log("sessions websocket connected");
+    //console.log("sessions websocket connected");
     webSocketService.subscribeToMessages((response) => {
-      console.log("Received ws-response :", response);
+      //console.log("Received ws-response :", response);
       const sessions = response.sessions;
       if (sessions)
         setSessions(sessions);
