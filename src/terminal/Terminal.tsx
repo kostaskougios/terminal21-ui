@@ -4,15 +4,15 @@ import UiHandlers from "../model/UiHandlers";
 
 interface TerminalProps {
   sessionId: string;
-  messages: any[];
-  uiHandlers: UiHandlers;
+  params: any;
 }
 
 const Terminal: React.FC<TerminalProps> = ({
   sessionId,
-  messages,
-  uiHandlers,
+  params
 }) => {
+  const uiHandlers: UiHandlers = params.uiHandlers;
+  const messages: any[] = params.elements;
   return (
     <div className="Terminal">
       <p>Started session {sessionId}</p>

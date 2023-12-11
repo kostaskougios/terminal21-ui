@@ -21,15 +21,6 @@ function Sessions() {
     webSocketService.send(new WsRequest("sessions", null));
   });
 
-  const [uiHandlers, setUiHandlers] = useState<UiHandlers>(
-    new UiHandlers((key) => {
-      console.log("Event received for ", key);
-      webSocketService.send(
-        new WsRequest("onclick", { OnClick: { key: key } }),
-      );
-    }),
-  );
-
   useEffect(() => {
     webSocketService.connect();
     //console.log("sessions websocket connected");
@@ -40,14 +31,22 @@ function Sessions() {
       const newState = response.sessionState;
       if (newState) {
         const j = JSON.parse(newState);
+        const session = response.session;
         console.log(
           "setting sessionState for",
-          response.session.id,
+          session.id,
           "to",
           j.elements,
         );
+        j.uiHandlers = new UiHandlers((key) => {
+          console.log("Event received for ", session.id, " and ", key);
+          webSocketService.send(
+            new WsRequest("onclick", { OnClick: { sessionId: session.id, key: key } }),
+          );
+        });
+
         setSessionState((prev) =>
-          new Map<string, any[]>(prev).set(response.session.id, j.elements),
+          new Map<string, any[]>(prev).set(response.session.id, j),
         );
       }
     });
@@ -69,13 +68,13 @@ function Sessions() {
       <TabPanels>
         {sessions.map((session) => {
           const state = sessionState.get(session.id);
+
           return (
             <TabPanel key={session.id + "TabPanel"}>
               <Terminal
                 key={session.id + "Terminal"}
                 sessionId={session.id}
-                messages={state ? state : []}
-                uiHandlers={uiHandlers}
+                params={state ? state : { elements:[]} }
               />
             </TabPanel>
           );
