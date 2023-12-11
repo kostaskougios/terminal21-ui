@@ -60,9 +60,9 @@ function Sessions() {
           sessions.map((session) => {
             const state = sessionState.get(session.id);
             return (
-              <TabPanel>
+              <TabPanel key={session.id + "TabPanel"}>
                 <Terminal
-                  key={session.id + "TabPanel"}
+                  key={session.id + "Terminal"}
                   sessionId={session.id}
                   messages={state ? state : []}
                 />
