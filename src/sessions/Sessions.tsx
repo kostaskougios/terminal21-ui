@@ -27,7 +27,7 @@ function Sessions() {
       console.log("Received ws-response :", response);
       const sessions = response.sessions;
       if (sessions)
-        setSessions((prev) => sessions);
+        setSessions(sessions);
       const newState = response.sessionState;
       if (newState) {
         const j = JSON.parse(newState);
