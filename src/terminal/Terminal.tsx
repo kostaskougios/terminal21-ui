@@ -9,32 +9,14 @@ import OnClickBody from "../service/json/OnClickBody";
 
 interface TerminalProps {
   sessionId: string;
+  messages: any[];
 }
 
-const Terminal: React.FC<TerminalProps> = ({ sessionId }) => {
-  const [messages, setMessages] = useState<any[]>([]);
-  const webSocketService = new WebSocketService(
-    `terminal-ws-${sessionId}`,
-    "ws://localhost:8080/ui/session",
-  );
-
-  webSocketService.subscribeToOnOpen(() => {
-    webSocketService.send(new WsRequest("init", new SessionId(sessionId)));
-  });
-  webSocketService.connect();
-
-  useEffect(() => {
-    webSocketService.subscribeToMessages((messages) => {
-      setMessages((prev) => messages.elements);
-    });
-
-    return () => {
-      webSocketService.disconnect();
-    };
-  }, []);
-
+const Terminal: React.FC<TerminalProps> = ({ sessionId, messages }) => {
+  console.log("Terminal messages = ", messages);
   const uiHandlers = new UiHandlers((key) => {
-    webSocketService.send(new WsRequest("onclick", new OnClickBody(key)));
+    alert(key);
+    // webSocketService.send(new WsRequest("onclick", new OnClickBody(key)));
   });
   return (
     <div className="Terminal">

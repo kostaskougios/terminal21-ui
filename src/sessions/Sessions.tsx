@@ -8,6 +8,9 @@ import WsRequest from "../service/json/WsRequest";
 
 function Sessions() {
   const [sessions, setSessions] = useState<Array<any>>([]);
+  const [sessionState, setSessionState] = useState<Map<string, any[]>>(
+    new Map<string, any[]>(),
+  );
   const webSocketService = new WebSocketService(
     "sessions-ws",
     "ws://localhost:8080/ui/sessions",
@@ -20,8 +23,30 @@ function Sessions() {
   useEffect(() => {
     webSocketService.connect();
     console.log("sessions websocket connected");
-    webSocketService.subscribeToMessages((sessions) => {
-      setSessions((prev) => sessions);
+    webSocketService.subscribeToMessages((response) => {
+      console.log("Received ws-response :", response);
+      const sessions = response.sessions;
+      if (sessions)
+        setSessions((prev) => {
+          for (var idx in sessions) {
+            const s = sessions[idx];
+            if (sessionState.get(s.id) === undefined)
+              sessionState.set(s.id, []);
+          }
+          return sessions;
+        });
+      const newState = response.sessionState;
+      if (newState) {
+        const j = JSON.parse(newState);
+        console.log(
+          "setting sessionState for",
+          response.session.id,
+          "to",
+          j.elements,
+        );
+        sessionState.set(response.session.id, j.elements);
+        setSessionState(sessionState);
+      }
     });
 
     return () => {
@@ -33,18 +58,20 @@ function Sessions() {
     <Tabs className="Sessions" variant="enclosed">
       <TabList>
         {sessions.map((session) => {
-          console.log("tab for session", session);
-          return <Tab key={session.id}>{session.name}</Tab>;
+          return <Tab key={session.id + "Tab"}>{session.name}</Tab>;
         })}
         <Tab>Demo</Tab>
       </TabList>
 
       <TabPanels>
         {sessions.map((session) => {
-          console.log(session);
           return (
             <TabPanel>
-              <Terminal key={session.id} sessionId={session.id} />
+              <Terminal
+                key={session.id + "TabPanel"}
+                sessionId={session.id}
+                messages={sessionState.get(session.id)!}
+              />
             </TabPanel>
           );
         })}
