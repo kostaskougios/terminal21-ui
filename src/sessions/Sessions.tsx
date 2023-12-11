@@ -5,6 +5,8 @@ import "./Sessions.css";
 import { useEffect, useState } from "react";
 import WebSocketService from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
+import UiHandlers from "../model/UiHandlers";
+import OnClickBody from "../service/json/OnClickBody";
 
 function Sessions() {
   const [sessions, setSessions] = useState<Array<any>>([]);
@@ -19,6 +21,13 @@ function Sessions() {
   webSocketService.subscribeToOnOpen(() => {
     webSocketService.send(new WsRequest("sessions", null));
   });
+
+  const [uiHandlers, setUiHandlers] = useState<UiHandlers>(
+    new UiHandlers((key) => {
+      console.log("Event received for ", key);
+      webSocketService.send(new WsRequest("onclick", new OnClickBody(key)));
+    })
+  );
 
   useEffect(() => {
     webSocketService.connect();
@@ -65,6 +74,7 @@ function Sessions() {
                   key={session.id + "Terminal"}
                   sessionId={session.id}
                   messages={state ? state : []}
+                  uiHandlers={uiHandlers}
                 />
               </TabPanel>
             );
