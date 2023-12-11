@@ -12,7 +12,7 @@ class WebSocketService {
   constructor(
     public name: string,
     private url: string,
-  ) { }
+  ) {}
 
   public connect(): void {
     this.reconnect();
@@ -26,9 +26,18 @@ class WebSocketService {
 
     this.socket!.onmessage = (event) => {
       console.log(`${new Date()} ${this.name}: received:`, event.data);
-      const message = JSON.parse(event.data);
-      this.responses.push(message);
-      this.messageHandlers.forEach((handler) => handler(message));
+      try {
+        const message = JSON.parse(event.data);
+        this.responses.push(message);
+        this.messageHandlers.forEach((handler) => handler(message));
+      } catch (error) {
+        console.log(
+          "An error occurred while receiving a message. received JSON =",
+          event.data,
+          "Error =",
+          error,
+        );
+      }
     };
 
     this.socket!.onclose = () => {
@@ -44,7 +53,7 @@ class WebSocketService {
   private reconnect(): void {
     console.log(`${this.name}: connecting to ${this.url}`);
     this.socket = new WebSocket(this.url);
-    console.log("reconnect()",this);
+    console.log("reconnect()", this);
   }
 
   public disconnect(): void {
@@ -66,9 +75,9 @@ class WebSocketService {
       this.socket.send(message.toJSON());
       console.log("Msg was send.");
     } else {
-      throw `${this.name
-      }: Message ${message.toJSON()} not send. Socket = ${this.socket}. readyState = ${this.socket
-        ?.readyState}`;
+      throw `${this.name}: Message ${message.toJSON()} not send. Socket = ${
+        this.socket
+      }. readyState = ${this.socket?.readyState}`;
     }
   }
 
