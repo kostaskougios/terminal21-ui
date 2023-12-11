@@ -27,14 +27,7 @@ function Sessions() {
       console.log("Received ws-response :", response);
       const sessions = response.sessions;
       if (sessions)
-        setSessions((prev) => {
-          for (var idx in sessions) {
-            const s = sessions[idx];
-            if (sessionState.get(s.id) === undefined)
-              sessionState.set(s.id, []);
-          }
-          return sessions;
-        });
+        setSessions((prev) => sessions);
       const newState = response.sessionState;
       if (newState) {
         const j = JSON.parse(newState);
@@ -44,8 +37,7 @@ function Sessions() {
           "to",
           j.elements,
         );
-        sessionState.set(response.session.id, j.elements);
-        setSessionState(sessionState);
+        setSessionState((prev) => new Map<string, any[]>(prev).set(response.session.id, j.elements));
       }
     });
 
@@ -64,17 +56,20 @@ function Sessions() {
       </TabList>
 
       <TabPanels>
-        {sessions.map((session) => {
-          return (
-            <TabPanel>
-              <Terminal
-                key={session.id + "TabPanel"}
-                sessionId={session.id}
-                messages={sessionState.get(session.id)!}
-              />
-            </TabPanel>
-          );
-        })}
+        {
+          sessions.map((session) => {
+            const state = sessionState.get(session.id);
+            return (
+              <TabPanel>
+                <Terminal
+                  key={session.id + "TabPanel"}
+                  sessionId={session.id}
+                  messages={state ? state : []}
+                />
+              </TabPanel>
+            );
+          })
+        }
         <TabPanel>
           <p>Demo</p>
           <TerminalDemo />
