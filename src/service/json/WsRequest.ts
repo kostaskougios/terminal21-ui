@@ -10,7 +10,7 @@ class WsRequest {
   toJSON(): string {
     return JSON.stringify({
       operation: this.operation,
-      body: this.body == null ? null : this.body.toJSON(),
+      body: this.body,
     });
   }
 }

@@ -8,7 +8,11 @@ interface TerminalProps {
   uiHandlers: UiHandlers;
 }
 
-const Terminal: React.FC<TerminalProps> = ({ sessionId, messages, uiHandlers }) => {
+const Terminal: React.FC<TerminalProps> = ({
+  sessionId,
+  messages,
+  uiHandlers,
+}) => {
   return (
     <div className="Terminal">
       <p>Started session {sessionId}</p>

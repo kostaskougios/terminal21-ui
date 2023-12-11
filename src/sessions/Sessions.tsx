@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import WebSocketService from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
-import OnClickBody from "../service/json/OnClickBody";
 
 function Sessions() {
   const [sessions, setSessions] = useState<Array<any>>([]);
@@ -25,8 +24,10 @@ function Sessions() {
   const [uiHandlers, setUiHandlers] = useState<UiHandlers>(
     new UiHandlers((key) => {
       console.log("Event received for ", key);
-      webSocketService.send(new WsRequest("onclick", new OnClickBody(key)));
-    })
+      webSocketService.send(
+        new WsRequest("onclick", { OnClick: { key: key } }),
+      );
+    }),
   );
 
   useEffect(() => {
@@ -35,8 +36,7 @@ function Sessions() {
     webSocketService.subscribeToMessages((response) => {
       //console.log("Received ws-response :", response);
       const sessions = response.sessions;
-      if (sessions)
-        setSessions(sessions);
+      if (sessions) setSessions(sessions);
       const newState = response.sessionState;
       if (newState) {
         const j = JSON.parse(newState);
@@ -46,7 +46,9 @@ function Sessions() {
           "to",
           j.elements,
         );
-        setSessionState((prev) => new Map<string, any[]>(prev).set(response.session.id, j.elements));
+        setSessionState((prev) =>
+          new Map<string, any[]>(prev).set(response.session.id, j.elements),
+        );
       }
     });
 
@@ -65,21 +67,19 @@ function Sessions() {
       </TabList>
 
       <TabPanels>
-        {
-          sessions.map((session) => {
-            const state = sessionState.get(session.id);
-            return (
-              <TabPanel key={session.id + "TabPanel"}>
-                <Terminal
-                  key={session.id + "Terminal"}
-                  sessionId={session.id}
-                  messages={state ? state : []}
-                  uiHandlers={uiHandlers}
-                />
-              </TabPanel>
-            );
-          })
-        }
+        {sessions.map((session) => {
+          const state = sessionState.get(session.id);
+          return (
+            <TabPanel key={session.id + "TabPanel"}>
+              <Terminal
+                key={session.id + "Terminal"}
+                sessionId={session.id}
+                messages={state ? state : []}
+                uiHandlers={uiHandlers}
+              />
+            </TabPanel>
+          );
+        })}
         <TabPanel>
           <p>Demo</p>
           <TerminalDemo />
