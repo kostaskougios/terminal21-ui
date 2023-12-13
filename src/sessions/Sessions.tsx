@@ -32,16 +32,13 @@ function Sessions() {
       if (newState) {
         const j = JSON.parse(newState);
         const session = response.session;
-        console.log(
-          "setting sessionState for",
-          session.id,
-          "to",
-          j.elements,
-        );
+        console.log("setting sessionState for", session.id, "to", j.elements);
         j.uiHandlers = new UiHandlers((key) => {
           console.log("Event received for ", session.id, " and ", key);
           webSocketService.send(
-            new WsRequest("onclick", { OnClick: { sessionId: session.id, key: key } }),
+            new WsRequest("onclick", {
+              OnClick: { sessionId: session.id, key: key },
+            }),
           );
         });
 
@@ -74,7 +71,7 @@ function Sessions() {
               <Terminal
                 key={session.id + "Terminal"}
                 sessionId={session.id}
-                params={state ? state : { elements:[]} }
+                params={state ? state : { elements: [] }}
               />
             </TabPanel>
           );

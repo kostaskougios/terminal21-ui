@@ -1,4 +1,4 @@
-import { Button, Box } from "@chakra-ui/react";
+import { Button, Box, SimpleGrid } from "@chakra-ui/react";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
 import { mapResponses } from "./mapResponse";
@@ -16,8 +16,21 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
     </Button>
   ),
-  Box: (b: any, uiHandlers: UiHandlers) => <Box key={b.key} {...b.props}>
-    {b.text}
-    {mapResponses(b.children, uiHandlers)}
-  </Box>,
+  Box: (b: any, uiHandlers: UiHandlers) => (
+    <Box key={b.key} {...b.props}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Box>
+  ),
+  SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
+    <SimpleGrid
+      key={b.key}
+      spacing={b.spacing}
+      spacingX={b.spacingX}
+      spacingY={b.spacingY}
+      columns={b.columns}
+    >
+      {mapResponses(b.children, uiHandlers)}
+    </SimpleGrid>
+  ),
 };

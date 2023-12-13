@@ -7,10 +7,7 @@ interface TerminalProps {
   params: any;
 }
 
-const Terminal: React.FC<TerminalProps> = ({
-  sessionId,
-  params
-}) => {
+const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
   const uiHandlers: UiHandlers = params.uiHandlers;
   const messages: any[] = params.elements;
   return (

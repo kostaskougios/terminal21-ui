@@ -11,6 +11,9 @@ export function mapResponse(msg: any, uiHandlers: UiHandlers): JSX.Element {
   return <div>Unknown message format {JSON.stringify(msg)}</div>;
 }
 
-export function mapResponses(msgs:any[], uiHandlers: UiHandlers):JSX.Element[] {
-  return msgs.map(msg=>mapResponse(msg,uiHandlers));
+export function mapResponses(
+  msgs: any[],
+  uiHandlers: UiHandlers,
+): JSX.Element[] {
+  return msgs.map((msg) => mapResponse(msg, uiHandlers));
 }

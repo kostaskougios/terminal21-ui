@@ -8,10 +8,12 @@ export function mapStd(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
   Text: (b: any) => <span key={b.key}>{b.text}</span>,
-  NewLine: (b: any) => <br key={b.key}/>,
-  Paragraph: (b: any, uiHandlers: UiHandlers) => <p key={b.key}>
-    {b.text}
-    {mapResponses(b.children, uiHandlers)}
-  </p>,
+  NewLine: (b: any) => <br key={b.key} />,
+  Paragraph: (b: any, uiHandlers: UiHandlers) => (
+    <p key={b.key}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </p>
+  ),
   Header1: (b: any) => <h1 key={b.key}>{b.text}</h1>,
 };
