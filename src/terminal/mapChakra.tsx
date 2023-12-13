@@ -15,5 +15,5 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
     </Button>
   ),
-  Box: (b: any) => <Box key={b.key}>{b.text}</Box>,
+  Box: (b: any) => <Box key={b.key} {...b.props}>{b.text}</Box>,
 };
