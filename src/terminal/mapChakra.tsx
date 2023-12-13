@@ -1,6 +1,7 @@
 import { Button, Box } from "@chakra-ui/react";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
+import { mapResponses } from "./mapResponse";
 
 export function mapChakra(
   msg: any,
@@ -15,5 +16,8 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
     </Button>
   ),
-  Box: (b: any) => <Box key={b.key} {...b.props}>{b.text}</Box>,
+  Box: (b: any, uiHandlers: UiHandlers) => <Box key={b.key} {...b.props}>
+    {b.text}
+    {mapResponses(b.children, uiHandlers)}
+  </Box>,
 };
