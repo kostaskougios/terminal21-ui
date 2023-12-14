@@ -17,5 +17,5 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Header1: (b: any) => <h1 key={b.key}>{b.text}</h1>,
   Em: (b: any) => <em key={b.key}>{b.text}</em>,
-  Input: (b: any, uiHandlers: UiHandlers) => (<input key={b.key} type={b.type} defaultValue={b.defaultValue} onChange={(event) => uiHandlers.onChange(b.key, event.target.value) }></input>)
+  Input: (b: any, uiHandlers: UiHandlers) => (<input key={b.key} type={b.type} defaultValue={b.defaultValue} onChange={(event) => uiHandlers.onChange(b.key, event.target.value)}></input>)
 };
