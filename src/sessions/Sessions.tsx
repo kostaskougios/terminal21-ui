@@ -33,14 +33,8 @@ function Sessions() {
         const j = JSON.parse(newState);
         const session = response.session;
         console.log("setting sessionState for", session.id, "to", j.elements);
-        j.uiHandlers = new UiHandlers((key) => {
-          console.log("Event received for ", session.id, " and ", key);
-          webSocketService.send(
-            new WsRequest("onclick", {
-              OnClick: { sessionId: session.id, key: key },
-            }),
-          );
-        });
+
+        j.uiHandlers = new UiHandlers(session, webSocketService);
 
         setSessionState((prev) =>
           new Map<string, any[]>(prev).set(response.session.id, j),

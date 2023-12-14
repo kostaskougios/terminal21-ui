@@ -2,6 +2,7 @@ import { Button, Box, SimpleGrid } from "@chakra-ui/react";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
 import { mapResponses } from "./mapResponse";
+import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
 export function mapChakra(
   msg: any,
@@ -32,5 +33,15 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     >
       {mapResponses(b.children, uiHandlers)}
     </SimpleGrid>
+  ),
+  Editable: (b: any, uiHandlers: UiHandlers) => (
+    <Editable
+      key={b.key}
+      defaultValue={b.defaultValue}
+      onChange={(newValue) => uiHandlers.onChange(b.key, newValue)}
+    >
+      <EditablePreview />
+      <EditableInput />
+    </Editable>
   ),
 };
