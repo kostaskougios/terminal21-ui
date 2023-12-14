@@ -19,4 +19,3 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   Em: (b: any) => <em key={b.key}>{b.text}</em>,
   Input: (b: any, uiHandlers: UiHandlers) => (<input key={b.key} type={b.type} defaultValue={b.defaultValue} onChange={(event) => uiHandlers.onChange(b.key, event.target.value) }></input>)
 };
-// uiHandlers.onChange(b.key, newValue.target.value);
