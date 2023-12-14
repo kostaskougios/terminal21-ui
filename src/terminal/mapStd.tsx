@@ -16,4 +16,5 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </p>
   ),
   Header1: (b: any) => <h1 key={b.key}>{b.text}</h1>,
+  Em: (b: any) => <em key={b.key}>{b.text}</em>,
 };
