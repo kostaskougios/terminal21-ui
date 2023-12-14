@@ -12,7 +12,6 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
   const messages: any[] = params.elements;
   return (
     <div className="Terminal">
-      <p>Started session {sessionId}</p>
       {messages.map((msg) => mapResponse(msg, uiHandlers))}
     </div>
   );
