@@ -12,6 +12,7 @@ import {
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <VStack>
       <Box>

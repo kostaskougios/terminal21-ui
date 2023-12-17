@@ -1,7 +1,20 @@
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
 import { mapResponses } from "./mapResponse";
-import { Button, Box, SimpleGrid, FormControl, FormLabel, Editable, EditableInput, EditablePreview, FormHelperText, Input, HStack,VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  SimpleGrid,
+  FormControl,
+  FormLabel,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  FormHelperText,
+  Input,
+  HStack,
+  VStack,
+} from "@chakra-ui/react";
 
 export function mapChakra(
   msg: any,
@@ -61,8 +74,14 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </FormHelperText>
   ),
   Input: (b: any, uiHandlers: UiHandlers) => (
-    <Input key={b.key} type={b.type} placeholder={b.placeholder} size={b.size} variant={b.variant} onChange={(event) => uiHandlers.onChange(b.key, event.target.value) }>
-    </Input>
+    <Input
+      key={b.key}
+      type={b.type}
+      placeholder={b.placeholder}
+      size={b.size}
+      variant={b.variant}
+      onChange={(event) => uiHandlers.onChange(b.key, event.target.value)}
+    ></Input>
   ),
   HStack: (b: any, uiHandlers: UiHandlers) => (
     <HStack key={b.key} spacing={b.spacing}>
@@ -74,5 +93,4 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {mapResponses(b.children, uiHandlers)}
     </VStack>
   ),
-
 };

@@ -2,28 +2,26 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
 import TerminalDemo from "../terminal/TerminalDemo";
 import "./Sessions.css";
-import { useEffect, useState } from "react";
-import WebSocketService from "../service/WebSocketService";
+import { useContext, useEffect, useState } from "react";
+import {
+  WebSocketContext,
+  WebSocketService,
+} from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
 
 function Sessions() {
+  const webSocketService = useContext(WebSocketContext)!;
   const [sessions, setSessions] = useState<Array<any>>([]);
   const [sessionState, setSessionState] = useState<Map<string, any[]>>(
     new Map<string, any[]>(),
   );
 
   useEffect(() => {
-    const webSocketService = new WebSocketService(
-      "sessions-ws",
-      "ws://localhost:8080/ui/sessions",
-    );
-  
     webSocketService.subscribeToOnOpen(() => {
       webSocketService.send(new WsRequest("sessions", null));
     });
-  
-    webSocketService.connect();
+
     //console.log("sessions websocket connected");
     webSocketService.subscribeToMessages((response) => {
       //console.log("Received ws-response :", response);

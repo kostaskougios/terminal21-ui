@@ -1,10 +1,11 @@
+import React from "react";
 import WsRequest from "./json/WsRequest";
-import { EventEmitter } from 'events';
+import { EventEmitter } from "events";
 
 type OnOpenHandler = () => void;
 type MessageHandler = (message: any) => void;
 
-class WebSocketService {
+export class WebSocketService {
   private socket: WebSocket | null = null;
   private messageHandlers: MessageHandler[] = [];
   private onOpenHandlers: OnOpenHandler[] = [];
@@ -15,14 +16,15 @@ class WebSocketService {
     public name: string,
     private url: string,
   ) {
-    console.log("WebSocketService constructed.")
-    this.emitter.on('new-message', () => {
+    console.log("WebSocketService constructed.");
+    this.emitter.on("new-message", () => {
       this.sendOutbound();
     });
   }
 
   private sendOutbound(): void {
-    if (this.socket == null) throw `Error, somehow sendOutbound called with null socket`;
+    if (this.socket == null)
+      throw `Error, somehow sendOutbound called with null socket`;
     if (this.socket.readyState === WebSocket.OPEN) {
       console.log(`Sending ${this.outbound.length}  outbound messages`);
       for (var i = 0; i < this.outbound.length; i++) {
@@ -32,7 +34,9 @@ class WebSocketService {
       }
       this.outbound = [];
     } else {
-      console.log(`Can't send outbound messages because websocket not open, will try to reconnect.`);
+      console.log(
+        `Can't send outbound messages because websocket not open, will try to reconnect.`,
+      );
       this.reconnect();
     }
   }
@@ -88,7 +92,7 @@ class WebSocketService {
 
   public send(message: WsRequest): void {
     this.outbound.push(message);
-    this.emitter.emit('new-message');
+    this.emitter.emit("new-message");
   }
 
   public subscribeToMessages(handler: MessageHandler): void {
@@ -100,4 +104,6 @@ class WebSocketService {
   }
 }
 
-export default WebSocketService;
+export const WebSocketContext = React.createContext<WebSocketService | null>(
+  null,
+);

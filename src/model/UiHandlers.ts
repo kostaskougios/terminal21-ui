@@ -1,4 +1,4 @@
-import WebSocketService from "../service/WebSocketService";
+import { WebSocketService } from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 
 type OnClick = (key: string) => void;
