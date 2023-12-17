@@ -12,16 +12,17 @@ function Sessions() {
   const [sessionState, setSessionState] = useState<Map<string, any[]>>(
     new Map<string, any[]>(),
   );
-  const webSocketService = new WebSocketService(
-    "sessions-ws",
-    "ws://localhost:8080/ui/sessions",
-  );
-
-  webSocketService.subscribeToOnOpen(() => {
-    webSocketService.send(new WsRequest("sessions", null));
-  });
 
   useEffect(() => {
+    const webSocketService = new WebSocketService(
+      "sessions-ws",
+      "ws://localhost:8080/ui/sessions",
+    );
+  
+    webSocketService.subscribeToOnOpen(() => {
+      webSocketService.send(new WsRequest("sessions", null));
+    });
+  
     webSocketService.connect();
     //console.log("sessions websocket connected");
     webSocketService.subscribeToMessages((response) => {

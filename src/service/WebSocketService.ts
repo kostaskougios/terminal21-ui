@@ -15,6 +15,7 @@ class WebSocketService {
     public name: string,
     private url: string,
   ) {
+    console.log("WebSocketService constructed.")
     this.emitter.on('new-message', () => {
       this.sendOutbound();
     });
