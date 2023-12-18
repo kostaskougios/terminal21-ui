@@ -44,7 +44,10 @@ export class WebSocketService {
   private reconnect(): void {
     this.isOpen = false;
     console.log(`${this.id}: connecting to ${this.url}`);
-    if (this.socket) this.socket.close();
+    if (this.socket) {
+      this.socket.onclose = () => {};
+      this.socket.close();
+    }
 
     this.socket = new WebSocket(this.url);
     this.socket.onopen = () => {
