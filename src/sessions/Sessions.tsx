@@ -3,28 +3,24 @@ import Terminal from "../terminal/Terminal";
 import TerminalDemo from "../terminal/TerminalDemo";
 import "./Sessions.css";
 import { useContext, useEffect, useState } from "react";
-import {
-  WebSocketContext,
-  WebSocketService,
-} from "../service/WebSocketService";
+import { WebSocketContext } from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
 
 function Sessions() {
-  const webSocketService = useContext(WebSocketContext)!;
   const [sessions, setSessions] = useState<Array<any>>([]);
   const [sessionState, setSessionState] = useState<Map<string, any[]>>(
     new Map<string, any[]>(),
   );
+
+  const webSocketService = useContext(WebSocketContext)!;
 
   useEffect(() => {
     webSocketService.subscribeToOnOpen(() => {
       webSocketService.send(new WsRequest("sessions", null));
     });
 
-    //console.log("sessions websocket connected");
     webSocketService.subscribeToMessages((response) => {
-      //console.log("Received ws-response :", response);
       const sessions = response.sessions;
       if (sessions) setSessions(sessions);
       const newState = response.sessionState;
@@ -42,7 +38,7 @@ function Sessions() {
     });
 
     return () => {
-      webSocketService.disconnect();
+      console.log("Sessions discarded.");
     };
   }, []);
 

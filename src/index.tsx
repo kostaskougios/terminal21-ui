@@ -1,6 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
 import reportWebVitals from "./reportWebVitals";
 
@@ -18,7 +17,6 @@ const theme = extendTheme({ config });
 export default theme;
 
 const webSocketService = new WebSocketService(
-  "sessions-ws",
   "ws://localhost:8080/ui/sessions",
 );
 webSocketService.connect();

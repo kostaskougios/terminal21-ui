@@ -1,14 +1,6 @@
-import React from "react";
 import "./App.css";
 import Sessions from "./sessions/Sessions";
-import {
-  Flex,
-  Spacer,
-  VStack,
-  Box,
-  useColorMode,
-  Button,
-} from "@chakra-ui/react";
+import { VStack, Box, useColorMode, Button } from "@chakra-ui/react";
 
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();

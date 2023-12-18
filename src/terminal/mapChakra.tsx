@@ -20,7 +20,7 @@ export function mapChakra(
   msg: any,
   uiHandlers: UiHandlers,
 ): JSX.Element | null {
-  return renderIfExists(ElementMap, uiHandlers, msg, msg.type == "Chakra");
+  return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Chakra");
 }
 
 const ElementMap: Record<string, ComponentRenderFunction> = {

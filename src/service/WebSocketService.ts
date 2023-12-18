@@ -1,6 +1,7 @@
 import React from "react";
 import WsRequest from "./json/WsRequest";
 import { EventEmitter } from "events";
+import { v4 as uuidv4 } from "uuid";
 
 type OnOpenHandler = () => void;
 type MessageHandler = (message: any) => void;
@@ -11,11 +12,11 @@ export class WebSocketService {
   private onOpenHandlers: OnOpenHandler[] = [];
   private outbound: WsRequest[] = [];
   private emitter = new EventEmitter();
+  private isOpen: boolean = false;
+  private isFirstOpen: boolean = true;
+  private id = uuidv4();
 
-  constructor(
-    public name: string,
-    private url: string,
-  ) {
+  constructor(private url: string) {
     console.log("WebSocketService constructed.");
     this.emitter.on("new-message", () => {
       this.sendOutbound();
@@ -23,37 +24,47 @@ export class WebSocketService {
   }
 
   private sendOutbound(): void {
-    if (this.socket == null)
-      throw `Error, somehow sendOutbound called with null socket`;
-    if (this.socket.readyState === WebSocket.OPEN) {
-      console.log(`Sending ${this.outbound.length}  outbound messages`);
+    if (
+      this.isOpen &&
+      this.socket &&
+      this.socket.readyState === WebSocket.OPEN
+    ) {
+      console.log(
+        `${this.id}: Sending ${this.outbound.length}  outbound messages`,
+      );
       for (var i = 0; i < this.outbound.length; i++) {
         const message = this.outbound[i];
-        console.log(`${this.name}: Sending `, message);
+        console.log(`${this.id}: Sending `, message);
         this.socket.send(message.toJSON());
       }
       this.outbound = [];
-    } else {
-      console.log(
-        `Can't send outbound messages because websocket not open, will try to reconnect.`,
-      );
-      this.reconnect();
     }
   }
 
   private reconnect(): void {
-    console.log(`${this.name}: connecting to ${this.url}`);
+    this.isOpen = false;
+    console.log(`${this.id}: connecting to ${this.url}`);
+    if (this.socket) this.socket.close();
+
     this.socket = new WebSocket(this.url);
     this.socket.onopen = () => {
+      if (this.isFirstOpen) {
+        this.isFirstOpen = false;
+        setInterval(() => {
+          this.send(new WsRequest("ping", null));
+        }, 10000);
+      }
+      this.isOpen = true;
+
       console.log(
-        `${this.name}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`,
+        `${this.id}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`,
       );
       this.onOpenHandlers.forEach((handler) => handler());
       this.sendOutbound();
     };
 
     this.socket.onmessage = (event) => {
-      console.log(`${new Date()} ${this.name}: received:`, event.data);
+      console.log(`${new Date()} ${this.id}: received:`, event.data);
       try {
         const message = JSON.parse(event.data);
         this.messageHandlers.forEach((handler) => handler(message));
@@ -68,13 +79,14 @@ export class WebSocketService {
     };
 
     this.socket.onclose = () => {
-      console.log(`${this.name}: WebSocket connection closed`);
-      setTimeout(() => this.reconnect(), 500);
+      console.log(`${this.id}: WebSocket connection closed`);
       this.socket = null;
+      this.isOpen = false;
+      this.reconnect();
     };
 
     this.socket.onerror = (error) => {
-      console.error(`${this.name}: WebSocket error:`, error);
+      console.error(`${this.id}: WebSocket error:`, error);
     };
   }
 
@@ -83,10 +95,11 @@ export class WebSocketService {
   }
 
   public disconnect(): void {
-    console.log(`${this.name}: disconnect called.`);
+    console.log(`${this.id}: disconnect called.`);
     if (this.socket) {
       this.socket.close();
       this.socket = null;
+      this.isOpen = false;
     }
   }
 
