@@ -42,13 +42,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Box>
   ),
   SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
-    <SimpleGrid
-      key={b.key}
-      spacing={b.spacing}
-      spacingX={b.spacingX}
-      spacingY={b.spacingY}
-      columns={b.columns}
-    >
+    <SimpleGrid {...b}>
       {mapResponses(b.children, uiHandlers)}
     </SimpleGrid>
   ),
