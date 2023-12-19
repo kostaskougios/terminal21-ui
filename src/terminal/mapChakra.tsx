@@ -15,6 +15,7 @@ import {
   HStack,
   VStack,
   ButtonGroup,
+  Checkbox,
 } from "@chakra-ui/react";
 
 export function mapChakra(
@@ -92,5 +93,10 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <VStack key={b.key} spacing={b.spacing}>
       {mapResponses(b.children, uiHandlers)}
     </VStack>
+  ),
+  Checkbox: (b: any, uiHandlers: UiHandlers) => (
+    <Checkbox {...b} onChange={(event) => uiHandlers.onChange(b.key, event.target.checked+"")}>
+      {b.text}
+    </Checkbox>
   ),
 };
