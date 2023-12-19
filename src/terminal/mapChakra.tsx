@@ -14,6 +14,7 @@ import {
   Input,
   HStack,
   VStack,
+  ButtonGroup,
 } from "@chakra-ui/react";
 
 export function mapChakra(
@@ -25,9 +26,14 @@ export function mapChakra(
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
   Button: (b: any, uiHandlers: UiHandlers) => (
-    <Button key={b.key} onClick={(event) => uiHandlers.onClick(b.key)} size={b.size} variant={b.variant} colorScheme={b.colorScheme}>
+    <Button {...b} onClick={(event) => uiHandlers.onClick(b.key)}>
       {b.text}
     </Button>
+  ),
+  ButtonGroup: (b: any, uiHandlers: UiHandlers) => (
+    <ButtonGroup {...b}>
+      {mapResponses(b.children, uiHandlers)}
+    </ButtonGroup>
   ),
   Box: (b: any, uiHandlers: UiHandlers) => (
     <Box key={b.key} {...b.props}>
