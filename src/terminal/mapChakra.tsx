@@ -25,7 +25,7 @@ export function mapChakra(
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
   Button: (b: any, uiHandlers: UiHandlers) => (
-    <Button key={b.key} onClick={(event) => uiHandlers.onClick(b.key)}>
+    <Button key={b.key} onClick={(event) => uiHandlers.onClick(b.key)} size={b.size} variant={b.variant} colorScheme={b.colorScheme}>
       {b.text}
     </Button>
   ),
