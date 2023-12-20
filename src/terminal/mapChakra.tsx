@@ -18,6 +18,7 @@ import {
   Checkbox,
   Radio,
   RadioGroup,
+  EditableTextarea,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -59,6 +60,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   },
   EditablePreview: (b:any) => (<EditablePreview {...b}/>),
   EditableInput: (b:any) => (<EditableInput {...b}/>),
+  EditableTextarea: (b:any) => (<EditableTextarea {...b}/>),
   FormControl: (b: any, uiHandlers: UiHandlers) => (
     <FormControl key={b.key} as={b.as}>
       {mapResponses(b.children, uiHandlers)}
