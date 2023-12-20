@@ -16,7 +16,10 @@ import {
   VStack,
   ButtonGroup,
   Checkbox,
+  Radio,
+  RadioGroup,
 } from "@chakra-ui/react";
+import React from "react";
 
 export function mapChakra(
   msg: any,
@@ -32,9 +35,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Button>
   ),
   ButtonGroup: (b: any, uiHandlers: UiHandlers) => (
-    <ButtonGroup {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </ButtonGroup>
+    <ButtonGroup {...b}>{mapResponses(b.children, uiHandlers)}</ButtonGroup>
   ),
   Box: (b: any, uiHandlers: UiHandlers) => (
     <Box key={b.key} {...b.props}>
@@ -43,9 +44,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Box>
   ),
   SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
-    <SimpleGrid {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </SimpleGrid>
+    <SimpleGrid {...b}>{mapResponses(b.children, uiHandlers)}</SimpleGrid>
   ),
   Editable: (b: any, uiHandlers: UiHandlers) => (
     <Editable
@@ -95,8 +94,29 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </VStack>
   ),
   Checkbox: (b: any, uiHandlers: UiHandlers) => (
-    <Checkbox {...b} onChange={(event) => uiHandlers.onChange(b.key, event.target.checked+"")}>
+    <Checkbox
+      {...b}
+      onChange={(event) =>
+        uiHandlers.onChange(b.key, event.target.checked + "")
+      }
+    >
       {b.text}
     </Checkbox>
   ),
+  Radio: (b: any, uiHandlers: UiHandlers) => <Radio {...b}>{b.text}</Radio>,
+  RadioGroup: (b: any, uiHandlers: UiHandlers) => {
+    const [value, setValue] = React.useState(b.value);
+    return (
+      <RadioGroup
+        {...b}
+        value={value}
+        onChange={(value) => {
+          setValue(value);
+          uiHandlers.onChange(b.key, value);
+        }}
+      >
+        {mapResponses(b.children, uiHandlers)}
+      </RadioGroup>
+    );
+  },
 };

@@ -67,7 +67,6 @@ export class WebSocketService {
     };
 
     this.socket.onmessage = (event) => {
-      console.log(`${new Date()} ${this.id}: received:`, event.data);
       try {
         const message = JSON.parse(event.data);
         this.messageHandlers.forEach((handler) => handler(message));

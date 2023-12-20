@@ -17,7 +17,7 @@ const theme = extendTheme({ config });
 export default theme;
 
 const webSocketService = new WebSocketService(
-  "ws://localhost:8080/ui/sessions"
+  "ws://localhost:8080/ui/sessions",
 );
 webSocketService.connect();
 
