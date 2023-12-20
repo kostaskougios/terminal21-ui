@@ -21,7 +21,10 @@ import {
   EditableTextarea,
   Center,
   Circle,
-  Square
+  Square,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon
 } from "@chakra-ui/react";
 import React from "react";
 import { AddIcon, ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ArrowUpDownIcon, AtSignIcon, AttachmentIcon, BellIcon, CalendarIcon, ChatIcon, CheckIcon, CheckCircleIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, CloseIcon, CopyIcon, DeleteIcon, DownloadIcon, DragHandleIcon, EditIcon, EmailIcon, ExternalLinkIcon, HamburgerIcon, InfoIcon, InfoOutlineIcon, LinkIcon, LockIcon, MinusIcon, MoonIcon, NotAllowedIcon, PhoneIcon, PlusSquareIcon, QuestionIcon, QuestionOutlineIcon, RepeatIcon, RepeatClockIcon, SearchIcon, Search2Icon, SettingsIcon, SmallAddIcon, SmallCloseIcon, SpinnerIcon, StarIcon, SunIcon, TimeIcon, TriangleDownIcon, TriangleUpIcon, UnlockIcon, UpDownIcon, ViewIcon, ViewOffIcon, WarningIcon, WarningTwoIcon } from '@chakra-ui/icons';
@@ -85,7 +88,6 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Input: (b: any, uiHandlers: UiHandlers) => {
     const [value, setValue] = React.useState(b.value);
-    delete b.children;
     return (
       <Input
         {...b} value={value}
@@ -93,6 +95,13 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       ></Input>
     )
   },
+  InputGroup: (b: any, uiHandlers: UiHandlers) => {
+    return (
+      <InputGroup {...b}>{mapResponses(b.children, uiHandlers)}</InputGroup>
+    )
+  },
+  InputLeftAddon: (b: any, uiHandlers: UiHandlers) => (<InputLeftAddon {...b}>{b.text}{mapResponses(b.children, uiHandlers)}</InputLeftAddon>),
+  InputRightAddon: (b: any, uiHandlers: UiHandlers) => (<InputRightAddon {...b}>{b.text}{mapResponses(b.children, uiHandlers)}</InputRightAddon>),
   HStack: (b: any, uiHandlers: UiHandlers) => (
     <HStack key={b.key} spacing={b.spacing}>
       {mapResponses(b.children, uiHandlers)}
