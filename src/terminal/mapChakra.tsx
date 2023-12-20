@@ -19,7 +19,9 @@ import {
   Radio,
   RadioGroup,
   EditableTextarea,
-  Center
+  Center,
+  Circle,
+  Square
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -130,5 +132,17 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Center>
+  ),
+  Circle: (b: any, uiHandlers: UiHandlers) => (
+    <Circle {...b}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Circle>
+  ),
+  Square: (b: any, uiHandlers: UiHandlers) => (
+    <Square {...b}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Square>
   ),
 };
