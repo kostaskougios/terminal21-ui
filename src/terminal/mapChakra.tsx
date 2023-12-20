@@ -24,6 +24,8 @@ import {
   Square
 } from "@chakra-ui/react";
 import React from "react";
+import { AddIcon, ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon, ArrowUpDownIcon, AtSignIcon, AttachmentIcon, BellIcon, CalendarIcon, ChatIcon, CheckIcon, CheckCircleIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, CloseIcon, CopyIcon, DeleteIcon, DownloadIcon, DragHandleIcon, EditIcon, EmailIcon, ExternalLinkIcon, HamburgerIcon, InfoIcon, InfoOutlineIcon, LinkIcon, LockIcon, MinusIcon, MoonIcon, NotAllowedIcon, PhoneIcon, PlusSquareIcon, QuestionIcon, QuestionOutlineIcon, RepeatIcon, RepeatClockIcon, SearchIcon, Search2Icon, SettingsIcon, SmallAddIcon, SmallCloseIcon, SpinnerIcon, StarIcon, SunIcon, TimeIcon, TriangleDownIcon, TriangleUpIcon, UnlockIcon, UpDownIcon, ViewIcon, ViewOffIcon, WarningIcon, WarningTwoIcon } from '@chakra-ui/icons';
+
 
 export function mapChakra(
   msg: any,
@@ -61,9 +63,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       </Editable>
     )
   },
-  EditablePreview: (b:any) => (<EditablePreview {...b}/>),
-  EditableInput: (b:any) => (<EditableInput {...b}/>),
-  EditableTextarea: (b:any) => (<EditableTextarea {...b}/>),
+  EditablePreview: (b: any) => (<EditablePreview {...b} />),
+  EditableInput: (b: any) => (<EditableInput {...b} />),
+  EditableTextarea: (b: any) => (<EditableTextarea {...b} />),
   FormControl: (b: any, uiHandlers: UiHandlers) => (
     <FormControl key={b.key} as={b.as}>
       {mapResponses(b.children, uiHandlers)}
@@ -145,4 +147,64 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {mapResponses(b.children, uiHandlers)}
     </Square>
   ),
+  // -------------- START OF ICONS
+  AddIcon: (b: any) => (<AddIcon {...b} />),
+  ArrowBackIcon: (b: any) => (<ArrowBackIcon {...b} />),
+  ArrowDownIcon: (b: any) => (<ArrowDownIcon {...b} />),
+  ArrowForwardIcon: (b: any) => (<ArrowForwardIcon {...b} />),
+  ArrowLeftIcon: (b: any) => (<ArrowLeftIcon {...b} />),
+  ArrowRightIcon: (b: any) => (<ArrowRightIcon {...b} />),
+  ArrowUpIcon: (b: any) => (<ArrowUpIcon {...b} />),
+  ArrowUpDownIcon: (b: any) => (<ArrowUpDownIcon {...b} />),
+  AtSignIcon: (b: any) => (<AtSignIcon {...b} />),
+  AttachmentIcon: (b: any) => (<AttachmentIcon {...b} />),
+  BellIcon: (b: any) => (<BellIcon {...b} />),
+  CalendarIcon: (b: any) => (<CalendarIcon {...b} />),
+  ChatIcon: (b: any) => (<ChatIcon {...b} />),
+  CheckIcon: (b: any) => (<CheckIcon {...b} />),
+  CheckCircleIcon: (b: any) => (<CheckCircleIcon {...b} />),
+  ChevronDownIcon: (b: any) => (<ChevronDownIcon {...b} />),
+  ChevronLeftIcon: (b: any) => (<ChevronLeftIcon {...b} />),
+  ChevronRightIcon: (b: any) => (<ChevronRightIcon {...b} />),
+  ChevronUpIcon: (b: any) => (<ChevronUpIcon {...b} />),
+  CloseIcon: (b: any) => (<CloseIcon {...b} />),
+  CopyIcon: (b: any) => (<CopyIcon {...b} />),
+  DeleteIcon: (b: any) => (<DeleteIcon {...b} />),
+  DownloadIcon: (b: any) => (<DownloadIcon {...b} />),
+  DragHandleIcon: (b: any) => (<DragHandleIcon {...b} />),
+  EditIcon: (b: any) => (<EditIcon {...b} />),
+  EmailIcon: (b: any) => (<EmailIcon {...b} />),
+  ExternalLinkIcon: (b: any) => (<ExternalLinkIcon {...b} />),
+  HamburgerIcon: (b: any) => (<HamburgerIcon {...b} />),
+  InfoIcon: (b: any) => (<InfoIcon {...b} />),
+  InfoOutlineIcon: (b: any) => (<InfoOutlineIcon {...b} />),
+  LinkIcon: (b: any) => (<LinkIcon {...b} />),
+  LockIcon: (b: any) => (<LockIcon {...b} />),
+  MinusIcon: (b: any) => (<MinusIcon {...b} />),
+  MoonIcon: (b: any) => (<MoonIcon {...b} />),
+  NotAllowedIcon: (b: any) => (<NotAllowedIcon {...b} />),
+  PhoneIcon: (b: any) => (<PhoneIcon {...b} />),
+  PlusSquareIcon: (b: any) => (<PlusSquareIcon {...b} />),
+  QuestionIcon: (b: any) => (<QuestionIcon {...b} />),
+  QuestionOutlineIcon: (b: any) => (<QuestionOutlineIcon {...b} />),
+  RepeatIcon: (b: any) => (<RepeatIcon {...b} />),
+  RepeatClockIcon: (b: any) => (<RepeatClockIcon {...b} />),
+  SearchIcon: (b: any) => (<SearchIcon {...b} />),
+  Search2Icon: (b: any) => (<Search2Icon {...b} />),
+  SettingsIcon: (b: any) => (<SettingsIcon {...b} />),
+  SmallAddIcon: (b: any) => (<SmallAddIcon {...b} />),
+  SmallCloseIcon: (b: any) => (<SmallCloseIcon {...b} />),
+  SpinnerIcon: (b: any) => (<SpinnerIcon {...b} />),
+  StarIcon: (b: any) => (<StarIcon {...b} />),
+  SunIcon: (b: any) => (<SunIcon {...b} />),
+  TimeIcon: (b: any) => (<TimeIcon {...b} />),
+  TriangleDownIcon: (b: any) => (<TriangleDownIcon {...b} />),
+  TriangleUpIcon: (b: any) => (<TriangleUpIcon {...b} />),
+  UnlockIcon: (b: any) => (<UnlockIcon {...b} />),
+  UpDownIcon: (b: any) => (<UpDownIcon {...b} />),
+  ViewIcon: (b: any) => (<ViewIcon {...b} />),
+  ViewOffIcon: (b: any) => (<ViewOffIcon {...b} />),
+  WarningIcon: (b: any) => (<WarningIcon {...b} />),
+  WarningTwoIcon: (b: any) => (<WarningTwoIcon {...b} />),
+  // -------------- END OF ICONS
 };
