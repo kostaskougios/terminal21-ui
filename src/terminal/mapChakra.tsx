@@ -46,16 +46,18 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
     <SimpleGrid {...b}>{mapResponses(b.children, uiHandlers)}</SimpleGrid>
   ),
-  Editable: (b: any, uiHandlers: UiHandlers) => (
-    <Editable
-      key={b.key}
-      defaultValue={b.defaultValue}
-      onChange={(newValue) => uiHandlers.onChange(b.key, newValue)}
-    >
-      <EditablePreview />
-      <EditableInput />
-    </Editable>
-  ),
+  Editable: (b: any, uiHandlers: UiHandlers) => {
+    delete b.value;
+    return (
+      <Editable
+        {...b}
+        onChange={(newValue) => uiHandlers.onChange(b.key, newValue)}
+      >
+        <EditablePreview />
+        <EditableInput />
+      </Editable>
+    )
+  },
   FormControl: (b: any, uiHandlers: UiHandlers) => (
     <FormControl key={b.key} as={b.as}>
       {mapResponses(b.children, uiHandlers)}
@@ -73,16 +75,16 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {mapResponses(b.children, uiHandlers)}
     </FormHelperText>
   ),
-  Input: (b: any, uiHandlers: UiHandlers) => (
-    <Input
-      key={b.key}
-      type={b.type}
-      placeholder={b.placeholder}
-      size={b.size}
-      variant={b.variant}
-      onChange={(event) => uiHandlers.onChange(b.key, event.target.value)}
-    ></Input>
-  ),
+  Input: (b: any, uiHandlers: UiHandlers) => {
+    const [value, setValue] = React.useState(b.value);
+    delete b.children;
+    return (
+      <Input
+        {...b} value={value}
+        onChange={(event) => { const v = event.target.value; setValue(v); uiHandlers.onChange(b.key, v); }}
+      ></Input>
+    )
+  },
   HStack: (b: any, uiHandlers: UiHandlers) => (
     <HStack key={b.key} spacing={b.spacing}>
       {mapResponses(b.children, uiHandlers)}
