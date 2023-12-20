@@ -53,11 +53,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
         {...b}
         onChange={(newValue) => uiHandlers.onChange(b.key, newValue)}
       >
-        <EditablePreview />
-        <EditableInput />
+        {mapResponses(b.children, uiHandlers)}
       </Editable>
     )
   },
+  EditablePreview: (b:any) => (<EditablePreview {...b}/>),
+  EditableInput: (b:any) => (<EditableInput {...b}/>),
   FormControl: (b: any, uiHandlers: UiHandlers) => (
     <FormControl key={b.key} as={b.as}>
       {mapResponses(b.children, uiHandlers)}
