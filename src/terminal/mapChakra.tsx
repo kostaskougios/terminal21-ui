@@ -26,6 +26,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Textarea,
+  Switch,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -195,6 +196,16 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     >
       {b.text}
     </Checkbox>
+  ),
+  Switch: (b: any, uiHandlers: UiHandlers) => (
+    <Switch
+      {...b}
+      onChange={(event) =>
+        uiHandlers.onChange(b.key, event.target.checked + "")
+      }
+    >
+      {b.text}
+    </Switch>
   ),
   Radio: (b: any) => <Radio {...b}>{b.text}</Radio>,
   RadioGroup: (b: any, uiHandlers: UiHandlers) => {
