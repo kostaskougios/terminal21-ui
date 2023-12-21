@@ -27,6 +27,7 @@ import {
   InputRightAddon,
   Textarea,
   Switch,
+  Select,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -221,6 +222,23 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       >
         {mapResponses(b.children, uiHandlers)}
       </RadioGroup>
+    );
+  },
+  Option_: (b: any) => <option {...b}>{b.text}</option>,
+  Select: (b: any, uiHandlers: UiHandlers) => {
+    const [value, setValue] = React.useState(b.value);
+    return (
+      <Select
+        {...b}
+        value={value}
+        onChange={(event) => {
+          const v = event.target.value;
+          setValue(v);
+          uiHandlers.onChange(b.key, v);
+        }}
+      >
+        {mapResponses(b.children, uiHandlers)}
+      </Select>
     );
   },
   Center: (b: any, uiHandlers: UiHandlers) => (
