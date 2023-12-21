@@ -117,7 +117,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <ButtonGroup {...b}>{mapResponses(b.children, uiHandlers)}</ButtonGroup>
   ),
   Box: (b: any, uiHandlers: UiHandlers) => (
-    <Box key={b.key} {...b.props}>
+    <Box {...b}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Box>
