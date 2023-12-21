@@ -41,6 +41,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  MenuDivider
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -352,6 +353,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuItem>
+  ),
+  MenuDivider: (b: any) => (
+    <MenuDivider {...b}/>
   ),
   // -------------- START OF ICONS ------------------------------------------------------------------------
   AddIcon: (b: any) => <AddIcon {...b} />,
