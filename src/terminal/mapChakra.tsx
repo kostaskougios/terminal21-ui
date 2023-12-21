@@ -36,7 +36,11 @@ import {
   Tfoot,
   Tr,
   Th,
-  Td
+  Td,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -289,43 +293,65 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Table: (b: any, uiHandlers: UiHandlers) => (
     <Table {...b}>
-    {mapResponses(b.children, uiHandlers)}
-  </Table>
+      {mapResponses(b.children, uiHandlers)}
+    </Table>
   ),
   TableCaption: (b: any) => (
     <TableCaption {...b}>{b.text}</TableCaption>
   ),
   Thead: (b: any, uiHandlers: UiHandlers) => (
     <Thead {...b}>
-    {mapResponses(b.children, uiHandlers)}
-  </Thead>
+      {mapResponses(b.children, uiHandlers)}
+    </Thead>
   ),
   Tbody: (b: any, uiHandlers: UiHandlers) => (
     <Tbody {...b}>
-    {mapResponses(b.children, uiHandlers)}
-  </Tbody>
+      {mapResponses(b.children, uiHandlers)}
+    </Tbody>
   ),
   Tfoot: (b: any, uiHandlers: UiHandlers) => (
     <Tfoot {...b}>
-    {mapResponses(b.children, uiHandlers)}
-  </Tfoot>
+      {mapResponses(b.children, uiHandlers)}
+    </Tfoot>
   ),
   Tr: (b: any, uiHandlers: UiHandlers) => (
     <Tr {...b}>
-    {mapResponses(b.children, uiHandlers)}
-  </Tr>
+      {mapResponses(b.children, uiHandlers)}
+    </Tr>
   ),
   Th: (b: any, uiHandlers: UiHandlers) => (
     <Th {...b}>
-    {b.text}
-    {mapResponses(b.children, uiHandlers)}
-  </Th>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Th>
   ),
   Td: (b: any, uiHandlers: UiHandlers) => (
     <Td {...b}>
-    {b.text}
-    {mapResponses(b.children, uiHandlers)}
-  </Td>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Td>
+  ),
+  Menu: (b: any, uiHandlers: UiHandlers) => (
+    <Menu {...b}>
+      {mapResponses(b.children, uiHandlers)}
+    </Menu>
+  ),
+  MenuButton: (b: any, uiHandlers: UiHandlers) => (
+    <MenuButton as={Button} {...b}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </MenuButton>
+  ),
+  MenuList: (b: any, uiHandlers: UiHandlers) => (
+    <MenuList {...b}>
+      {mapResponses(b.children, uiHandlers)}
+    </MenuList>
+  ),
+  MenuItem: (b: any, uiHandlers: UiHandlers) => (
+    <MenuItem {...b}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </MenuItem>
   ),
   // -------------- START OF ICONS ------------------------------------------------------------------------
   AddIcon: (b: any) => <AddIcon {...b} />,
