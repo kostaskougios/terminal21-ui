@@ -1,0 +1,6 @@
+#! /bin/sh
+
+npm run clean
+npm run build
+rm -rf ../terminal21-restapi/terminal21-server/src/main/resources/web/*
+cp -r build/* ../terminal21-restapi/terminal21-server/src/main/resources/web/
