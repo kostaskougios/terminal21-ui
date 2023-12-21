@@ -1,6 +1,6 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
-import TerminalDemo from "../terminal/TerminalDemo";
+import Settings from "../terminal/Settings";
 import "./Sessions.css";
 import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../service/WebSocketService";
@@ -48,7 +48,7 @@ function Sessions() {
         {sessions.map((session) => {
           return <Tab key={session.id + "Tab"}>{session.name}</Tab>;
         })}
-        <Tab>Demo</Tab>
+        <Tab>Settings</Tab>
       </TabList>
 
       <TabPanels>
@@ -66,8 +66,7 @@ function Sessions() {
           );
         })}
         <TabPanel>
-          <p>Demo</p>
-          <TerminalDemo />
+          <Settings />
         </TabPanel>
       </TabPanels>
     </Tabs>
