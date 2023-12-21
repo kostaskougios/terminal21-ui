@@ -349,7 +349,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </MenuList>
   ),
   MenuItem: (b: any, uiHandlers: UiHandlers) => (
-    <MenuItem {...b}>
+    <MenuItem {...b} onClick={ (event) => uiHandlers.onClick(b.key)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuItem>
