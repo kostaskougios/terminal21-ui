@@ -34,7 +34,8 @@ export class WebSocketService {
       );
       for (var i = 0; i < this.outbound.length; i++) {
         const message = this.outbound[i];
-        if (message.operation!="ping") console.log(`${this.id}: Sending `, message);
+        if (message.operation != "ping")
+          console.log(`${this.id}: Sending `, message);
         this.socket.send(message.toJSON());
       }
       this.outbound = [];
