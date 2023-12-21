@@ -28,6 +28,15 @@ import {
   Textarea,
   Switch,
   Select,
+  TableContainer,
+  Table,
+  TableCaption,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -273,7 +282,51 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       ></Textarea>
     );
   },
-
+  TableContainer: (b: any, uiHandlers: UiHandlers) => (
+    <TableContainer {...b}>
+      {mapResponses(b.children, uiHandlers)}
+    </TableContainer>
+  ),
+  Table: (b: any, uiHandlers: UiHandlers) => (
+    <Table {...b}>
+    {mapResponses(b.children, uiHandlers)}
+  </Table>
+  ),
+  TableCaption: (b: any) => (
+    <TableCaption {...b}>{b.text}</TableCaption>
+  ),
+  Thead: (b: any, uiHandlers: UiHandlers) => (
+    <Thead {...b}>
+    {mapResponses(b.children, uiHandlers)}
+  </Thead>
+  ),
+  Tbody: (b: any, uiHandlers: UiHandlers) => (
+    <Tbody {...b}>
+    {mapResponses(b.children, uiHandlers)}
+  </Tbody>
+  ),
+  Tfoot: (b: any, uiHandlers: UiHandlers) => (
+    <Tfoot {...b}>
+    {mapResponses(b.children, uiHandlers)}
+  </Tfoot>
+  ),
+  Tr: (b: any, uiHandlers: UiHandlers) => (
+    <Tr {...b}>
+    {mapResponses(b.children, uiHandlers)}
+  </Tr>
+  ),
+  Th: (b: any, uiHandlers: UiHandlers) => (
+    <Th {...b}>
+    {b.text}
+    {mapResponses(b.children, uiHandlers)}
+  </Th>
+  ),
+  Td: (b: any, uiHandlers: UiHandlers) => (
+    <Td {...b}>
+    {b.text}
+    {mapResponses(b.children, uiHandlers)}
+  </Td>
+  ),
   // -------------- START OF ICONS ------------------------------------------------------------------------
   AddIcon: (b: any) => <AddIcon {...b} />,
   ArrowBackIcon: (b: any) => <ArrowBackIcon {...b} />,
