@@ -43,7 +43,7 @@ import {
   MenuItem,
   MenuDivider,
   Badge,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -295,32 +295,20 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </TableContainer>
   ),
   Table: (b: any, uiHandlers: UiHandlers) => (
-    <Table {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Table>
+    <Table {...b}>{mapResponses(b.children, uiHandlers)}</Table>
   ),
-  TableCaption: (b: any) => (
-    <TableCaption {...b}>{b.text}</TableCaption>
-  ),
+  TableCaption: (b: any) => <TableCaption {...b}>{b.text}</TableCaption>,
   Thead: (b: any, uiHandlers: UiHandlers) => (
-    <Thead {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Thead>
+    <Thead {...b}>{mapResponses(b.children, uiHandlers)}</Thead>
   ),
   Tbody: (b: any, uiHandlers: UiHandlers) => (
-    <Tbody {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Tbody>
+    <Tbody {...b}>{mapResponses(b.children, uiHandlers)}</Tbody>
   ),
   Tfoot: (b: any, uiHandlers: UiHandlers) => (
-    <Tfoot {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Tfoot>
+    <Tfoot {...b}>{mapResponses(b.children, uiHandlers)}</Tfoot>
   ),
   Tr: (b: any, uiHandlers: UiHandlers) => (
-    <Tr {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Tr>
+    <Tr {...b}>{mapResponses(b.children, uiHandlers)}</Tr>
   ),
   Th: (b: any, uiHandlers: UiHandlers) => (
     <Th {...b}>
@@ -335,9 +323,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Td>
   ),
   Menu: (b: any, uiHandlers: UiHandlers) => (
-    <Menu {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </Menu>
+    <Menu {...b}>{mapResponses(b.children, uiHandlers)}</Menu>
   ),
   MenuButton: (b: any, uiHandlers: UiHandlers) => (
     <MenuButton as={Button} {...b}>
@@ -346,21 +332,19 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </MenuButton>
   ),
   MenuList: (b: any, uiHandlers: UiHandlers) => (
-    <MenuList {...b}>
-      {mapResponses(b.children, uiHandlers)}
-    </MenuList>
+    <MenuList {...b}>{mapResponses(b.children, uiHandlers)}</MenuList>
   ),
   MenuItem: (b: any, uiHandlers: UiHandlers) => (
-    <MenuItem {...b} onClick={ (event) => uiHandlers.onClick(b.key)}>
+    <MenuItem {...b} onClick={(event) => uiHandlers.onClick(b.key)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuItem>
   ),
-  MenuDivider: (b: any) => (
-    <MenuDivider {...b}/>
-  ),
+  MenuDivider: (b: any) => <MenuDivider {...b} />,
   Badge: (b: any, uiHandlers: UiHandlers) => (
-    <Badge {...b}>{b.text} {mapResponses(b.children, uiHandlers)}</Badge>
+    <Badge {...b}>
+      {b.text} {mapResponses(b.children, uiHandlers)}
+    </Badge>
   ),
   Image: (b: any) => <Image {...b} />,
   // -------------- START OF ICONS ------------------------------------------------------------------------
