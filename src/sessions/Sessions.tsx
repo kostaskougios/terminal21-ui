@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, CloseButton } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
 import Settings from "../terminal/Settings";
 import "./Sessions.css";
@@ -42,11 +42,16 @@ function Sessions() {
     };
   }, []);
 
+  function closeSession(session: any) {
+    const r = session.isOpen ? new WsRequest("close-session", { CloseSession: { id: session.id } }) : new WsRequest("remove-session", { RemoveSession: { id: session.id } })
+    webSocketService.send(r);
+  }
+
   return (
     <Tabs className="Sessions" variant="enclosed">
       <TabList>
         {sessions.map((session) => {
-          return <Tab key={session.id + "Tab"}>{session.name}</Tab>;
+          return <Tab key={session.id + "Tab"} style={{ textDecoration: session.isOpen? 'none' : 'line-through' }}><CloseButton onClick={(e) => closeSession(session) } />{session.name}</Tab>;
         })}
         <Tab>Settings</Tab>
       </TabList>
