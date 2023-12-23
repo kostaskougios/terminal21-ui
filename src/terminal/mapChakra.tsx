@@ -195,12 +195,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </InputRightAddon>
   ),
   HStack: (b: any, uiHandlers: UiHandlers) => (
-    <HStack key={b.key} spacing={b.spacing}>
+    <HStack {...b}>
       {mapResponses(b.children, uiHandlers)}
     </HStack>
   ),
   VStack: (b: any, uiHandlers: UiHandlers) => (
-    <VStack key={b.key} spacing={b.spacing}>
+    <VStack {...b}>
       {mapResponses(b.children, uiHandlers)}
     </VStack>
   ),
