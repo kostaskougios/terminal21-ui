@@ -1,5 +1,6 @@
 import { WebSocketService } from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
+import LoggerFactory from "../util/Logger";
 
 type OnClick = (key: string) => void;
 type OnChange = (key: string, value: string) => void;
@@ -7,10 +8,11 @@ type OnChange = (key: string, value: string) => void;
 class UiHandlers {
   public onClick: OnClick;
   public onChange: OnChange;
+  private logger = LoggerFactory(this);
 
   constructor(session: any, webSocketService: WebSocketService) {
     this.onChange = (key: string, value: string) => {
-      console.log(
+      this.logger.info(
         "onChange event for ",
         session.id,
         " and ",
@@ -25,7 +27,7 @@ class UiHandlers {
       );
     };
     this.onClick = (key: string) => {
-      console.log("onClick event for ", session.id, " and ", key);
+      this.logger.info("onClick event for ", session.id, " and ", key);
       webSocketService.send(
         new WsRequest("onclick", {
           OnClick: { sessionId: session.id, key: key },

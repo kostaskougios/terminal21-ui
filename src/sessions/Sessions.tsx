@@ -16,8 +16,10 @@ import { WebSocketContext } from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
 import { WarningIcon } from "@chakra-ui/icons";
+import LoggerFactory from "../util/Logger";
 
 function Sessions() {
+  const logger = LoggerFactory("Sessions");
   const [sessions, setSessions] = useState<Array<any>>([]);
   const [sessionState, setSessionState] = useState<Map<string, any[]>>(
     new Map<string, any[]>(),
@@ -37,7 +39,7 @@ function Sessions() {
       if (newState) {
         const j = JSON.parse(newState);
         const session = response.session;
-        console.log("setting sessionState for", session.id, "to", j.elements);
+        logger.info("setting sessionState for", session.id, "to", j.elements);
 
         j.uiHandlers = new UiHandlers(session, webSocketService);
 
@@ -48,7 +50,7 @@ function Sessions() {
     });
 
     return () => {
-      console.log("Sessions discarded.");
+      logger.info("Sessions discarded.");
     };
   }, []);
 
