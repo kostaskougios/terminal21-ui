@@ -1,22 +1,39 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import App from "../App";
 
-function chackraComponentsTab(test: () => any): () => Promise<void> {
+const Timeout = {
+  timeout: 2000
+};
+
+function chackraComponentsTabIsInTheDocument(): () => Promise<void> {
   return async () => {
-    render(<App />);
-    await waitFor(() => {
-      const linkElement = screen.getByText(/Chakra Components/i);
-      expect(linkElement).toBeInTheDocument();
-      test()
-    });
+    expect(await screen.findByText(/Chakra Components/i, {}, Timeout)).toBeInTheDocument();
   }
 }
-test("Chakra Components tab is available", chackraComponentsTab(() => { }));
+test("Chakra Components tab is available", async () => {
+  chackraComponentsTabIsInTheDocument();
+});
 
-test("Box renders", chackraComponentsTab(() => {
-  expect(screen.getByText("Menus")).toBeInTheDocument();
-}));
+test("Box renders", async () => {
+  render(<App />);
+  await chackraComponentsTabIsInTheDocument();
+    expect(await screen.findByText(/Menus box0001/)).toBeInTheDocument();
+});
 
-test("Action Menu exists", chackraComponentsTab(() => {
-  expect(screen.getByText("Actions menu0001")).toBeInTheDocument();
-}));
+test("Action Menu exists", async () => {
+  render(<App />);
+  await chackraComponentsTabIsInTheDocument();
+  expect(await screen.findByText("Actions menu0001")).toBeInTheDocument();
+
+});
+
+test("Action Menu clicked", async () => {
+  render(<App />);
+  await chackraComponentsTabIsInTheDocument();
+
+  const menu = await screen.findByText("Actions menu0001", {}, Timeout);
+  fireEvent.click(menu);
+  const dlMenu = await screen.findByText("Download menu-download");
+  fireEvent.click(dlMenu);
+  expect(await screen.findByText("'Download' clicked")).toBeInTheDocument();
+});
