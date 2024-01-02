@@ -6,6 +6,7 @@ import {
   TabPanel,
   CloseButton,
   Box,
+  Link,
 } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
 import Settings from "../terminal/Settings";
@@ -69,8 +70,8 @@ function Sessions() {
                 textDecoration: session.isOpen ? "none" : "line-through",
               }}
             >
-              <CloseButton onClick={(e) => closeSession(session)} />
               {session.name}
+              &nbsp;<Link onClick={(e) => closeSession(session)}>x</Link>
             </Tab>
           );
         })}
@@ -90,7 +91,7 @@ function Sessions() {
                 h={8}
                 style={session.isOpen ? { display: "none" } : {}}
               >
-                &nbsp;<WarningIcon/>&nbsp;
+                &nbsp;<WarningIcon />&nbsp;
                 Session has terminated, please review and click the close button
                 again to delete the session.
               </Box>
