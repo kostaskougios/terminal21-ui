@@ -5,19 +5,21 @@ const Timeout = {
   timeout: 2000
 };
 
-function chackraComponentsTabIsInTheDocument(): () => Promise<void> {
-  return async () => {
-    expect(await screen.findByText(/Chakra Components/i, {}, Timeout)).toBeInTheDocument();
-  }
+async function chackraComponentsTabIsInTheDocument() {
+  const tab = await screen.findByText(/Chakra Components/i, {}, Timeout);
+  expect(tab).toBeInTheDocument();
+  fireEvent.click(tab);
 }
+
 test("Chakra Components tab is available", async () => {
-  chackraComponentsTabIsInTheDocument();
+  render(<App />);
+  await chackraComponentsTabIsInTheDocument();
 });
 
 test("Box renders", async () => {
   render(<App />);
   await chackraComponentsTabIsInTheDocument();
-    expect(await screen.findByText(/Menus box0001/)).toBeInTheDocument();
+  expect(await screen.findByText(/Menus box0001/)).toBeInTheDocument();
 });
 
 test("Action Menu exists", async () => {
