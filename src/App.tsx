@@ -1,15 +1,23 @@
 import "./App.css";
 import Sessions from "./sessions/Sessions";
-import { VStack, Box, useColorMode, Button } from "@chakra-ui/react";
+import { VStack, Box } from "@chakra-ui/react";
+import { WebSocketContext, WebSocketService } from "./service/WebSocketService";
 
 function App() {
+  const webSocketService = new WebSocketService(
+    "ws://localhost:8080/ui/sessions",
+  );
+  webSocketService.connect();
+
   return (
-    <VStack>
-      <Box>Terminal 21</Box>
-      <Box>
-        <Sessions />
-      </Box>
-    </VStack>
+    <WebSocketContext.Provider value={webSocketService}>
+      <VStack>
+        <Box>Terminal 21</Box>
+        <Box>
+          <Sessions />
+        </Box>
+      </VStack>
+    </WebSocketContext.Provider>
   );
 }
 
