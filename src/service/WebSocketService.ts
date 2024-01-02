@@ -2,6 +2,7 @@ import React from "react";
 import WsRequest from "./json/WsRequest";
 import { EventEmitter } from "events";
 import { v4 as uuidv4 } from "uuid";
+import LoggerFactory from "../util/Logger";
 
 type OnOpenHandler = () => void;
 type MessageHandler = (message: any) => void;
@@ -15,9 +16,10 @@ export class WebSocketService {
   private isOpen: boolean = false;
   private isFirstOpen: boolean = true;
   private id = uuidv4();
+  private logger = LoggerFactory(this);
 
   constructor(private url: string) {
-    console.log("WebSocketService constructed.");
+    this.logger.info("WebSocketService constructed.");
     this.emitter.on("new-message", () => {
       this.sendOutbound();
     });
@@ -29,13 +31,13 @@ export class WebSocketService {
       this.socket &&
       this.socket.readyState === WebSocket.OPEN
     ) {
-      console.log(
+      this.logger.info(
         `${this.id}: Sending ${this.outbound.length}  outbound messages`,
       );
       for (var i = 0; i < this.outbound.length; i++) {
         const message = this.outbound[i];
         if (message.operation != "ping")
-          console.log(`${this.id}: Sending `, message);
+          this.logger.info(`${this.id}: Sending `, message);
         this.socket.send(message.toJSON());
       }
       this.outbound = [];
@@ -44,9 +46,9 @@ export class WebSocketService {
 
   private reconnect(): void {
     this.isOpen = false;
-    console.log(`${this.id}: connecting to ${this.url}`);
+    this.logger.info(`${this.id}: connecting to ${this.url}`);
     if (this.socket) {
-      this.socket.onclose = () => {};
+      this.socket.onclose = () => { };
       this.socket.close();
     }
 
@@ -60,7 +62,7 @@ export class WebSocketService {
       }
       this.isOpen = true;
 
-      console.log(
+      this.logger.info(
         `${this.id}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`,
       );
       this.onOpenHandlers.forEach((handler) => handler());
@@ -72,7 +74,7 @@ export class WebSocketService {
         const message = JSON.parse(event.data);
         this.messageHandlers.forEach((handler) => handler(message));
       } catch (error) {
-        console.log(
+        this.logger.error(
           "An error occurred while receiving a message. received JSON =",
           event.data,
           "Error =",
@@ -82,14 +84,14 @@ export class WebSocketService {
     };
 
     this.socket.onclose = () => {
-      console.log(`${this.id}: WebSocket connection closed`);
+      this.logger.info(`${this.id}: WebSocket connection closed`);
       this.socket = null;
       this.isOpen = false;
       this.reconnect();
     };
 
     this.socket.onerror = (error) => {
-      console.error(`${this.id}: WebSocket error:`, error);
+      this.logger.error(`${this.id}: WebSocket error:`, error);
     };
   }
 
@@ -98,7 +100,7 @@ export class WebSocketService {
   }
 
   public disconnect(): void {
-    console.log(`${this.id}: disconnect called.`);
+    this.logger.info(`${this.id}: disconnect called.`);
     if (this.socket) {
       this.socket.close();
       this.socket = null;
