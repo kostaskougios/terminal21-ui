@@ -123,6 +123,13 @@ test("Simple grid", async () => {
   expect(scope).toHaveTextContent(/Three/);
 });
 
+test("squares", async () => {
+  await renderApp();
+  expect(await screen.findByText(/center-demo-0001/)).toBeInTheDocument();
+  expect(await screen.findByText(/circle-demo-0001/)).toBeInTheDocument();
+  expect(await screen.findByText(/square-demo-0001/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
