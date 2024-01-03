@@ -173,6 +173,14 @@ test("Images", async () => {
   expect(image).toHaveAttribute("src", "https://bit.ly/dan-abramov");
 });
 
+test("Table", async () => {
+  await renderApp();
+  expect(await screen.findByText(/table-caption-0001/)).toBeInTheDocument();
+  expect(await screen.findByText(/td0001/)).toBeInTheDocument();
+  expect(await screen.findByText(/td0002/)).toBeInTheDocument();
+  expect(await screen.findByText(/td0003/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
