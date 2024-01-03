@@ -7,6 +7,7 @@ import {
   CloseButton,
   Box,
   Link,
+  IconButton,
 } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
 import Settings from "../terminal/Settings";
@@ -15,7 +16,7 @@ import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../service/WebSocketService";
 import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
-import { WarningIcon } from "@chakra-ui/icons";
+import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
 import LoggerFactory from "../util/Logger";
 
 function Sessions() {
@@ -73,7 +74,7 @@ function Sessions() {
               }}
             >
               {session.name}
-              &nbsp;<Link onClick={(e) => closeSession(session)}>x</Link>
+              &nbsp;&nbsp;<Link onClick={(e) => closeSession(session)}><CloseIcon boxSize="0.5em"/></Link>
             </Tab>
           );
         })}
