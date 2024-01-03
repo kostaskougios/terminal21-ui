@@ -44,6 +44,7 @@ import {
   MenuDivider,
   Badge,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -115,6 +116,11 @@ export function mapChakra(
 }
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
+  Text: (b: any) => (
+    <Text {...elementAttributes(b)}>
+      {b.text}
+    </Text>
+  ),
   Button: (b: any, uiHandlers: UiHandlers) => (
     <Button {...elementAttributes(b)} onClick={(event) => uiHandlers.onClick(b.key)}>
       {b.text}

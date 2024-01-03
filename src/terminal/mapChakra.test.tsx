@@ -181,6 +181,11 @@ test("Table", async () => {
   expect(await screen.findByText(/td0003/)).toBeInTheDocument();
 });
 
+test("Text", async () => {
+  await renderApp();
+  expect(await screen.findByText(/typography-text-0001/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
