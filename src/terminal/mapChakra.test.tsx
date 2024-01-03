@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import App from "../App";
 
 const Timeout = {
@@ -93,6 +93,37 @@ test("editable", async () => {
   expect(await screen.findByText(/editable1 newValue = edited it, verify editable1.value = edited it/)).toBeInTheDocument();
 });
 
+test("HStack", async () => {
+  await renderApp();
+  const hstack = await screen.findByText("HStack")
+  expect(hstack).toBeInTheDocument();
+  const scope = hstack.nextElementSibling;
+  expect(scope).toHaveTextContent(/1/);
+  expect(scope).toHaveTextContent(/2/);
+  expect(scope).toHaveTextContent(/3/);
+});
+
+test("VStack", async () => {
+  await renderApp();
+  const hstack = await screen.findByText("VStack")
+  expect(hstack).toBeInTheDocument();
+  const scope = hstack.nextElementSibling;
+  expect(scope).toHaveTextContent(/1/);
+  expect(scope).toHaveTextContent(/2/);
+  expect(scope).toHaveTextContent(/3/);
+});
+
+test("Simple grid", async () => {
+  await renderApp();
+  const hstack = await screen.findByText("Simple grid")
+  expect(hstack).toBeInTheDocument();
+  const scope = hstack.nextElementSibling;
+  expect(scope).toHaveTextContent(/One/);
+  expect(scope).toHaveTextContent(/Two/);
+  expect(scope).toHaveTextContent(/Three/);
+});
+
+// --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
   const button = await screen.findByText(/Keep Running/);
