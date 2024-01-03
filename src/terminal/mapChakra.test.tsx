@@ -86,6 +86,13 @@ test("radio", async () => {
   expect(await screen.findByText(/radioGroup newValue=3 , verify radioGroup.value=3/))
 });
 
+test("editable", async () => {
+  await renderApp();
+  const editable = await screen.findByDisplayValue(/Please type here/)
+  fireEvent.change(editable, { target: { value: 'edited it' } });
+  expect(await screen.findByText(/editable1 newValue = edited it, verify editable1.value = edited it/)).toBeInTheDocument();
+});
+
 test("Done, reset session", async () => {
   await renderApp();
   const button = await screen.findByText(/Keep Running/);
