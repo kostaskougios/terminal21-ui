@@ -1,6 +1,6 @@
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
-import { mapResponses } from "./mapResponse";
+import { elementAttributes, mapResponses } from "./mapResponse";
 import {
   Button,
   Box,
@@ -116,36 +116,36 @@ export function mapChakra(
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
   Button: (b: any, uiHandlers: UiHandlers) => (
-    <Button {...b} onClick={(event) => uiHandlers.onClick(b.key)}>
+    <Button {...elementAttributes(b)} onClick={(event) => uiHandlers.onClick(b.key)}>
       {b.text}
     </Button>
   ),
   ButtonGroup: (b: any, uiHandlers: UiHandlers) => (
-    <ButtonGroup {...b}>{mapResponses(b.children, uiHandlers)}</ButtonGroup>
+    <ButtonGroup {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</ButtonGroup>
   ),
   Box: (b: any, uiHandlers: UiHandlers) => (
-    <Box {...b}>
+    <Box {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Box>
   ),
   SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
-    <SimpleGrid {...b}>{mapResponses(b.children, uiHandlers)}</SimpleGrid>
+    <SimpleGrid {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</SimpleGrid>
   ),
   Editable: (b: any, uiHandlers: UiHandlers) => {
     delete b.value;
     return (
       <Editable
-        {...b}
+        {...elementAttributes(b)}
         onChange={(newValue) => uiHandlers.onChange(b.key, newValue)}
       >
         {mapResponses(b.children, uiHandlers)}
       </Editable>
     );
   },
-  EditablePreview: (b: any) => <EditablePreview {...b} />,
-  EditableInput: (b: any) => <EditableInput {...b} />,
-  EditableTextarea: (b: any) => <EditableTextarea {...b} />,
+  EditablePreview: (b: any) => <EditablePreview {...elementAttributes(b)} />,
+  EditableInput: (b: any) => <EditableInput {...elementAttributes(b)} />,
+  EditableTextarea: (b: any) => <EditableTextarea {...elementAttributes(b)} />,
   FormControl: (b: any, uiHandlers: UiHandlers) => (
     <FormControl key={b.key} as={b.as}>
       {mapResponses(b.children, uiHandlers)}
@@ -167,7 +167,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     const [value, setValue] = React.useState(b.value);
     return (
       <Input
-        {...b}
+        {...elementAttributes(b)}
         value={value}
         onChange={(event) => {
           const v = event.target.value;
@@ -179,30 +179,30 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   },
   InputGroup: (b: any, uiHandlers: UiHandlers) => {
     return (
-      <InputGroup {...b}>{mapResponses(b.children, uiHandlers)}</InputGroup>
+      <InputGroup {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</InputGroup>
     );
   },
   InputLeftAddon: (b: any, uiHandlers: UiHandlers) => (
-    <InputLeftAddon {...b}>
+    <InputLeftAddon {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </InputLeftAddon>
   ),
   InputRightAddon: (b: any, uiHandlers: UiHandlers) => (
-    <InputRightAddon {...b}>
+    <InputRightAddon {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </InputRightAddon>
   ),
   HStack: (b: any, uiHandlers: UiHandlers) => (
-    <HStack {...b}>{mapResponses(b.children, uiHandlers)}</HStack>
+    <HStack {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</HStack>
   ),
   VStack: (b: any, uiHandlers: UiHandlers) => (
-    <VStack {...b}>{mapResponses(b.children, uiHandlers)}</VStack>
+    <VStack {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</VStack>
   ),
   Checkbox: (b: any, uiHandlers: UiHandlers) => (
     <Checkbox
-      {...b}
+      {...elementAttributes(b)}
       onChange={(event) =>
         uiHandlers.onChange(b.key, event.target.checked + "")
       }
@@ -212,7 +212,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Switch: (b: any, uiHandlers: UiHandlers) => (
     <Switch
-      {...b}
+      {...elementAttributes(b)}
       onChange={(event) =>
         uiHandlers.onChange(b.key, event.target.checked + "")
       }
@@ -220,12 +220,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
     </Switch>
   ),
-  Radio: (b: any) => <Radio {...b}>{b.text}</Radio>,
+  Radio: (b: any) => <Radio {...elementAttributes(b)}>{b.text}</Radio>,
   RadioGroup: (b: any, uiHandlers: UiHandlers) => {
     const [value, setValue] = React.useState(b.value);
     return (
       <RadioGroup
-        {...b}
+        {...elementAttributes(b)}
         value={value}
         onChange={(value) => {
           setValue(value);
@@ -236,12 +236,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       </RadioGroup>
     );
   },
-  Option_: (b: any) => <option {...b}>{b.text}</option>,
+  Option_: (b: any) => <option {...elementAttributes(b)}>{b.text}</option>,
   Select: (b: any, uiHandlers: UiHandlers) => {
     const [value, setValue] = React.useState(b.value);
     return (
       <Select
-        {...b}
+        {...elementAttributes(b)}
         value={value}
         onChange={(event) => {
           const v = event.target.value;
@@ -254,19 +254,19 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     );
   },
   Center: (b: any, uiHandlers: UiHandlers) => (
-    <Center {...b}>
+    <Center {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Center>
   ),
   Circle: (b: any, uiHandlers: UiHandlers) => (
-    <Circle {...b}>
+    <Circle {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Circle>
   ),
   Square: (b: any, uiHandlers: UiHandlers) => (
-    <Square {...b}>
+    <Square {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Square>
@@ -275,7 +275,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     const [value, setValue] = React.useState(b.value);
     return (
       <Textarea
-        {...b}
+        {...elementAttributes(b)}
         value={value}
         onChange={(event) => {
           const v = event.target.value;
@@ -286,121 +286,121 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     );
   },
   TableContainer: (b: any, uiHandlers: UiHandlers) => (
-    <TableContainer {...b}>
+    <TableContainer {...elementAttributes(b)}>
       {mapResponses(b.children, uiHandlers)}
     </TableContainer>
   ),
   Table: (b: any, uiHandlers: UiHandlers) => (
-    <Table {...b}>{mapResponses(b.children, uiHandlers)}</Table>
+    <Table {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Table>
   ),
-  TableCaption: (b: any) => <TableCaption {...b}>{b.text}</TableCaption>,
+  TableCaption: (b: any) => <TableCaption {...elementAttributes(b)}>{b.text}</TableCaption>,
   Thead: (b: any, uiHandlers: UiHandlers) => (
-    <Thead {...b}>{mapResponses(b.children, uiHandlers)}</Thead>
+    <Thead {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Thead>
   ),
   Tbody: (b: any, uiHandlers: UiHandlers) => (
-    <Tbody {...b}>{mapResponses(b.children, uiHandlers)}</Tbody>
+    <Tbody {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tbody>
   ),
   Tfoot: (b: any, uiHandlers: UiHandlers) => (
-    <Tfoot {...b}>{mapResponses(b.children, uiHandlers)}</Tfoot>
+    <Tfoot {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tfoot>
   ),
   Tr: (b: any, uiHandlers: UiHandlers) => (
-    <Tr {...b}>{mapResponses(b.children, uiHandlers)}</Tr>
+    <Tr {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tr>
   ),
   Th: (b: any, uiHandlers: UiHandlers) => (
-    <Th {...b}>
+    <Th {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Th>
   ),
   Td: (b: any, uiHandlers: UiHandlers) => (
-    <Td {...b}>
+    <Td {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Td>
   ),
   Menu: (b: any, uiHandlers: UiHandlers) => (
-    <Menu {...b}>{mapResponses(b.children, uiHandlers)}</Menu>
+    <Menu {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Menu>
   ),
   MenuButton: (b: any, uiHandlers: UiHandlers) => (
-    <MenuButton as={Button} {...b}>
+    <MenuButton as={Button} {...elementAttributes(b)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuButton>
   ),
   MenuList: (b: any, uiHandlers: UiHandlers) => (
-    <MenuList {...b}>{mapResponses(b.children, uiHandlers)}</MenuList>
+    <MenuList {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</MenuList>
   ),
   MenuItem: (b: any, uiHandlers: UiHandlers) => (
-    <MenuItem {...b} onClick={(event) => uiHandlers.onClick(b.key)}>
+    <MenuItem {...elementAttributes(b)} onClick={(event) => uiHandlers.onClick(b.key)}>
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuItem>
   ),
-  MenuDivider: (b: any) => <MenuDivider {...b} />,
+  MenuDivider: (b: any) => <MenuDivider {...elementAttributes(b)} />,
   Badge: (b: any, uiHandlers: UiHandlers) => (
-    <Badge {...b}>
+    <Badge {...elementAttributes(b)}>
       {b.text} {mapResponses(b.children, uiHandlers)}
     </Badge>
   ),
-  Image: (b: any) => <Image {...b} />,
+  Image: (b: any) => <Image {...elementAttributes(b)} />,
   // -------------- START OF ICONS ------------------------------------------------------------------------
-  AddIcon: (b: any) => <AddIcon {...b} />,
-  ArrowBackIcon: (b: any) => <ArrowBackIcon {...b} />,
-  ArrowDownIcon: (b: any) => <ArrowDownIcon {...b} />,
-  ArrowForwardIcon: (b: any) => <ArrowForwardIcon {...b} />,
-  ArrowLeftIcon: (b: any) => <ArrowLeftIcon {...b} />,
-  ArrowRightIcon: (b: any) => <ArrowRightIcon {...b} />,
-  ArrowUpIcon: (b: any) => <ArrowUpIcon {...b} />,
-  ArrowUpDownIcon: (b: any) => <ArrowUpDownIcon {...b} />,
-  AtSignIcon: (b: any) => <AtSignIcon {...b} />,
-  AttachmentIcon: (b: any) => <AttachmentIcon {...b} />,
-  BellIcon: (b: any) => <BellIcon {...b} />,
-  CalendarIcon: (b: any) => <CalendarIcon {...b} />,
-  ChatIcon: (b: any) => <ChatIcon {...b} />,
-  CheckIcon: (b: any) => <CheckIcon {...b} />,
-  CheckCircleIcon: (b: any) => <CheckCircleIcon {...b} />,
-  ChevronDownIcon: (b: any) => <ChevronDownIcon {...b} />,
-  ChevronLeftIcon: (b: any) => <ChevronLeftIcon {...b} />,
-  ChevronRightIcon: (b: any) => <ChevronRightIcon {...b} />,
-  ChevronUpIcon: (b: any) => <ChevronUpIcon {...b} />,
-  CloseIcon: (b: any) => <CloseIcon {...b} />,
-  CopyIcon: (b: any) => <CopyIcon {...b} />,
-  DeleteIcon: (b: any) => <DeleteIcon {...b} />,
-  DownloadIcon: (b: any) => <DownloadIcon {...b} />,
-  DragHandleIcon: (b: any) => <DragHandleIcon {...b} />,
-  EditIcon: (b: any) => <EditIcon {...b} />,
-  EmailIcon: (b: any) => <EmailIcon {...b} />,
-  ExternalLinkIcon: (b: any) => <ExternalLinkIcon {...b} />,
-  HamburgerIcon: (b: any) => <HamburgerIcon {...b} />,
-  InfoIcon: (b: any) => <InfoIcon {...b} />,
-  InfoOutlineIcon: (b: any) => <InfoOutlineIcon {...b} />,
-  LinkIcon: (b: any) => <LinkIcon {...b} />,
-  LockIcon: (b: any) => <LockIcon {...b} />,
-  MinusIcon: (b: any) => <MinusIcon {...b} />,
-  MoonIcon: (b: any) => <MoonIcon {...b} />,
-  NotAllowedIcon: (b: any) => <NotAllowedIcon {...b} />,
-  PhoneIcon: (b: any) => <PhoneIcon {...b} />,
-  PlusSquareIcon: (b: any) => <PlusSquareIcon {...b} />,
-  QuestionIcon: (b: any) => <QuestionIcon {...b} />,
-  QuestionOutlineIcon: (b: any) => <QuestionOutlineIcon {...b} />,
-  RepeatIcon: (b: any) => <RepeatIcon {...b} />,
-  RepeatClockIcon: (b: any) => <RepeatClockIcon {...b} />,
-  SearchIcon: (b: any) => <SearchIcon {...b} />,
-  Search2Icon: (b: any) => <Search2Icon {...b} />,
-  SettingsIcon: (b: any) => <SettingsIcon {...b} />,
-  SmallAddIcon: (b: any) => <SmallAddIcon {...b} />,
-  SmallCloseIcon: (b: any) => <SmallCloseIcon {...b} />,
-  SpinnerIcon: (b: any) => <SpinnerIcon {...b} />,
-  StarIcon: (b: any) => <StarIcon {...b} />,
-  SunIcon: (b: any) => <SunIcon {...b} />,
-  TimeIcon: (b: any) => <TimeIcon {...b} />,
-  TriangleDownIcon: (b: any) => <TriangleDownIcon {...b} />,
-  TriangleUpIcon: (b: any) => <TriangleUpIcon {...b} />,
-  UnlockIcon: (b: any) => <UnlockIcon {...b} />,
-  UpDownIcon: (b: any) => <UpDownIcon {...b} />,
-  ViewIcon: (b: any) => <ViewIcon {...b} />,
-  ViewOffIcon: (b: any) => <ViewOffIcon {...b} />,
-  WarningIcon: (b: any) => <WarningIcon {...b} />,
-  WarningTwoIcon: (b: any) => <WarningTwoIcon {...b} />,
+  AddIcon: (b: any) => <AddIcon {...elementAttributes(b)} />,
+  ArrowBackIcon: (b: any) => <ArrowBackIcon {...elementAttributes(b)} />,
+  ArrowDownIcon: (b: any) => <ArrowDownIcon {...elementAttributes(b)} />,
+  ArrowForwardIcon: (b: any) => <ArrowForwardIcon {...elementAttributes(b)} />,
+  ArrowLeftIcon: (b: any) => <ArrowLeftIcon {...elementAttributes(b)} />,
+  ArrowRightIcon: (b: any) => <ArrowRightIcon {...elementAttributes(b)} />,
+  ArrowUpIcon: (b: any) => <ArrowUpIcon {...elementAttributes(b)} />,
+  ArrowUpDownIcon: (b: any) => <ArrowUpDownIcon {...elementAttributes(b)} />,
+  AtSignIcon: (b: any) => <AtSignIcon {...elementAttributes(b)} />,
+  AttachmentIcon: (b: any) => <AttachmentIcon {...elementAttributes(b)} />,
+  BellIcon: (b: any) => <BellIcon {...elementAttributes(b)} />,
+  CalendarIcon: (b: any) => <CalendarIcon {...elementAttributes(b)} />,
+  ChatIcon: (b: any) => <ChatIcon {...elementAttributes(b)} />,
+  CheckIcon: (b: any) => <CheckIcon {...elementAttributes(b)} />,
+  CheckCircleIcon: (b: any) => <CheckCircleIcon {...elementAttributes(b)} />,
+  ChevronDownIcon: (b: any) => <ChevronDownIcon {...elementAttributes(b)} />,
+  ChevronLeftIcon: (b: any) => <ChevronLeftIcon {...elementAttributes(b)} />,
+  ChevronRightIcon: (b: any) => <ChevronRightIcon {...elementAttributes(b)} />,
+  ChevronUpIcon: (b: any) => <ChevronUpIcon {...elementAttributes(b)} />,
+  CloseIcon: (b: any) => <CloseIcon {...elementAttributes(b)} />,
+  CopyIcon: (b: any) => <CopyIcon {...elementAttributes(b)} />,
+  DeleteIcon: (b: any) => <DeleteIcon {...elementAttributes(b)} />,
+  DownloadIcon: (b: any) => <DownloadIcon {...elementAttributes(b)} />,
+  DragHandleIcon: (b: any) => <DragHandleIcon {...elementAttributes(b)} />,
+  EditIcon: (b: any) => <EditIcon {...elementAttributes(b)} />,
+  EmailIcon: (b: any) => <EmailIcon {...elementAttributes(b)} />,
+  ExternalLinkIcon: (b: any) => <ExternalLinkIcon {...elementAttributes(b)} />,
+  HamburgerIcon: (b: any) => <HamburgerIcon {...elementAttributes(b)} />,
+  InfoIcon: (b: any) => <InfoIcon {...elementAttributes(b)} />,
+  InfoOutlineIcon: (b: any) => <InfoOutlineIcon {...elementAttributes(b)} />,
+  LinkIcon: (b: any) => <LinkIcon {...elementAttributes(b)} />,
+  LockIcon: (b: any) => <LockIcon {...elementAttributes(b)} />,
+  MinusIcon: (b: any) => <MinusIcon {...elementAttributes(b)} />,
+  MoonIcon: (b: any) => <MoonIcon {...elementAttributes(b)} />,
+  NotAllowedIcon: (b: any) => <NotAllowedIcon {...elementAttributes(b)} />,
+  PhoneIcon: (b: any) => <PhoneIcon {...elementAttributes(b)} />,
+  PlusSquareIcon: (b: any) => <PlusSquareIcon {...elementAttributes(b)} />,
+  QuestionIcon: (b: any) => <QuestionIcon {...elementAttributes(b)} />,
+  QuestionOutlineIcon: (b: any) => <QuestionOutlineIcon {...elementAttributes(b)} />,
+  RepeatIcon: (b: any) => <RepeatIcon {...elementAttributes(b)} />,
+  RepeatClockIcon: (b: any) => <RepeatClockIcon {...elementAttributes(b)} />,
+  SearchIcon: (b: any) => <SearchIcon {...elementAttributes(b)} />,
+  Search2Icon: (b: any) => <Search2Icon {...elementAttributes(b)} />,
+  SettingsIcon: (b: any) => <SettingsIcon {...elementAttributes(b)} />,
+  SmallAddIcon: (b: any) => <SmallAddIcon {...elementAttributes(b)} />,
+  SmallCloseIcon: (b: any) => <SmallCloseIcon {...elementAttributes(b)} />,
+  SpinnerIcon: (b: any) => <SpinnerIcon {...elementAttributes(b)} />,
+  StarIcon: (b: any) => <StarIcon {...elementAttributes(b)} />,
+  SunIcon: (b: any) => <SunIcon {...elementAttributes(b)} />,
+  TimeIcon: (b: any) => <TimeIcon {...elementAttributes(b)} />,
+  TriangleDownIcon: (b: any) => <TriangleDownIcon {...elementAttributes(b)} />,
+  TriangleUpIcon: (b: any) => <TriangleUpIcon {...elementAttributes(b)} />,
+  UnlockIcon: (b: any) => <UnlockIcon {...elementAttributes(b)} />,
+  UpDownIcon: (b: any) => <UpDownIcon {...elementAttributes(b)} />,
+  ViewIcon: (b: any) => <ViewIcon {...elementAttributes(b)} />,
+  ViewOffIcon: (b: any) => <ViewOffIcon {...elementAttributes(b)} />,
+  WarningIcon: (b: any) => <WarningIcon {...elementAttributes(b)} />,
+  WarningTwoIcon: (b: any) => <WarningTwoIcon {...elementAttributes(b)} />,
   // -------------- END OF ICONS ----------------------------------
 };

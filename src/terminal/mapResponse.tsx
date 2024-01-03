@@ -17,3 +17,8 @@ export function mapResponses(
 ): JSX.Element[] {
   return msgs.map((msg) => mapResponse(msg, uiHandlers));
 }
+
+export function elementAttributes(b:any) {
+  const { text, ...buttonProps } = b;
+  return buttonProps;
+}
