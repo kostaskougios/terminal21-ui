@@ -49,6 +49,14 @@ test("input text", async () => {
   expect(await screen.findByText(/email input new value = test@example.com, verify email.value = test@example.com/)).toBeInTheDocument();
 });
 
+test("textarea", async () => {
+  await renderApp();
+  const input = await screen.findByLabelText(/Description/)
+  expect(input).toBeInTheDocument();
+  fireEvent.change(input, { target: { value: 'hello world' } });
+  expect(await screen.findByText(/description input new value = hello world, verify description.value = hello world/)).toBeInTheDocument();
+});
+
 test("input date of birth", async () => {
   await renderApp();
   const input = await screen.findByLabelText(/Date of birth/)
@@ -62,6 +70,20 @@ test("checkbox", async () => {
   const checkbox = await screen.findByLabelText(/Check 1/);
   fireEvent.click(checkbox);
   expect(await screen.findByText(/checkbox1 checked is true , verify checkbox1.checked = true/))
+});
+
+test("switch", async () => {
+  await renderApp();
+  const switch1 = await screen.findByLabelText(/Switch 1/);
+  fireEvent.click(switch1);
+  expect(await screen.findByText(/switch1 checked is true , verify switch1.checked = true/))
+});
+
+test("radio", async () => {
+  await renderApp();
+  const radio3 = await screen.findByLabelText(/third/);
+  fireEvent.click(radio3);
+  expect(await screen.findByText(/radioGroup newValue=3 , verify radioGroup.value=3/))
 });
 
 test("Done, reset session", async () => {
