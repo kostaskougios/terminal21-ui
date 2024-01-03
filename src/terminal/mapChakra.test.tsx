@@ -130,6 +130,16 @@ test("squares", async () => {
   expect(await screen.findByText(/square-demo-0001/)).toBeInTheDocument();
 });
 
+test("Images", async () => {
+  await renderApp();
+  const hstack = await screen.findByText("Images")
+  expect(hstack).toBeInTheDocument();
+  const scope = hstack.nextElementSibling!;
+  const image=scope.querySelector("img")
+  expect(image).toBeInTheDocument();
+  expect(image).toHaveAttribute('src', 'https://bit.ly/dan-abramov');
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
