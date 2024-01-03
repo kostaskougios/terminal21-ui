@@ -48,7 +48,7 @@ export class WebSocketService {
     this.isOpen = false;
     this.logger.info(`${this.id}: connecting to ${this.url}`);
     if (this.socket) {
-      this.socket.onclose = () => { };
+      this.socket.onclose = () => {};
       this.socket.close();
     }
 

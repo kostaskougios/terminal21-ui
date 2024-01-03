@@ -93,9 +93,10 @@ function Sessions() {
                 h={8}
                 style={session.isOpen ? { display: "none" } : {}}
               >
-                &nbsp;<WarningIcon />&nbsp;
-                Session has terminated, please review and click the close button
-                again to delete the session.
+                &nbsp;
+                <WarningIcon />
+                &nbsp; Session has terminated, please review and click the close
+                button again to delete the session.
               </Box>
               <div style={session.isOpen ? {} : { filter: "grayscale(100%)" }}>
                 <Terminal
