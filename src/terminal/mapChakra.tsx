@@ -121,6 +121,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <Button
       {...elementAttributes(b)}
       onClick={(event) => uiHandlers.onClick(b.key)}
+      leftIcon={b.leftIcon? mapResponses([b.leftIcon], uiHandlers) : null}
     >
       {b.text}
     </Button>
