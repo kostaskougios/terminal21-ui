@@ -74,7 +74,10 @@ function Sessions() {
               }}
             >
               {session.name}
-              &nbsp;&nbsp;<Link onClick={(e) => closeSession(session)}><CloseIcon boxSize="0.5em"/></Link>
+              &nbsp;&nbsp;
+              <Link onClick={(e) => closeSession(session)}>
+                <CloseIcon boxSize="0.5em" />
+              </Link>
             </Tab>
           );
         })}

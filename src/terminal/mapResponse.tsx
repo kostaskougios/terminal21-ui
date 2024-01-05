@@ -18,7 +18,7 @@ export function mapResponses(
   return msgs.map((msg) => mapResponse(msg, uiHandlers));
 }
 
-export function elementAttributes(b:any) {
+export function elementAttributes(b: any) {
   const { text, ...buttonProps } = b;
   return buttonProps;
 }

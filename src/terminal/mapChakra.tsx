@@ -116,18 +116,19 @@ export function mapChakra(
 }
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
-  Text: (b: any) => (
-    <Text {...elementAttributes(b)}>
-      {b.text}
-    </Text>
-  ),
+  Text: (b: any) => <Text {...elementAttributes(b)}>{b.text}</Text>,
   Button: (b: any, uiHandlers: UiHandlers) => (
-    <Button {...elementAttributes(b)} onClick={(event) => uiHandlers.onClick(b.key)}>
+    <Button
+      {...elementAttributes(b)}
+      onClick={(event) => uiHandlers.onClick(b.key)}
+    >
       {b.text}
     </Button>
   ),
   ButtonGroup: (b: any, uiHandlers: UiHandlers) => (
-    <ButtonGroup {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</ButtonGroup>
+    <ButtonGroup {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </ButtonGroup>
   ),
   Box: (b: any, uiHandlers: UiHandlers) => (
     <Box {...elementAttributes(b)}>
@@ -136,7 +137,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Box>
   ),
   SimpleGrid: (b: any, uiHandlers: UiHandlers) => (
-    <SimpleGrid {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</SimpleGrid>
+    <SimpleGrid {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </SimpleGrid>
   ),
   Editable: (b: any, uiHandlers: UiHandlers) => {
     delete b.value;
@@ -185,7 +188,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   },
   InputGroup: (b: any, uiHandlers: UiHandlers) => {
     return (
-      <InputGroup {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</InputGroup>
+      <InputGroup {...elementAttributes(b)}>
+        {mapResponses(b.children, uiHandlers)}
+      </InputGroup>
     );
   },
   InputLeftAddon: (b: any, uiHandlers: UiHandlers) => (
@@ -201,10 +206,14 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </InputRightAddon>
   ),
   HStack: (b: any, uiHandlers: UiHandlers) => (
-    <HStack {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</HStack>
+    <HStack {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </HStack>
   ),
   VStack: (b: any, uiHandlers: UiHandlers) => (
-    <VStack {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</VStack>
+    <VStack {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </VStack>
   ),
   Checkbox: (b: any, uiHandlers: UiHandlers) => (
     <Checkbox
@@ -297,17 +306,27 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </TableContainer>
   ),
   Table: (b: any, uiHandlers: UiHandlers) => (
-    <Table {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Table>
+    <Table {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Table>
   ),
-  TableCaption: (b: any) => <TableCaption {...elementAttributes(b)}>{b.text}</TableCaption>,
+  TableCaption: (b: any) => (
+    <TableCaption {...elementAttributes(b)}>{b.text}</TableCaption>
+  ),
   Thead: (b: any, uiHandlers: UiHandlers) => (
-    <Thead {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Thead>
+    <Thead {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Thead>
   ),
   Tbody: (b: any, uiHandlers: UiHandlers) => (
-    <Tbody {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tbody>
+    <Tbody {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Tbody>
   ),
   Tfoot: (b: any, uiHandlers: UiHandlers) => (
-    <Tfoot {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tfoot>
+    <Tfoot {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Tfoot>
   ),
   Tr: (b: any, uiHandlers: UiHandlers) => (
     <Tr {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Tr>
@@ -325,7 +344,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Td>
   ),
   Menu: (b: any, uiHandlers: UiHandlers) => (
-    <Menu {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</Menu>
+    <Menu {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Menu>
   ),
   MenuButton: (b: any, uiHandlers: UiHandlers) => (
     <MenuButton as={Button} {...elementAttributes(b)}>
@@ -334,10 +355,15 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </MenuButton>
   ),
   MenuList: (b: any, uiHandlers: UiHandlers) => (
-    <MenuList {...elementAttributes(b)}>{mapResponses(b.children, uiHandlers)}</MenuList>
+    <MenuList {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </MenuList>
   ),
   MenuItem: (b: any, uiHandlers: UiHandlers) => (
-    <MenuItem {...elementAttributes(b)} onClick={(event) => uiHandlers.onClick(b.key)}>
+    <MenuItem
+      {...elementAttributes(b)}
+      onClick={(event) => uiHandlers.onClick(b.key)}
+    >
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </MenuItem>
@@ -388,7 +414,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   PhoneIcon: (b: any) => <PhoneIcon {...elementAttributes(b)} />,
   PlusSquareIcon: (b: any) => <PlusSquareIcon {...elementAttributes(b)} />,
   QuestionIcon: (b: any) => <QuestionIcon {...elementAttributes(b)} />,
-  QuestionOutlineIcon: (b: any) => <QuestionOutlineIcon {...elementAttributes(b)} />,
+  QuestionOutlineIcon: (b: any) => (
+    <QuestionOutlineIcon {...elementAttributes(b)} />
+  ),
   RepeatIcon: (b: any) => <RepeatIcon {...elementAttributes(b)} />,
   RepeatClockIcon: (b: any) => <RepeatClockIcon {...elementAttributes(b)} />,
   SearchIcon: (b: any) => <SearchIcon {...elementAttributes(b)} />,
