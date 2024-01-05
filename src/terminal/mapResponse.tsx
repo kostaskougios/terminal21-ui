@@ -19,6 +19,6 @@ export function mapResponses(
 }
 
 export function elementAttributes(b: any) {
-  const { text, leftIcon, ...buttonProps } = b;
+  const { text, leftIcon, rightIcon, ...buttonProps } = b;
   return buttonProps;
 }
