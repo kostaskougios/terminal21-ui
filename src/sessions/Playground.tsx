@@ -272,6 +272,51 @@ const PlaygroundData = [
         ]
     }
 ];
+
+const darkTheme = {
+    background: "black",
+    axis: {
+        domain: {
+            line: {
+                stroke: "#777777",
+                strokeWidth: 1
+            }
+        },
+        ticks: {
+            line: {
+                stroke: "#777777",
+                strokeWidth: 1
+            },
+            text: {
+                fill: "#ffffff"
+            }
+        },
+        legend: {
+            text: {
+                fill: "#aaaaaa"
+            }
+        }
+    },
+    grid: {
+        line: {
+            stroke: "#555555",
+            strokeWidth: 1
+        }
+    },
+    legends: {
+        text: {
+            fill: "#ffffff"
+        }
+    },
+    tooltip: {
+        container: {
+            background: "#000000",
+            color: "#ffffff",
+            fontSize: "13px"
+        }
+    }
+};
+
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -281,6 +326,7 @@ const Playground = () => (
 
     <ResponsiveLine
         data={PlaygroundData}
+        theme={darkTheme}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{
