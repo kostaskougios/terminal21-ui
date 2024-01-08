@@ -18,6 +18,7 @@ import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
 import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
 import LoggerFactory from "../util/Logger";
+import Playground from "./Playground";
 
 function Sessions() {
   const logger = LoggerFactory("Sessions");
@@ -82,6 +83,7 @@ function Sessions() {
           );
         })}
         <Tab>Settings</Tab>
+        <Tab>Playground</Tab>
       </TabList>
 
       <TabPanels>
@@ -114,6 +116,9 @@ function Sessions() {
         })}
         <TabPanel>
           <Settings />
+        </TabPanel>
+        <TabPanel height="800px" bg="black">
+          <Playground></Playground>
         </TabPanel>
       </TabPanels>
     </Tabs>
