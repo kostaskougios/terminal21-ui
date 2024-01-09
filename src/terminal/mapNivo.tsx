@@ -3,7 +3,7 @@ import UiHandlers from "../model/UiHandlers";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 
 export function mapNivo(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
-    console.log(msg);
+  console.log(msg);
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Nivo");
 }
 
