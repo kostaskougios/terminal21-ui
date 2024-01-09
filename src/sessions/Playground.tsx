@@ -325,6 +325,7 @@ const darkTheme = {
 const Playground = () => (
 
     <ResponsiveLine
+        key="123"
         data={PlaygroundData}
         theme={darkTheme}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

@@ -2,9 +2,10 @@ import React from "react";
 import { mapStd } from "./mapStd";
 import { mapChakra } from "./mapChakra";
 import UiHandlers from "../model/UiHandlers";
+import { mapNivo } from "./mapNivo";
 
 export function mapResponse(msg: any, uiHandlers: UiHandlers): JSX.Element {
-  const r = [mapStd(msg, uiHandlers), mapChakra(msg, uiHandlers)].filter(
+  const r = [mapStd(msg, uiHandlers), mapChakra(msg, uiHandlers),mapNivo(msg,uiHandlers)].filter(
     (e) => e != null,
   );
   if (r.length > 0) return r[0]!;
