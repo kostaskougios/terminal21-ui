@@ -12,10 +12,14 @@ function Settings() {
       <Switch onChange={toggleColorMode}>
         Toggle {colorMode === "light" ? "Dark" : "Light"} Mode
       </Switch>
-      <p style={ {'margin' : '25px'}}>
+      <p style={{ margin: "25px" }}>
         Have a question? Please ask at &nbsp;
-        <Link href='https://github.com/kostaskougios/terminal21-restapi/discussions' color='teal.500' isExternal>
-        terminal21's discussion board <ExternalLinkIcon mx='2px' />
+        <Link
+          href="https://github.com/kostaskougios/terminal21-restapi/discussions"
+          color="teal.500"
+          isExternal
+        >
+          terminal21's discussion board <ExternalLinkIcon mx="2px" />
         </Link>
       </p>
     </>
