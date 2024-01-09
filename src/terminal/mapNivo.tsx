@@ -53,6 +53,11 @@ const darkTheme = {
     }
 };
 
+function elementAttributes(b: any) {
+    const { wrapperStyle, ...buttonProps } = b;
+    return buttonProps;
+  }
+
 const ElementMap: Record<string, ComponentRenderFunction> = {
-    ResponsiveLine: (b: any) => <div key={b.key+"wrapper"} style={{height: "200px"}}><ResponsiveLine theme={darkTheme} {...b}></ResponsiveLine></div>,
+    ResponsiveLine: (b: any) => <div key={b.key+"-wrapper"} style={b.wrapperStyle}><ResponsiveLine theme={darkTheme} {...elementAttributes(b)}></ResponsiveLine></div>,
 }  
