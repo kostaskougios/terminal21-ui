@@ -1,9 +1,9 @@
 import { ResponsiveLine } from "@nivo/line";
 import UiHandlers from "../model/UiHandlers";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import { ResponsiveBar } from "@nivo/bar";
 
 export function mapNivo(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
-  console.log(msg);
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Nivo");
 }
 
@@ -63,6 +63,14 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
         theme={darkTheme}
         {...elementAttributes(b)}
       ></ResponsiveLine>
+    </div>
+  ),
+  ResponsiveBar: (b: any) => (
+    <div key={b.key + "-wrapper"} style={b.style}>
+      <ResponsiveBar
+        theme={darkTheme}
+        {...elementAttributes(b)}
+      ></ResponsiveBar>
     </div>
   ),
 };
