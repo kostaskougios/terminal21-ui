@@ -1,278 +1,113 @@
+import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
 
 const PlaygroundData = [
   {
-    id: "japan",
-    color: "hsl(88, 70%, 50%)",
-    data: [
-      {
-        x: "plane",
-        y: 262,
-      },
-      {
-        x: "helicopter",
-        y: 26,
-      },
-      {
-        x: "boat",
-        y: 43,
-      },
-      {
-        x: "train",
-        y: 255,
-      },
-      {
-        x: "subway",
-        y: 260,
-      },
-      {
-        x: "bus",
-        y: 204,
-      },
-      {
-        x: "car",
-        y: 216,
-      },
-      {
-        x: "moto",
-        y: 218,
-      },
-      {
-        x: "bicycle",
-        y: 192,
-      },
-      {
-        x: "horse",
-        y: 266,
-      },
-      {
-        x: "skateboard",
-        y: 56,
-      },
-      {
-        x: "others",
-        y: 169,
-      },
-    ],
+    country: "AD",
+    "hot dog": 150,
+    "hot dogColor": "hsl(202, 70%, 50%)",
+    burger: 189,
+    burgerColor: "hsl(106, 70%, 50%)",
+    sandwich: 170,
+    sandwichColor: "hsl(115, 70%, 50%)",
+    kebab: 52,
+    kebabColor: "hsl(110, 70%, 50%)",
+    fries: 161,
+    friesColor: "hsl(193, 70%, 50%)",
+    donut: 116,
+    donutColor: "hsl(205, 70%, 50%)",
   },
   {
-    id: "france",
-    color: "hsl(186, 70%, 50%)",
-    data: [
-      {
-        x: "plane",
-        y: 271,
-      },
-      {
-        x: "helicopter",
-        y: 31,
-      },
-      {
-        x: "boat",
-        y: 27,
-      },
-      {
-        x: "train",
-        y: 138,
-      },
-      {
-        x: "subway",
-        y: 219,
-      },
-      {
-        x: "bus",
-        y: 160,
-      },
-      {
-        x: "car",
-        y: 213,
-      },
-      {
-        x: "moto",
-        y: 296,
-      },
-      {
-        x: "bicycle",
-        y: 244,
-      },
-      {
-        x: "horse",
-        y: 233,
-      },
-      {
-        x: "skateboard",
-        y: 106,
-      },
-      {
-        x: "others",
-        y: 48,
-      },
-    ],
+    country: "AE",
+    "hot dog": 124,
+    "hot dogColor": "hsl(340, 70%, 50%)",
+    burger: 84,
+    burgerColor: "hsl(349, 70%, 50%)",
+    sandwich: 196,
+    sandwichColor: "hsl(108, 70%, 50%)",
+    kebab: 136,
+    kebabColor: "hsl(113, 70%, 50%)",
+    fries: 72,
+    friesColor: "hsl(209, 70%, 50%)",
+    donut: 145,
+    donutColor: "hsl(47, 70%, 50%)",
   },
   {
-    id: "us",
-    color: "hsl(15, 70%, 50%)",
-    data: [
-      {
-        x: "plane",
-        y: 23,
-      },
-      {
-        x: "helicopter",
-        y: 95,
-      },
-      {
-        x: "boat",
-        y: 187,
-      },
-      {
-        x: "train",
-        y: 248,
-      },
-      {
-        x: "subway",
-        y: 7,
-      },
-      {
-        x: "bus",
-        y: 122,
-      },
-      {
-        x: "car",
-        y: 65,
-      },
-      {
-        x: "moto",
-        y: 178,
-      },
-      {
-        x: "bicycle",
-        y: 273,
-      },
-      {
-        x: "horse",
-        y: 171,
-      },
-      {
-        x: "skateboard",
-        y: 128,
-      },
-      {
-        x: "others",
-        y: 180,
-      },
-    ],
+    country: "AF",
+    "hot dog": 2,
+    "hot dogColor": "hsl(8, 70%, 50%)",
+    burger: 86,
+    burgerColor: "hsl(94, 70%, 50%)",
+    sandwich: 30,
+    sandwichColor: "hsl(297, 70%, 50%)",
+    kebab: 189,
+    kebabColor: "hsl(208, 70%, 50%)",
+    fries: 166,
+    friesColor: "hsl(230, 70%, 50%)",
+    donut: 185,
+    donutColor: "hsl(189, 70%, 50%)",
   },
   {
-    id: "germany",
-    color: "hsl(265, 70%, 50%)",
-    data: [
-      {
-        x: "plane",
-        y: 47,
-      },
-      {
-        x: "helicopter",
-        y: 42,
-      },
-      {
-        x: "boat",
-        y: 204,
-      },
-      {
-        x: "train",
-        y: 50,
-      },
-      {
-        x: "subway",
-        y: 206,
-      },
-      {
-        x: "bus",
-        y: 244,
-      },
-      {
-        x: "car",
-        y: 166,
-      },
-      {
-        x: "moto",
-        y: 112,
-      },
-      {
-        x: "bicycle",
-        y: 294,
-      },
-      {
-        x: "horse",
-        y: 234,
-      },
-      {
-        x: "skateboard",
-        y: 3,
-      },
-      {
-        x: "others",
-        y: 104,
-      },
-    ],
+    country: "AG",
+    "hot dog": 3,
+    "hot dogColor": "hsl(295, 70%, 50%)",
+    burger: 138,
+    burgerColor: "hsl(68, 70%, 50%)",
+    sandwich: 95,
+    sandwichColor: "hsl(227, 70%, 50%)",
+    kebab: 163,
+    kebabColor: "hsl(304, 70%, 50%)",
+    fries: 143,
+    friesColor: "hsl(158, 70%, 50%)",
+    donut: 8,
+    donutColor: "hsl(316, 70%, 50%)",
   },
   {
-    id: "norway",
-    color: "hsl(296, 70%, 50%)",
-    data: [
-      {
-        x: "plane",
-        y: 56,
-      },
-      {
-        x: "helicopter",
-        y: 0,
-      },
-      {
-        x: "boat",
-        y: 50,
-      },
-      {
-        x: "train",
-        y: 292,
-      },
-      {
-        x: "subway",
-        y: 267,
-      },
-      {
-        x: "bus",
-        y: 106,
-      },
-      {
-        x: "car",
-        y: 4,
-      },
-      {
-        x: "moto",
-        y: 10,
-      },
-      {
-        x: "bicycle",
-        y: 102,
-      },
-      {
-        x: "horse",
-        y: 128,
-      },
-      {
-        x: "skateboard",
-        y: 57,
-      },
-      {
-        x: "others",
-        y: 210,
-      },
-    ],
+    country: "AI",
+    "hot dog": 174,
+    "hot dogColor": "hsl(136, 70%, 50%)",
+    burger: 138,
+    burgerColor: "hsl(358, 70%, 50%)",
+    sandwich: 110,
+    sandwichColor: "hsl(287, 70%, 50%)",
+    kebab: 12,
+    kebabColor: "hsl(239, 70%, 50%)",
+    fries: 50,
+    friesColor: "hsl(230, 70%, 50%)",
+    donut: 98,
+    donutColor: "hsl(141, 70%, 50%)",
+  },
+  {
+    country: "AL",
+    "hot dog": 188,
+    "hot dogColor": "hsl(201, 70%, 50%)",
+    burger: 133,
+    burgerColor: "hsl(325, 70%, 50%)",
+    sandwich: 42,
+    sandwichColor: "hsl(316, 70%, 50%)",
+    kebab: 191,
+    kebabColor: "hsl(113, 70%, 50%)",
+    fries: 180,
+    friesColor: "hsl(353, 70%, 50%)",
+    donut: 27,
+    donutColor: "hsl(56, 70%, 50%)",
+  },
+  {
+    country: "AM",
+    "hot dog": 35,
+    "hot dogColor": "hsl(120, 70%, 50%)",
+    burger: 98,
+    burgerColor: "hsl(91, 70%, 50%)",
+    sandwich: 182,
+    sandwichColor: "hsl(149, 70%, 50%)",
+    kebab: 196,
+    kebabColor: "hsl(340, 70%, 50%)",
+    fries: 197,
+    friesColor: "hsl(129, 70%, 50%)",
+    donut: 14,
+    donutColor: "hsl(26, 70%, 50%)",
   },
 ];
-
 const darkTheme = {
   background: "black",
   axis: {
@@ -323,70 +158,109 @@ const darkTheme = {
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const Playground = () => (
-  <ResponsiveLine
-    key="123"
+  <ResponsiveBar
     data={PlaygroundData}
     theme={darkTheme}
-    margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-    xScale={{ type: "point" }}
-    yScale={{
-      type: "linear",
-      min: "auto",
-      max: "auto",
-      stacked: true,
-      reverse: false,
+    keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+    indexBy="country"
+    margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+    padding={0.3}
+    valueScale={{ type: "linear" }}
+    indexScale={{ type: "band", round: true }}
+    colors={{ scheme: "nivo" }}
+    defs={[
+      {
+        id: "dots",
+        type: "patternDots",
+        background: "inherit",
+        color: "#38bcb2",
+        size: 4,
+        padding: 1,
+        stagger: true,
+      },
+      {
+        id: "lines",
+        type: "patternLines",
+        background: "inherit",
+        color: "#eed312",
+        rotation: -45,
+        lineWidth: 6,
+        spacing: 10,
+      },
+    ]}
+    fill={[
+      {
+        match: {
+          id: "fries",
+        },
+        id: "dots",
+      },
+      {
+        match: {
+          id: "sandwich",
+        },
+        id: "lines",
+      },
+    ]}
+    borderColor={{
+      from: "color",
+      modifiers: [["darker", 1.6]],
     }}
-    yFormat=" >-.2f"
     axisTop={null}
     axisRight={null}
     axisBottom={{
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "transportation",
-      legendOffset: 36,
+      legend: "country",
       legendPosition: "middle",
+      legendOffset: 32,
+      truncateTickAt: 0,
     }}
     axisLeft={{
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: "count",
-      legendOffset: -40,
+      legend: "food",
       legendPosition: "middle",
+      legendOffset: -40,
+      truncateTickAt: 0,
     }}
-    pointSize={10}
-    pointColor={{ theme: "background" }}
-    pointBorderWidth={2}
-    pointBorderColor={{ from: "serieColor" }}
-    pointLabelYOffset={-12}
-    useMesh={true}
+    labelSkipWidth={12}
+    labelSkipHeight={12}
+    labelTextColor={{
+      from: "color",
+      modifiers: [["darker", 1.6]],
+    }}
     legends={[
       {
+        dataFrom: "keys",
         anchor: "bottom-right",
         direction: "column",
         justify: false,
-        translateX: 100,
+        translateX: 120,
         translateY: 0,
-        itemsSpacing: 0,
-        itemDirection: "left-to-right",
-        itemWidth: 80,
+        itemsSpacing: 2,
+        itemWidth: 100,
         itemHeight: 20,
-        itemOpacity: 0.75,
-        symbolSize: 12,
-        symbolShape: "circle",
-        symbolBorderColor: "rgba(0, 0, 0, .5)",
+        itemDirection: "left-to-right",
+        itemOpacity: 0.85,
+        symbolSize: 20,
         effects: [
           {
             on: "hover",
             style: {
-              itemBackground: "rgba(0, 0, 0, .03)",
               itemOpacity: 1,
             },
           },
         ],
       },
     ]}
+    role="application"
+    ariaLabel="Nivo bar chart demo"
+    barAriaLabel={(e) =>
+      e.id + ": " + e.formattedValue + " in country: " + e.indexValue
+    }
   />
 );
 
