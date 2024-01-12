@@ -16,8 +16,6 @@ export function elementAttributes(b: any) {
 
 const ElementMap: Record<string, ComponentRenderFunction> = {
   MathJax: (b: any) => (
-    <MathJax inline {...elementAttributes(b)}>
-      {b.expression}
-    </MathJax>
+    <MathJax {...elementAttributes(b)}>{b.expression}</MathJax>
   ),
 };
