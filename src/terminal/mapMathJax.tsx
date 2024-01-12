@@ -9,6 +9,15 @@ export function mapMathJax(
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "MathJax");
 }
 
+export function elementAttributes(b: any) {
+  const { expression, ...buttonProps } = b;
+  return buttonProps;
+}
+
 const ElementMap: Record<string, ComponentRenderFunction> = {
-  MathJax: (b: any) => <MathJax key={b.key}>{b.expression}</MathJax>,
+  MathJax: (b: any) => (
+    <MathJax inline {...elementAttributes(b)}>
+      {b.expression}
+    </MathJax>
+  ),
 };
