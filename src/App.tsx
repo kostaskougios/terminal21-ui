@@ -2,6 +2,7 @@ import "./App.css";
 import Sessions from "./sessions/Sessions";
 import { VStack, Box } from "@chakra-ui/react";
 import { WebSocketContext, WebSocketService } from "./service/WebSocketService";
+import { MathJaxContext } from "better-react-mathjax";
 
 function App() {
   const webSocketService = new WebSocketService(
@@ -10,14 +11,16 @@ function App() {
   webSocketService.connect();
 
   return (
-    <WebSocketContext.Provider value={webSocketService}>
-      <VStack>
-        <Box>Terminal 21</Box>
-        <Box>
-          <Sessions />
-        </Box>
-      </VStack>
-    </WebSocketContext.Provider>
+    <MathJaxContext>
+      <WebSocketContext.Provider value={webSocketService}>
+        <VStack>
+          <Box>Terminal 21</Box>
+          <Box>
+            <Sessions />
+          </Box>
+        </VStack>
+      </WebSocketContext.Provider>
+    </MathJaxContext>
   );
 }
 
