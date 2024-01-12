@@ -24,7 +24,7 @@ function Sessions() {
   const logger = LoggerFactory("Sessions");
   const [sessions, setSessions] = useState<Array<any>>([]);
   const [sessionState, setSessionState] = useState<Map<string, any[]>>(
-    new Map<string, any[]>(),
+    new Map<string, any[]>()
   );
 
   const webSocketService = useContext(WebSocketContext)!;
@@ -46,7 +46,7 @@ function Sessions() {
         j.uiHandlers = new UiHandlers(session, webSocketService);
 
         setSessionState((prev) =>
-          new Map<string, any[]>(prev).set(response.session.id, j),
+          new Map<string, any[]>(prev).set(response.session.id, j)
         );
       }
     });
@@ -83,7 +83,7 @@ function Sessions() {
           );
         })}
         <Tab>Settings</Tab>
-        <Tab>Playground</Tab>
+        {/* <Tab>Playground</Tab> */}
       </TabList>
 
       <TabPanels>
@@ -117,9 +117,9 @@ function Sessions() {
         <TabPanel>
           <Settings />
         </TabPanel>
-        <TabPanel height="800px" bg="black">
+        {/* <TabPanel height="800px" bg="black">
           <Playground></Playground>
-        </TabPanel>
+        </TabPanel> */}
       </TabPanels>
     </Tabs>
   );

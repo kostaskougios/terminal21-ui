@@ -6,12 +6,12 @@ import { MathJaxContext } from "better-react-mathjax";
 
 function App() {
   const webSocketService = new WebSocketService(
-    "ws://localhost:8080/ui/sessions",
+    "ws://localhost:8080/ui/sessions"
   );
   webSocketService.connect();
 
   return (
-    <MathJaxContext>
+    <MathJaxContext version={3}>
       <WebSocketContext.Provider value={webSocketService}>
         <VStack>
           <Box>Terminal 21</Box>
