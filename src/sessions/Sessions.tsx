@@ -4,10 +4,8 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  CloseButton,
   Box,
   Link,
-  IconButton,
 } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
 import Settings from "../terminal/Settings";
@@ -18,7 +16,6 @@ import WsRequest from "../service/json/WsRequest";
 import UiHandlers from "../model/UiHandlers";
 import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
 import LoggerFactory from "../util/Logger";
-import Playground from "./Playground";
 
 function Sessions() {
   const logger = LoggerFactory("Sessions");
