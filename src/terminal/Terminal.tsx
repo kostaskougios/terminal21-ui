@@ -17,7 +17,7 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
     const e = elements[key];
     const childKeys: string[] = keyTree[key];
     const children: any[] = childKeys.map((k) => reconstruct(k));
-    const ec = JSON.parse(JSON.stringify(e));
+    const ec = e; //JSON.parse(JSON.stringify(e));
     if (children.length > 0) {
       const topLevelKey = Object.keys(ec)[0];
       ec[topLevelKey].children = children;
@@ -26,7 +26,6 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
   }
 
   const reconstructed: any[] = rootKeys.map((key) => reconstruct(key));
-  console.log(reconstructed);
   return (
     <div className="Terminal">
       {reconstructed.map((msg) => mapResponse(msg, uiHandlers))}
