@@ -53,15 +53,11 @@ function Sessions() {
   }, []);
 
   function closeSession(session: any) {
-    const r = session.isOpen
+    const o = session.isOpen;
+    const r = o
       ? new WsRequest("close-session", { CloseSession: { id: session.id } })
       : new WsRequest("remove-session", { RemoveSession: { id: session.id } });
     webSocketService.send(r);
-    setSessionState((prev) => {
-      const m = new Map<string, any[]>(prev);
-      m.delete(session.id);
-      return m;
-    });
   }
 
   return (
