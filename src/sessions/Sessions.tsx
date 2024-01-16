@@ -51,7 +51,6 @@ function Sessions() {
         setSessionState((prev) => {
           const m = new Map<string, any>(prev);
           const pj = m.get(response.session.id);
-          console.log("pj", pj);
           const merged = {
             ...pj,
             elements: {
