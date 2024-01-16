@@ -38,7 +38,7 @@ function Sessions() {
       if (newState) {
         const j = JSON.parse(newState);
         const session = response.session;
-        logger.info("setting sessionState for", session.id, "to", j.elements);
+        logger.info("setting sessionState for", session.id, "to", j);
 
         j.uiHandlers = new UiHandlers(session, webSocketService);
 
@@ -58,6 +58,11 @@ function Sessions() {
       ? new WsRequest("close-session", { CloseSession: { id: session.id } })
       : new WsRequest("remove-session", { RemoveSession: { id: session.id } });
     webSocketService.send(r);
+    setSessionState((prev) => {
+      const m = new Map<string, any[]>(prev);
+      m.delete(session.id);
+      return m;
+    });
   }
 
   return (
