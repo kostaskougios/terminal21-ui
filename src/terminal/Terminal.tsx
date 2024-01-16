@@ -18,6 +18,7 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
     const reconstruct = (key: string) => {
       const e = elements[key];
       const childKeys: string[] = keyTree[key];
+      if (!childKeys) throw `can't find keyTree[${key}]`;
       const children: any[] = childKeys.map((k) => reconstruct(k));
       const ec = e; //JSON.parse(JSON.stringify(e));
       if (children.length > 0) {
