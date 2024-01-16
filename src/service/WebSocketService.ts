@@ -32,7 +32,7 @@ export class WebSocketService {
       this.socket.readyState === WebSocket.OPEN
     ) {
       this.logger.info(
-        `${this.id}: Sending ${this.outbound.length}  outbound messages`,
+        `${this.id}: Sending ${this.outbound.length}  outbound messages`
       );
       for (var i = 0; i < this.outbound.length; i++) {
         const message = this.outbound[i];
@@ -63,7 +63,7 @@ export class WebSocketService {
       this.isOpen = true;
 
       this.logger.info(
-        `${this.id}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`,
+        `${this.id}: WebSocket connection established, executing ${this.onOpenHandlers.length} on-open-handlers`
       );
       this.onOpenHandlers.forEach((handler) => handler());
       this.sendOutbound();
@@ -78,7 +78,7 @@ export class WebSocketService {
           "An error occurred while receiving a message. received JSON =",
           event.data,
           "Error =",
-          error,
+          error
         );
       }
     };
@@ -123,5 +123,5 @@ export class WebSocketService {
 }
 
 export const WebSocketContext = React.createContext<WebSocketService | null>(
-  null,
+  null
 );

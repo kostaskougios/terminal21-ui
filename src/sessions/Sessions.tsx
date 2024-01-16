@@ -36,14 +36,13 @@ function Sessions() {
       if (sessions) setSessions(sessions);
       const newState = response.sessionState;
       if (newState) {
-        const j = JSON.parse(newState);
         const session = response.session;
-        logger.info("setting sessionState for", session.id, "to", j);
+        logger.info("setting sessionState for", session.id, "to", newState);
 
-        j.uiHandlers = new UiHandlers(session, webSocketService);
+        newState.uiHandlers = new UiHandlers(session, webSocketService);
 
         setSessionState((prev) =>
-          new Map<string, any[]>(prev).set(response.session.id, j)
+          new Map<string, any[]>(prev).set(response.session.id, newState)
         );
       }
     });
