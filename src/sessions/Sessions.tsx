@@ -20,8 +20,8 @@ import LoggerFactory from "../util/Logger";
 function Sessions() {
   const logger = LoggerFactory("Sessions");
   const [sessions, setSessions] = useState<Array<any>>([]);
-  const [sessionState, setSessionState] = useState<Map<string, any[]>>(
-    new Map<string, any[]>()
+  const [sessionState, setSessionState] = useState<Map<string, any>>(
+    new Map<string, any>()
   );
 
   const webSocketService = useContext(WebSocketContext)!;
@@ -42,8 +42,30 @@ function Sessions() {
         newState.uiHandlers = new UiHandlers(session, webSocketService);
 
         setSessionState((prev) =>
-          new Map<string, any[]>(prev).set(response.session.id, newState)
+          new Map<string, any>(prev).set(response.session.id, newState)
         );
+      }
+      const sessionStateChange = response.sessionStateChange;
+      if (sessionStateChange) {
+        logger.info("received change", sessionStateChange);
+        setSessionState((prev) => {
+          const m = new Map<string, any>(prev);
+          const pj = m.get(response.session.id);
+          console.log("pj", pj);
+          const merged = {
+            ...pj,
+            elements: {
+              ...pj!.elements,
+              ...sessionStateChange.elements,
+            },
+            keyTree: {
+              ...pj!.keyTree,
+              ...sessionStateChange.keyTree,
+            },
+          };
+          m.set(response.session.id, merged);
+          return m;
+        });
       }
     });
 
