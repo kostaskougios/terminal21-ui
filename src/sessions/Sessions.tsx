@@ -51,6 +51,8 @@ function Sessions() {
         setSessionState((prev) => {
           const m = new Map<string, any>(prev);
           const pj = m.get(response.session.id);
+          if (!pj)
+            throw `got an update for a session that doesn't exist yet: ${response.session.id}`;
           const merged = {
             ...pj,
             elements: {
