@@ -53,7 +53,7 @@ function Sessions() {
           const sessionId = response.session.id;
           const pj = m.get(sessionId);
           if (!pj) {
-            logger.info(
+            logger.warn(
               `got an update for a session that doesn't exist yet: ${sessionId}. Will request for the full session's ui state.`
             );
             webSocketService.send(
