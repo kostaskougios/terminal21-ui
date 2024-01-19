@@ -50,22 +50,35 @@ function Sessions() {
         logger.info("received change", sessionStateChange);
         setSessionState((prev) => {
           const m = new Map<string, any>(prev);
-          const pj = m.get(response.session.id);
-          if (!pj)
-            throw `got an update for a session that doesn't exist yet: ${response.session.id}`;
-          const merged = {
-            ...pj,
-            elements: {
-              ...pj!.elements,
-              ...sessionStateChange.elements,
-            },
-            keyTree: {
-              ...pj!.keyTree,
-              ...sessionStateChange.keyTree,
-            },
-          };
-          m.set(response.session.id, merged);
-          return m;
+          const sessionId = response.session.id;
+          const pj = m.get(sessionId);
+          if (!pj) {
+            logger.info(
+              `got an update for a session that doesn't exist yet: ${sessionId}. Will request for the full session's ui state.`
+            );
+            webSocketService.send(
+              new WsRequest("session-full-refresh", {
+                SessionFullRefresh: {
+                  sessionId: sessionId,
+                },
+              })
+            );
+            return prev;
+          } else {
+            const merged = {
+              ...pj,
+              elements: {
+                ...pj!.elements,
+                ...sessionStateChange.elements,
+              },
+              keyTree: {
+                ...pj!.keyTree,
+                ...sessionStateChange.keyTree,
+              },
+            };
+            m.set(sessionId, merged);
+            return m;
+          }
         });
       }
     });
