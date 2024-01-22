@@ -20,8 +20,8 @@ import LoggerFactory from "../util/Logger";
 function Sessions() {
   const logger = LoggerFactory("Sessions");
   const [sessions, setSessions] = useState<Array<any>>([]);
-  const [sessionState, setSessionState] = useState<Map<string, any[]>>(
-    new Map<string, any[]>()
+  const [sessionState, setSessionState] = useState<Map<string, any>>(
+    new Map<string, any>()
   );
 
   const webSocketService = useContext(WebSocketContext)!;
@@ -36,15 +36,50 @@ function Sessions() {
       if (sessions) setSessions(sessions);
       const newState = response.sessionState;
       if (newState) {
-        const j = JSON.parse(newState);
         const session = response.session;
-        logger.info("setting sessionState for", session.id, "to", j.elements);
+        logger.info("setting sessionState for", session.id, "to", newState);
 
-        j.uiHandlers = new UiHandlers(session, webSocketService);
+        newState.uiHandlers = new UiHandlers(session, webSocketService);
 
         setSessionState((prev) =>
-          new Map<string, any[]>(prev).set(response.session.id, j)
+          new Map<string, any>(prev).set(response.session.id, newState)
         );
+      }
+      const sessionStateChange = response.sessionStateChange;
+      if (sessionStateChange) {
+        logger.info("received change", sessionStateChange);
+        setSessionState((prev) => {
+          const m = new Map<string, any>(prev);
+          const sessionId = response.session.id;
+          const pj = m.get(sessionId);
+          if (!pj) {
+            logger.warn(
+              `got an update for a session that doesn't exist yet: ${sessionId}. Will request for the full session's ui state.`
+            );
+            webSocketService.send(
+              new WsRequest("session-full-refresh", {
+                SessionFullRefresh: {
+                  sessionId: sessionId,
+                },
+              })
+            );
+            return prev;
+          } else {
+            const merged = {
+              ...pj,
+              elements: {
+                ...pj!.elements,
+                ...sessionStateChange.elements,
+              },
+              keyTree: {
+                ...pj!.keyTree,
+                ...sessionStateChange.keyTree,
+              },
+            };
+            m.set(sessionId, merged);
+            return m;
+          }
+        });
       }
     });
 
@@ -54,7 +89,8 @@ function Sessions() {
   }, []);
 
   function closeSession(session: any) {
-    const r = session.isOpen
+    const o = session.isOpen;
+    const r = o
       ? new WsRequest("close-session", { CloseSession: { id: session.id } })
       : new WsRequest("remove-session", { RemoveSession: { id: session.id } });
     webSocketService.send(r);
