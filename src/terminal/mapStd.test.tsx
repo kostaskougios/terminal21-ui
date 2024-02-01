@@ -49,3 +49,48 @@ test("h1 renders", async () => {
     })
   ).toBeInTheDocument();
 });
+
+test("h2 renders", async () => {
+  await renderApp();
+  expect(
+    await screen.findByRole("heading", {
+      name: /header2 test/,
+    })
+  ).toBeInTheDocument();
+});
+
+test("h3 renders", async () => {
+  await renderApp();
+  expect(
+    await screen.findByRole("heading", {
+      name: /header3 test/,
+    })
+  ).toBeInTheDocument();
+});
+
+test("h4 renders", async () => {
+  await renderApp();
+  expect(
+    await screen.findByRole("heading", {
+      name: /header4 test/,
+    })
+  ).toBeInTheDocument();
+});
+
+test("h5 renders", async () => {
+  await renderApp();
+  expect(
+    await screen.findByRole("heading", {
+      name: /header5 test/,
+    })
+  ).toBeInTheDocument();
+});
+
+test("h6 renders", async () => {
+  await renderApp();
+  expect(
+    await screen.findByRole("heading", {
+      name: /header6 test/,
+    })
+  ).toBeInTheDocument();
+});

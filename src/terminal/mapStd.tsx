@@ -16,6 +16,11 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </p>
   ),
   Header1: (b: any) => <h1 {...elementAttributes(b)}>{b.text}</h1>,
+  Header2: (b: any) => <h2 {...elementAttributes(b)}>{b.text}</h2>,
+  Header3: (b: any) => <h3 {...elementAttributes(b)}>{b.text}</h3>,
+  Header4: (b: any) => <h4 {...elementAttributes(b)}>{b.text}</h4>,
+  Header5: (b: any) => <h5 {...elementAttributes(b)}>{b.text}</h5>,
+  Header6: (b: any) => <h6 {...elementAttributes(b)}>{b.text}</h6>,
   Em: (b: any) => <em {...elementAttributes(b)}>{b.text}</em>,
   Input: (b: any, uiHandlers: UiHandlers) => (
     <input
