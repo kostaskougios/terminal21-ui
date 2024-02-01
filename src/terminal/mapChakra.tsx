@@ -48,6 +48,7 @@ import {
   Code,
   UnorderedList,
   ListItem,
+  OrderedList,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -390,6 +391,11 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <UnorderedList {...elementAttributes(b)}>
       {mapResponses(b.children, uiHandlers)}
     </UnorderedList>
+  ),
+  OrderedList: (b: any, uiHandlers: UiHandlers) => (
+    <OrderedList {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </OrderedList>
   ),
   ListItem: (b: any, uiHandlers: UiHandlers) => (
     <ListItem {...elementAttributes(b)}>

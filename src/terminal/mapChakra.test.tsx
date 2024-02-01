@@ -199,6 +199,16 @@ test("UnorderedList", async () => {
   ).toBeInTheDocument();
 });
 
+test("OrderedList", async () => {
+  await renderApp();
+  expect(
+    await screen.findByText(/Ordered-list-list-item1/)
+  ).toBeInTheDocument();
+  expect(
+    await screen.findByText(/Ordered-list-list-item2/)
+  ).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
