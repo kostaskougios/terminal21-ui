@@ -209,6 +209,30 @@ test("OrderedList", async () => {
   ).toBeInTheDocument();
 });
 
+test("alert error", async () => {
+  await renderApp();
+  expect(await screen.findByText(/alert-error-text-01/)).toBeInTheDocument();
+  expect(await screen.findByText(/Alert:error/)).toBeInTheDocument();
+});
+
+test("alert success", async () => {
+  await renderApp();
+  expect(await screen.findByText(/alert-success-text-01/)).toBeInTheDocument();
+  expect(await screen.findByText(/Alert:success/)).toBeInTheDocument();
+});
+
+test("alert warning", async () => {
+  await renderApp();
+  expect(await screen.findByText(/alert-warning-text-01/)).toBeInTheDocument();
+  expect(await screen.findByText(/Alert:warning/)).toBeInTheDocument();
+});
+
+test("alert info", async () => {
+  await renderApp();
+  expect(await screen.findByText(/alert-info-text-01/)).toBeInTheDocument();
+  expect(await screen.findByText(/Alert:info/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

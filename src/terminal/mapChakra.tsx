@@ -49,6 +49,10 @@ import {
   UnorderedList,
   ListItem,
   OrderedList,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -402,6 +406,20 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </ListItem>
+  ),
+  Alert: (b: any, uiHandlers: UiHandlers) => (
+    <Alert {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Alert>
+  ),
+  AlertIcon: (b: any, uiHandlers: UiHandlers) => (
+    <AlertIcon {...elementAttributes(b)} />
+  ),
+  AlertTitle: (b: any, uiHandlers: UiHandlers) => (
+    <AlertTitle {...elementAttributes(b)}>{b.text}</AlertTitle>
+  ),
+  AlertDescription: (b: any, uiHandlers: UiHandlers) => (
+    <AlertDescription {...elementAttributes(b)}>{b.text}</AlertDescription>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
