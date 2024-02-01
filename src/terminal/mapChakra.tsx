@@ -46,6 +46,8 @@ import {
   Image,
   Text,
   Code,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -383,6 +385,17 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </Code>
+  ),
+  UnorderedList: (b: any, uiHandlers: UiHandlers) => (
+    <UnorderedList {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </UnorderedList>
+  ),
+  ListItem: (b: any, uiHandlers: UiHandlers) => (
+    <ListItem {...elementAttributes(b)}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </ListItem>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------

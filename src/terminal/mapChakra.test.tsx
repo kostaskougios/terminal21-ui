@@ -188,6 +188,17 @@ test("Code", async () => {
   await renderApp();
   expect(await screen.findByText(/code-0001/)).toBeInTheDocument();
 });
+
+test("UnorderedList", async () => {
+  await renderApp();
+  expect(
+    await screen.findByText(/unordered-list-list-item1/)
+  ).toBeInTheDocument();
+  expect(
+    await screen.findByText(/unordered-list-list-item2/)
+  ).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
