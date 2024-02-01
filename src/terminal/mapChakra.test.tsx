@@ -53,8 +53,8 @@ test("input text", async () => {
   fireEvent.change(input, { target: { value: "test@example.com" } });
   expect(
     await screen.findByText(
-      /email input new value = test@example.com, verify email.value = test@example.com/,
-    ),
+      /email input new value = test@example.com, verify email.value = test@example.com/
+    )
   ).toBeInTheDocument();
 });
 
@@ -65,8 +65,8 @@ test("textarea", async () => {
   fireEvent.change(input, { target: { value: "hello world" } });
   expect(
     await screen.findByText(
-      /description input new value = hello world, verify description.value = hello world/,
-    ),
+      /description input new value = hello world, verify description.value = hello world/
+    )
   ).toBeInTheDocument();
 });
 
@@ -77,8 +77,8 @@ test("input date of birth", async () => {
   fireEvent.change(input, { target: { value: "2001-12-21T01:02" } });
   expect(
     await screen.findByText(
-      /dob = 2001-12-21T01:02 , verify dob.value = 2001-12-21T01:02/,
-    ),
+      /dob = 2001-12-21T01:02 , verify dob.value = 2001-12-21T01:02/
+    )
   ).toBeInTheDocument();
 });
 
@@ -88,8 +88,8 @@ test("checkbox", async () => {
   fireEvent.click(checkbox);
   expect(
     await screen.findByText(
-      /checkbox1 checked is true , verify checkbox1.checked = true/,
-    ),
+      /checkbox1 checked is true , verify checkbox1.checked = true/
+    )
   );
 });
 
@@ -99,8 +99,8 @@ test("switch", async () => {
   fireEvent.click(switch1);
   expect(
     await screen.findByText(
-      /switch1 checked is true , verify switch1.checked = true/,
-    ),
+      /switch1 checked is true , verify switch1.checked = true/
+    )
   );
 });
 
@@ -109,9 +109,7 @@ test("radio", async () => {
   const radio3 = await screen.findByLabelText(/third/);
   fireEvent.click(radio3);
   expect(
-    await screen.findByText(
-      /radioGroup newValue=3 , verify radioGroup.value=3/,
-    ),
+    await screen.findByText(/radioGroup newValue=3 , verify radioGroup.value=3/)
   );
 });
 
@@ -121,8 +119,8 @@ test("editable", async () => {
   fireEvent.change(editable, { target: { value: "edited it" } });
   expect(
     await screen.findByText(
-      /editable1 newValue = edited it, verify editable1.value = edited it/,
-    ),
+      /editable1 newValue = edited it, verify editable1.value = edited it/
+    )
   ).toBeInTheDocument();
 });
 
@@ -186,6 +184,10 @@ test("Text", async () => {
   expect(await screen.findByText(/typography-text-0001/)).toBeInTheDocument();
 });
 
+test("Code", async () => {
+  await renderApp();
+  expect(await screen.findByText(/code-0001/)).toBeInTheDocument();
+});
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

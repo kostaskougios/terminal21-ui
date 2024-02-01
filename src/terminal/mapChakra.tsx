@@ -45,6 +45,7 @@ import {
   Badge,
   Image,
   Text,
+  Code,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -377,6 +378,13 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Badge>
   ),
   Image: (b: any) => <Image {...elementAttributes(b)} />,
+  Code: (b: any, uiHandlers: UiHandlers) => (
+    <Code {...elementAttributes(b)}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Code>
+  ),
+
   // -------------- START OF ICONS ------------------------------------------------------------------------
   AddIcon: (b: any) => <AddIcon {...elementAttributes(b)} />,
   ArrowBackIcon: (b: any) => <ArrowBackIcon {...elementAttributes(b)} />,
