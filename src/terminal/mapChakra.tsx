@@ -427,9 +427,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <Progress {...elementAttributes(b)} />
   ),
   Tooltip: (b: any, uiHandlers: UiHandlers) => (
-    <Tooltip {...elementAttributes(b)}>
-      {mapResponse(b.child, uiHandlers)}
-    </Tooltip>
+    <Tooltip {...b}>{mapResponse(b.children[0], uiHandlers)}</Tooltip>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
