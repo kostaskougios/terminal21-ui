@@ -1,6 +1,6 @@
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
-import { elementAttributes, mapResponses } from "./mapResponse";
+import { elementAttributes, mapResponse, mapResponses } from "./mapResponse";
 import {
   Button,
   Box,
@@ -54,6 +54,7 @@ import {
   AlertTitle,
   AlertDescription,
   Progress,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -424,6 +425,11 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Progress: (b: any, uiHandlers: UiHandlers) => (
     <Progress {...elementAttributes(b)} />
+  ),
+  Tooltip: (b: any, uiHandlers: UiHandlers) => (
+    <Tooltip {...elementAttributes(b)}>
+      {mapResponse(b.child, uiHandlers)}
+    </Tooltip>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
