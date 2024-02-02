@@ -233,6 +233,11 @@ test("alert info", async () => {
   expect(await screen.findByText(/Alert:info/)).toBeInTheDocument();
 });
 
+test("progressbar", async () => {
+  await renderApp();
+  expect(await screen.findAllByRole("progressbar")).toHaveLength(3);
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

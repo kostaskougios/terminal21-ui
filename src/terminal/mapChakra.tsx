@@ -53,6 +53,7 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Progress,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -420,6 +421,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   AlertDescription: (b: any, uiHandlers: UiHandlers) => (
     <AlertDescription {...elementAttributes(b)}>{b.text}</AlertDescription>
+  ),
+  Progress: (b: any, uiHandlers: UiHandlers) => (
+    <Progress {...elementAttributes(b)} />
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
