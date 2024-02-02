@@ -238,6 +238,20 @@ test("progressbar", async () => {
   expect(await screen.findAllByRole("progressbar")).toHaveLength(3);
 });
 
+test("tabs", async () => {
+  await renderApp();
+  const tab2 = await screen.findByText(/tab-two/);
+  const tab3 = await screen.findByText(/tab-three/);
+  expect(await screen.findByText(/tab-one/)).toBeInTheDocument();
+  expect(tab2).toBeInTheDocument();
+  expect(tab3).toBeInTheDocument();
+  expect(await screen.findByText(/tab-1-content/)).toBeInTheDocument();
+  fireEvent.click(tab2);
+  expect(await screen.findByText(/tab-2-content/)).toBeInTheDocument();
+  fireEvent.click(tab3);
+  expect(await screen.findByText(/tab-3-content/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

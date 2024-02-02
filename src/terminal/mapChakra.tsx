@@ -55,6 +55,11 @@ import {
   AlertDescription,
   Progress,
   Tooltip,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -428,6 +433,32 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Tooltip: (b: any, uiHandlers: UiHandlers) => (
     <Tooltip {...b}>{mapResponse(b.children[0], uiHandlers)}</Tooltip>
+  ),
+  Tabs: (b: any, uiHandlers: UiHandlers) => (
+    <Tabs {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Tabs>
+  ),
+  TabList: (b: any, uiHandlers: UiHandlers) => (
+    <TabList {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </TabList>
+  ),
+  Tab: (b: any, uiHandlers: UiHandlers) => (
+    <Tab {...elementAttributes(b)}>
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Tab>
+  ),
+  TabPanels: (b: any, uiHandlers: UiHandlers) => (
+    <TabPanels {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </TabPanels>
+  ),
+  TabPanel: (b: any, uiHandlers: UiHandlers) => (
+    <TabPanel {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </TabPanel>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
