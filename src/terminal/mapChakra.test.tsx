@@ -274,6 +274,14 @@ test("breadcrumb", async () => {
   ).toBeInTheDocument();
 });
 
+test("link", async () => {
+  await renderApp();
+  const link = await screen.findByText(/link-external-google/);
+  expect(link).toBeInTheDocument();
+  fireEvent.click(link);
+  expect(await screen.findByText(/link-clicked/)).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

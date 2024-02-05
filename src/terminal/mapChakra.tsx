@@ -63,6 +63,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -481,6 +482,15 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       {b.text}
       {mapResponses(b.children, uiHandlers)}
     </BreadcrumbLink>
+  ),
+  Link: (b: any, uiHandlers: UiHandlers) => (
+    <Link
+      {...elementAttributes(b)}
+      onClick={(event) => uiHandlers.onClick(b.key)}
+    >
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </Link>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
