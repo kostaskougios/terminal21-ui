@@ -252,6 +252,28 @@ test("tabs", async () => {
   expect(await screen.findByText(/tab-3-content/)).toBeInTheDocument();
 });
 
+test("breadcrumb", async () => {
+  await renderApp();
+  const bc1 = await screen.findByText(/breadcrumb-home/);
+  const bc2 = await screen.findByText(/breadcrumb-link1/);
+  const bc3 = await screen.findByText(/breadcrumb-link2/);
+  expect(bc1).toBeInTheDocument();
+  expect(bc2).toBeInTheDocument();
+  expect(bc3).toBeInTheDocument();
+  fireEvent.click(bc1);
+  expect(
+    await screen.findByText(/breadcrumb-click: breadcrumb-home/)
+  ).toBeInTheDocument();
+  fireEvent.click(bc2);
+  expect(
+    await screen.findByText(/breadcrumb-click: breadcrumb-link1/)
+  ).toBeInTheDocument();
+  fireEvent.click(bc3);
+  expect(
+    await screen.findByText(/breadcrumb-click: breadcrumb-link2/)
+  ).toBeInTheDocument();
+});
+
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();

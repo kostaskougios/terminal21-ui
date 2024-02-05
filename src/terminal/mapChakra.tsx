@@ -60,6 +60,9 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
 } from "@chakra-ui/react";
 import React from "react";
 import {
@@ -459,6 +462,25 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <TabPanel {...elementAttributes(b)}>
       {mapResponses(b.children, uiHandlers)}
     </TabPanel>
+  ),
+  Breadcrumb: (b: any, uiHandlers: UiHandlers) => (
+    <Breadcrumb {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </Breadcrumb>
+  ),
+  BreadcrumbItem: (b: any, uiHandlers: UiHandlers) => (
+    <BreadcrumbItem {...elementAttributes(b)}>
+      {mapResponses(b.children, uiHandlers)}
+    </BreadcrumbItem>
+  ),
+  BreadcrumbLink: (b: any, uiHandlers: UiHandlers) => (
+    <BreadcrumbLink
+      {...elementAttributes(b)}
+      onClick={(event) => uiHandlers.onClick(b.key)}
+    >
+      {b.text}
+      {mapResponses(b.children, uiHandlers)}
+    </BreadcrumbLink>
   ),
 
   // -------------- START OF ICONS ------------------------------------------------------------------------
