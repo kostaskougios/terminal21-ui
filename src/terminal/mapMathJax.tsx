@@ -1,11 +1,13 @@
 import { MathJax } from "better-react-mathjax";
 import UiHandlers from "../model/UiHandlers";
-import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import {
+  ComponentRenderFunction,
+  MapElement,
+  NoElement,
+  renderIfExists,
+} from "./renderElement";
 
-export function mapMathJax(
-  msg: any,
-  uiHandlers: UiHandlers
-): JSX.Element | null {
+export function mapMathJax(msg: any, uiHandlers: UiHandlers): MapElement {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "MathJax");
 }
 

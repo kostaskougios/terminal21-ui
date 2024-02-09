@@ -1,4 +1,9 @@
-import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import {
+  ComponentRenderFunction,
+  MapElement,
+  NoElement,
+  renderIfExists,
+} from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
 import { elementAttributes, mapResponse, mapResponses } from "./mapResponse";
 import {
@@ -127,10 +132,7 @@ import {
   WarningTwoIcon,
 } from "@chakra-ui/icons";
 
-export function mapChakra(
-  msg: any,
-  uiHandlers: UiHandlers
-): JSX.Element | null {
+export function mapChakra(msg: any, uiHandlers: UiHandlers): MapElement {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Chakra");
 }
 

@@ -1,9 +1,13 @@
 import { ResponsiveLine } from "@nivo/line";
 import UiHandlers from "../model/UiHandlers";
-import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import {
+  ComponentRenderFunction,
+  MapElement,
+  renderIfExists,
+} from "./renderElement";
 import { ResponsiveBar } from "@nivo/bar";
 
-export function mapNivo(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
+export function mapNivo(msg: any, uiHandlers: UiHandlers): MapElement {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Nivo");
 }
 

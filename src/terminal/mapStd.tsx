@@ -1,10 +1,14 @@
 import UiHandlers from "../model/UiHandlers";
-import LoggerFactory from "../util/Logger";
 import { elementAttributes, mapResponses } from "./mapResponse";
-import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import {
+  ComponentRenderFunction,
+  MapElement,
+  NoElement,
+  renderIfExists,
+} from "./renderElement";
 import Cookies from "js-cookie";
 
-export function mapStd(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
+export function mapStd(msg: any, uiHandlers: UiHandlers): MapElement {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Std");
 }
 
@@ -32,8 +36,8 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Cookie: (b: any, uiHandlers: UiHandlers) => {
     const { key, name, value, ...expireProps } = b;
-    const logger = LoggerFactory("Cookie");
+    //console.log("adding cookie ");
     Cookies.set(name, value);
-    return <div key={key} />;
+    return NoElement;
   },
 };
