@@ -31,9 +31,9 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     ></input>
   ),
   Cookie: (b: any, uiHandlers: UiHandlers) => {
-    const { name, value, ...expireProps } = b;
+    const { key, name, value, ...expireProps } = b;
     const logger = LoggerFactory("Cookie");
     Cookies.set(name, value);
-    return <></>;
+    return <div key={key} />;
   },
 };

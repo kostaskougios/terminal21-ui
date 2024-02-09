@@ -6,6 +6,7 @@ import {
   within,
 } from "@testing-library/react";
 import App from "../App";
+import Cookies from "js-cookie";
 
 const Timeout = {
   timeout: 2000,
@@ -93,4 +94,10 @@ test("h6 renders", async () => {
       name: /header6 test/,
     })
   ).toBeInTheDocument();
+});
+
+test("cookies", async () => {
+  await renderApp();
+  const c = Cookies.get("std-components-test-cookie");
+  expect(c).toBe("test-cookie-value");
 });
