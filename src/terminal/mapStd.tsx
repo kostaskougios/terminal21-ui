@@ -1,6 +1,8 @@
 import UiHandlers from "../model/UiHandlers";
+import LoggerFactory from "../util/Logger";
 import { elementAttributes, mapResponses } from "./mapResponse";
 import { ComponentRenderFunction, renderIfExists } from "./renderElement";
+import Cookies from "js-cookie";
 
 export function mapStd(msg: any, uiHandlers: UiHandlers): JSX.Element | null {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Std");
@@ -28,4 +30,10 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
       onChange={(event) => uiHandlers.onChange(b.key, event.target.value)}
     ></input>
   ),
+  Cookie: (b: any, uiHandlers: UiHandlers) => {
+    const { name, value, ...expireProps } = b;
+    const logger = LoggerFactory("Cookie");
+    Cookies.set(name, value);
+    return <></>;
+  },
 };
