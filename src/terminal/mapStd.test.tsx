@@ -101,3 +101,9 @@ test("cookies", async () => {
   const c = Cookies.get("std-components-test-cookie");
   expect(c).toBe("test-cookie-value");
 });
+
+test("cookies don't render the no-element", async () => {
+  await renderApp();
+  const ne = screen.queryByText("no-element");
+  expect(ne).toBeNull;
+});

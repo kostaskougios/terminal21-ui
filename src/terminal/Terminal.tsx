@@ -1,6 +1,7 @@
 import "./Terminal.css";
 import { mapResponse } from "./mapResponse";
 import UiHandlers from "../model/UiHandlers";
+import { NoElement } from "./renderElement";
 
 interface TerminalProps {
   sessionId: string;
@@ -31,7 +32,9 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
     const reconstructed: any[] = rootKeys.map((key) => reconstruct(key));
     return (
       <div className="Terminal">
-        {reconstructed.map((msg) => mapResponse(msg, uiHandlers))}
+        {reconstructed
+          .map((msg) => mapResponse(msg, uiHandlers))
+          .filter((e) => e != NoElement)}
       </div>
     );
   } else return <div className="Terminal">Not yet ready</div>;
