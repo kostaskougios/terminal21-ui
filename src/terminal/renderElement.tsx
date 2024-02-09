@@ -2,6 +2,10 @@ import UiHandlers from "../model/UiHandlers";
 
 export const NoElement = "no-element";
 
+/**
+ * Either an Element or null (in case it is not handled by a specific handler) or NoElement if a component
+ * has no visible element.
+ */
 export type MapElement = JSX.Element | null | typeof NoElement;
 
 export type ComponentRenderFunction = (
