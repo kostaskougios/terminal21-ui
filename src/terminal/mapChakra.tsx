@@ -441,9 +441,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     <Tooltip {...b}>{mapResponse(b.children[0], uiHandlers)}</Tooltip>
   ),
   Tabs: (b: any, uiHandlers: UiHandlers) => (
-    <Tabs {...elementAttributes(b)}>
-      {mapResponses(b.children, uiHandlers)}
-    </Tabs>
+    <Tabs {...b}>{mapResponses(b.children, uiHandlers)}</Tabs>
   ),
   TabList: (b: any, uiHandlers: UiHandlers) => (
     <TabList {...elementAttributes(b)}>
