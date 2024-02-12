@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 function Settings() {
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const toast = useToast();
+  //const toast = useToast();
   return (
     <>
       <Switch onChange={toggleColorMode}>
