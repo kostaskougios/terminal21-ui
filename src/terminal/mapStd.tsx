@@ -36,8 +36,8 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     ></input>
   ),
   Cookie: (b: any, uiHandlers: UiHandlers) => {
-    const { key, name, value, requestId, ...expireProps } = b;
-    if (shouldProcessTransientRequestWith(requestId)) {
+    if (shouldProcessTransientRequestWith(b.requestId)) {
+      const { key, name, value, ...expireProps } = b;
       Cookies.set(name, value);
     }
     return NoElement;
