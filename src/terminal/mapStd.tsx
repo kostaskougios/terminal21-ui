@@ -7,6 +7,7 @@ import {
   renderIfExists,
 } from "./renderElement";
 import Cookies from "js-cookie";
+import { shouldProcessTransientRequestWith } from "./transientRequest";
 
 export function mapStd(msg: any, uiHandlers: UiHandlers): MapElement {
   return renderIfExists(ElementMap, uiHandlers, msg, msg.type === "Std");
@@ -35,9 +36,10 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     ></input>
   ),
   Cookie: (b: any, uiHandlers: UiHandlers) => {
-    const { key, name, value, ...expireProps } = b;
-    //console.log("adding cookie ");
-    Cookies.set(name, value);
+    const { key, name, value, requestId, ...expireProps } = b;
+    if (shouldProcessTransientRequestWith(requestId)) {
+      Cookies.set(name, value);
+    }
     return NoElement;
   },
 };
