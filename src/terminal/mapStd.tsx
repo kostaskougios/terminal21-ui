@@ -45,7 +45,6 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   CookieReader: (b: any, uiHandlers: UiHandlers) => {
     if (shouldProcessTransientRequestWith(b.requestId)) {
       const v = Cookies.get(b.name);
-      console.log("Value for cookie", b.name, "is", v);
       uiHandlers.onChange(b.key, v === undefined ? null : v);
     }
     return NoElement;

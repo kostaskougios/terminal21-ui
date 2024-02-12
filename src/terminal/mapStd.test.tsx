@@ -101,3 +101,10 @@ test("cookies don't render the no-element", async () => {
   const ne = screen.queryByText("no-element");
   expect(ne).toBeNull;
 });
+
+test("cookie reader to read the cookie value", async () => {
+  await renderApp();
+  expect(
+    await screen.findByText(/Cookie value test-cookie-value/)
+  ).toBeInTheDocument();
+});
