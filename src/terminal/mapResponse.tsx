@@ -5,6 +5,7 @@ import UiHandlers from "../model/UiHandlers";
 import { mapNivo } from "./mapNivo";
 import { mapMathJax } from "./mapMathJax";
 import { NoElement } from "./renderElement";
+import { mapFrontEnd } from "./mapFrontEnd";
 
 export function mapResponse(
   msg: any,
@@ -15,12 +16,13 @@ export function mapResponse(
     mapChakra(msg, uiHandlers),
     mapNivo(msg, uiHandlers),
     mapMathJax(msg, uiHandlers),
+    mapFrontEnd(msg, uiHandlers),
   ].filter((e) => e != null);
   if (r.length > 0) {
     const res = r[0];
     return res!;
   }
-  return <div>Unknown message format {JSON.stringify(msg)}</div>;
+  return <div>Unknown message: {JSON.stringify(msg)}</div>;
 }
 
 export function mapResponses(

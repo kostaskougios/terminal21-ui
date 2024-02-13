@@ -13,12 +13,7 @@ function App() {
   return (
     <MathJaxContext version={3}>
       <WebSocketContext.Provider value={webSocketService}>
-        <VStack>
-          <Box>Terminal 21</Box>
-          <Box>
-            <Sessions />
-          </Box>
-        </VStack>
+        <Sessions />
       </WebSocketContext.Provider>
     </MathJaxContext>
   );
