@@ -22,6 +22,11 @@ function Sessions() {
   const [sessionState, setSessionState] = useState<Map<string, any>>(
     new Map<string, any>()
   );
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index);
+  };
 
   const webSocketService = useContext(WebSocketContext)!;
 
@@ -31,8 +36,20 @@ function Sessions() {
     });
 
     webSocketService.subscribeToMessages((response) => {
-      const sessions = response.sessions;
-      if (sessions) setSessions(sessions);
+      const newSessions = response.sessions as any[];
+      if (newSessions) {
+        setSessions((prevSessions) => {
+          const newSessionIds = findNewSessions(prevSessions, newSessions);
+          if (newSessionIds.size > 0) {
+            const [newSessionId] = newSessionIds;
+            const idx = newSessions.findIndex((j) => j.id == newSessionId);
+            setTimeout(() => {
+              setTabIndex(idx);
+            }, 100);
+          }
+          return newSessions;
+        });
+      }
       const newState = response.sessionState;
       if (newState) {
         const session = response.session;
@@ -96,7 +113,12 @@ function Sessions() {
   }
 
   return (
-    <Tabs className="Sessions" variant="enclosed">
+    <Tabs
+      className="Sessions"
+      variant="enclosed"
+      index={tabIndex}
+      onChange={handleTabsChange}
+    >
       <TabList>
         {sessions.map((session) => {
           return (
@@ -158,3 +180,17 @@ function Sessions() {
 }
 
 export default Sessions;
+
+function findNewSessions(prevSessions: any[], newSessions: any[]): Set<string> {
+  const oldIds = idsOf(prevSessions);
+  const newIds = idsOf(newSessions);
+
+  oldIds.forEach((id) => newIds.delete(id));
+  return newIds;
+}
+
+function idsOf(sessions: any[]): Set<string> {
+  const ids = sessions.map((s) => s.id);
+  const s = new Set<string>(ids);
+  return s;
+}
