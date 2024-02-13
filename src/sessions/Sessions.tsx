@@ -8,7 +8,6 @@ import {
   Link,
 } from "@chakra-ui/react";
 import Terminal from "../terminal/Terminal";
-import Settings from "../terminal/Settings";
 import "./Sessions.css";
 import { useContext, useEffect, useState } from "react";
 import { WebSocketContext } from "../service/WebSocketService";
@@ -115,7 +114,6 @@ function Sessions() {
             </Tab>
           );
         })}
-        <Tab>Settings</Tab>
         {/* <Tab>Playground</Tab> */}
       </TabList>
 
@@ -147,9 +145,6 @@ function Sessions() {
             </TabPanel>
           );
         })}
-        <TabPanel>
-          <Settings />
-        </TabPanel>
         {/* <TabPanel height="800px" bg="black">
           <Playground></Playground>
         </TabPanel> */}
