@@ -107,9 +107,11 @@ function Sessions() {
               }}
             >
               {session.name}
-              &nbsp;&nbsp;
               {!session.options.alwaysOpen && (
-                <Link onClick={(e) => closeSession(session)}>
+                <Link
+                  style={{ marginLeft: "12px" }}
+                  onClick={(e) => closeSession(session)}
+                >
                   <CloseIcon boxSize="0.5em" />
                 </Link>
               )}
