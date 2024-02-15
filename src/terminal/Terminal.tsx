@@ -4,11 +4,11 @@ import UiHandlers from "../model/UiHandlers";
 import { NoElement } from "./renderElement";
 
 interface TerminalProps {
-  sessionId: string;
+  session: any;
   params: any;
 }
 
-const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
+const Terminal: React.FC<TerminalProps> = ({ session, params }) => {
   const uiHandlers: UiHandlers = params.uiHandlers;
   const rootKeys: string[] = params.rootKeys;
 
@@ -21,12 +21,12 @@ const Terminal: React.FC<TerminalProps> = ({ sessionId, params }) => {
       const childKeys: string[] = keyTree[key];
       if (!childKeys) throw `can't find keyTree[${key}]`;
       const children: any[] = childKeys.map((k) => reconstruct(k));
-      const ec = e; //JSON.parse(JSON.stringify(e));
       if (children.length > 0) {
-        const topLevelKey = Object.keys(ec)[0];
-        ec[topLevelKey].children = children;
+        const topLevelKey = Object.keys(e)[0];
+        const topLevel = e[topLevelKey];
+        topLevel.children = children;
       }
-      return ec;
+      return e;
     };
 
     const reconstructed: any[] = rootKeys.map((key) => reconstruct(key));

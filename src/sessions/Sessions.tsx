@@ -40,6 +40,19 @@ function Sessions() {
       if (newSessions) {
         setSessions((prevSessions) => {
           const newSessionIds = findNewSessions(prevSessions, newSessions);
+          const removedSessionIds = findRemovedSessions(
+            prevSessions,
+            newSessions
+          );
+          removedSessionIds.forEach((id) =>
+            setSessionState((prev) => {
+              // we need to remove the state of the removed session just in case the session is recreated. If the session is
+              // recreated, stale data may appear.
+              const m = new Map<string, any>(prev);
+              m.delete(id);
+              return m;
+            })
+          );
           if (newSessionIds.size > 0) {
             const [newSessionId] = newSessionIds;
             const idx = newSessions.findIndex((j) => j.id == newSessionId);
@@ -123,7 +136,7 @@ function Sessions() {
         {sessions.map((session) => {
           return (
             <Tab
-              key={session.id + "Tab"}
+              key={`${session.id}-Tab`}
               style={{
                 textDecoration: session.isOpen ? "none" : "line-through",
               }}
@@ -148,7 +161,7 @@ function Sessions() {
           const state = sessionState.get(session.id);
 
           return (
-            <TabPanel key={session.id + "TabPanel"}>
+            <TabPanel key={`${session.id}-TabPanel`}>
               <Box
                 borderRadius="md"
                 bg="tomato"
@@ -164,7 +177,7 @@ function Sessions() {
               <div style={session.isOpen ? {} : { filter: "grayscale(100%)" }}>
                 <Terminal
                   key={session.id + "Terminal"}
-                  sessionId={session.id}
+                  session={session}
                   params={state ? state : { elements: [] }}
                 />
               </div>
@@ -187,6 +200,17 @@ function findNewSessions(prevSessions: any[], newSessions: any[]): Set<string> {
 
   oldIds.forEach((id) => newIds.delete(id));
   return newIds;
+}
+
+function findRemovedSessions(
+  prevSessions: any[],
+  newSessions: any[]
+): Set<string> {
+  const oldIds = idsOf(prevSessions);
+  const newIds = idsOf(newSessions);
+
+  newIds.forEach((id) => oldIds.delete(id));
+  return oldIds;
 }
 
 function idsOf(sessions: any[]): Set<string> {
