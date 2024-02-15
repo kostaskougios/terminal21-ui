@@ -285,7 +285,7 @@ test("link", async () => {
 // --------------- KEEP THIS LAST ------------------------------------
 test("Done, reset session", async () => {
   await renderApp();
-  const button = await screen.findByText(/Keep Running/);
+  const button = await screen.findByText(/Reset state/);
   fireEvent.click(button);
   expect(await screen.findByText(/Terminated/)).toBeInTheDocument();
 });
