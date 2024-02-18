@@ -274,14 +274,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   },
   Option_: (b: any) => <option {...elementAttributes(b)}>{b.text}</option>,
   Select: (b: any, uiHandlers: UiHandlers) => {
-    const [value, setValue] = React.useState(b.value);
+    delete b.valueReceived;
     return (
       <Select
         {...elementAttributes(b)}
-        value={value}
         onChange={(event) => {
           const v = event.target.value;
-          setValue(v);
           uiHandlers.onChange(b.key, v);
         }}
       >
