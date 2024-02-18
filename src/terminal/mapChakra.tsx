@@ -1,7 +1,6 @@
 import {
   ComponentRenderFunction,
   MapElement,
-  NoElement,
   renderIfExists,
 } from "./renderElement";
 import UiHandlers from "../model/UiHandlers";
@@ -70,7 +69,6 @@ import {
   BreadcrumbLink,
   Link,
 } from "@chakra-ui/react";
-import React from "react";
 import {
   AddIcon,
   ArrowBackIcon,
