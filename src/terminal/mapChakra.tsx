@@ -165,7 +165,7 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </SimpleGrid>
   ),
   Editable: (b: any, uiHandlers: UiHandlers) => {
-    delete b.value;
+    delete b.valueReceived;
     return (
       <Editable
         {...elementAttributes(b)}
@@ -308,14 +308,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </Square>
   ),
   Textarea: (b: any, uiHandlers: UiHandlers) => {
-    const [value, setValue] = React.useState(b.value);
+    delete b.valueReceived;
     return (
       <Textarea
         {...elementAttributes(b)}
-        value={value}
         onChange={(event) => {
           const v = event.target.value;
-          setValue(v);
           uiHandlers.onChange(b.key, v);
         }}
       ></Textarea>
