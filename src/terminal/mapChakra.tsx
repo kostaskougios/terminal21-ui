@@ -196,14 +196,12 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
     </FormHelperText>
   ),
   Input: (b: any, uiHandlers: UiHandlers) => {
-    const [value, setValue] = React.useState(b.value);
+    delete b.valueReceived;
     return (
       <Input
         {...elementAttributes(b)}
-        value={value}
         onChange={(event) => {
           const v = event.target.value;
-          setValue(v);
           uiHandlers.onChange(b.key, v);
         }}
       ></Input>
