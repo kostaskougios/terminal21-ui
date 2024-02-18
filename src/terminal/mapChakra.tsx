@@ -258,13 +258,11 @@ const ElementMap: Record<string, ComponentRenderFunction> = {
   ),
   Radio: (b: any) => <Radio {...elementAttributes(b)}>{b.text}</Radio>,
   RadioGroup: (b: any, uiHandlers: UiHandlers) => {
-    const [value, setValue] = React.useState(b.defaultValue);
+    delete b.valueReceived;
     return (
       <RadioGroup
         {...elementAttributes(b)}
-        value={value}
         onChange={(value) => {
-          setValue(value);
           uiHandlers.onChange(b.key, value);
         }}
       >
