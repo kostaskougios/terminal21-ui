@@ -48,12 +48,12 @@ test("Action Menu clicked", async () => {
 
 test("input text", async () => {
   await renderApp();
-  const input = await screen.findByLabelText(/Email address/);
+  const input = await screen.findByLabelText(/Test-Email-Address/);
   expect(input).toBeInTheDocument();
-  fireEvent.change(input, { target: { value: "test@example.com" } });
+  fireEvent.change(input, { target: { value: "test-email@example.com" } });
   expect(
     await screen.findByText(
-      /email input new value = test@example.com, verify email.value = test@example.com/
+      /email input new value = test-email@example.com, verify email.value = test-email@example.com/
     )
   ).toBeInTheDocument();
 });
