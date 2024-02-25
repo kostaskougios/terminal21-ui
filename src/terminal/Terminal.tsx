@@ -17,7 +17,7 @@ const Terminal: React.FC<TerminalProps> = ({ session, params }) => {
     const keyTree: any = params.keyTree;
 
     const reconstruct = (key: string) => {
-      const e = elements[key];
+      const e = JSON.parse(JSON.stringify(elements[key])); // clone it
       const childKeys: string[] = keyTree[key];
       if (!childKeys) throw `can't find keyTree[${key}]`;
       const children: any[] = childKeys.map((k) => reconstruct(k));
