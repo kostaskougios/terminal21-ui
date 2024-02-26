@@ -287,5 +287,5 @@ test("Done, reset session", async () => {
   await renderApp();
   const button = await screen.findByText(/Reset state/);
   fireEvent.click(button);
-  expect(await screen.findByText(/Terminated/)).toBeInTheDocument();
+  expect(await screen.findByText(/chakra-session-reset/)).toBeInTheDocument();
 });
