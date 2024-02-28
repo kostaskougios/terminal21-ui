@@ -52,9 +52,7 @@ test("input text", async () => {
   expect(input).toBeInTheDocument();
   fireEvent.change(input, { target: { value: "test-email@example.com" } });
   expect(
-    await screen.findByText(
-      /email input new value = test-email@example.com, verify email.value = test-email@example.com/
-    )
+    await screen.findByText(/email input new value = test-email@example.com/)
   ).toBeInTheDocument();
 });
 
@@ -64,9 +62,7 @@ test("textarea", async () => {
   expect(input).toBeInTheDocument();
   fireEvent.change(input, { target: { value: "hello world" } });
   expect(
-    await screen.findByText(
-      /description input new value = hello world, verify description.value = hello world/
-    )
+    await screen.findByText(/description input new value = hello world/)
   ).toBeInTheDocument();
 });
 
@@ -75,42 +71,28 @@ test("input date of birth", async () => {
   const input = await screen.findByLabelText(/Date of birth/);
   expect(input).toBeInTheDocument();
   fireEvent.change(input, { target: { value: "2001-12-21T01:02" } });
-  expect(
-    await screen.findByText(
-      /dob = 2001-12-21T01:02 , verify dob.value = 2001-12-21T01:02/
-    )
-  ).toBeInTheDocument();
+  expect(await screen.findByText(/dob = 2001-12-21T01:02/)).toBeInTheDocument();
 });
 
 test("checkbox", async () => {
   await renderApp();
   const checkbox = await screen.findByLabelText(/Check 1/);
   fireEvent.click(checkbox);
-  expect(
-    await screen.findByText(
-      /checkbox1 checked is true , verify checkbox1.checked = true/
-    )
-  );
+  expect(await screen.findByText(/checkbox1 checked is true/));
 });
 
 test("switch", async () => {
   await renderApp();
   const switch1 = await screen.findByLabelText(/Switch 1/);
   fireEvent.click(switch1);
-  expect(
-    await screen.findByText(
-      /switch1 checked is true , verify switch1.checked = true/
-    )
-  );
+  expect(await screen.findByText(/switch1 checked is true/));
 });
 
 test("radio", async () => {
   await renderApp();
   const radio3 = await screen.findByLabelText(/third/);
   fireEvent.click(radio3);
-  expect(
-    await screen.findByText(/radioGroup newValue=3 , verify radioGroup.value=3/)
-  );
+  expect(await screen.findByText(/radioGroup newValue=3/));
 });
 
 test("editable", async () => {
@@ -118,9 +100,7 @@ test("editable", async () => {
   const editable = await screen.findByDisplayValue(/Please type here/);
   fireEvent.change(editable, { target: { value: "edited it" } });
   expect(
-    await screen.findByText(
-      /editable1 newValue = edited it, verify editable1.value = edited it/
-    )
+    await screen.findByText(/editable1 newValue = edited it/)
   ).toBeInTheDocument();
 });
 
