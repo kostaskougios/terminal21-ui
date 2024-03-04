@@ -6,7 +6,7 @@ enum LogLevels {
 }
 
 // Set the default log level
-let currentLogLevel: LogLevels = LogLevels.WARN;
+let currentLogLevel: LogLevels = LogLevels.INFO;
 
 // Custom logger interface
 interface Logger {

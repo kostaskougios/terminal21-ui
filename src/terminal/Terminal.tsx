@@ -10,29 +10,12 @@ interface TerminalProps {
 
 const Terminal: React.FC<TerminalProps> = ({ session, params }) => {
   const uiHandlers: UiHandlers = params.uiHandlers;
-  const rootKeys: string[] = params.rootKeys;
+  const elements: string[] = params.elements;
 
-  if (rootKeys) {
-    const elements: any = params.elements;
-    const keyTree: any = params.keyTree;
-
-    const reconstruct = (key: string) => {
-      const e = JSON.parse(JSON.stringify(elements[key])); // clone it
-      const childKeys: string[] = keyTree[key];
-      if (!childKeys) throw `can't find keyTree[${key}]`;
-      const children: any[] = childKeys.map((k) => reconstruct(k));
-      if (children.length > 0) {
-        const topLevelKey = Object.keys(e)[0];
-        const topLevel = e[topLevelKey];
-        topLevel.children = children;
-      }
-      return e;
-    };
-
-    const reconstructed: any[] = rootKeys.map((key) => reconstruct(key));
+  if (elements) {
     return (
       <div className="Terminal">
-        {reconstructed
+        {elements
           .map((msg) => mapResponse(msg, uiHandlers))
           .filter((e) => e != NoElement)}
       </div>
