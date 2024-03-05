@@ -5,8 +5,9 @@ import { WebSocketContext, WebSocketService } from "./service/WebSocketService";
 import { MathJaxContext } from "better-react-mathjax";
 
 function App() {
+  const host = window.location.hostname;
   const webSocketService = new WebSocketService(
-    "ws://localhost:8080/ui/sessions"
+    `ws://${host}:8080/ui/sessions`
   );
   webSocketService.connect();
 
