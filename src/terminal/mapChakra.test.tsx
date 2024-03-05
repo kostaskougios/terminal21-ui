@@ -235,8 +235,8 @@ test("tabs", async () => {
 test("breadcrumb", async () => {
   await renderApp();
   const bc1 = await screen.findByText(/breadcrumb-home/);
-  const bc2 = await screen.findByText(/breadcrumb-link1/);
-  const bc3 = await screen.findByText(/breadcrumb-link2/);
+  const bc2 = await screen.findByText(/breadcrumb1/);
+  const bc3 = await screen.findByText(/breadcrumb2/);
   expect(bc1).toBeInTheDocument();
   expect(bc2).toBeInTheDocument();
   expect(bc3).toBeInTheDocument();
